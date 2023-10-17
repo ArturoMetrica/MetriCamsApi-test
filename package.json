@@ -1,0 +1,19 @@
+{
+  "name": "metricams-api",
+  "version": "1.0.0",
+  "description": "\"# MetriCams-API\"",
+  "main": "src/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mmsistemas/MetriCams-API.git"
+  },
+  "author": "mmsistemas",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/mmsistemas/MetriCams-API/issues"
+  },
+  "homepage": "https://github.com/mmsistemas/MetriCams-API#readme"
+}
