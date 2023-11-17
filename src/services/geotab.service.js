@@ -1,9 +1,6 @@
 const _ = require('lodash');
-const GeotabHelper = require('../helpers/geotab.helper');
-const mgAPI = require('mg-api-js');
-const { use } = require('../routes/driver.router');
-
 const { geotab } = require('../config/env');
+const GeotabHelper = require('../helpers/geotab.helper');
 
 class GeotabService extends GeotabHelper {
   constructor({ username = geotab.username, password = geotab.password, database = geotab.database, server = geotab.server, sessionId, userName, name } = {}) {
