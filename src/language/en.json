@@ -1,0 +1,1185 @@
+{
+  "language.language" : "Language",
+  "logout" : "Log Out",
+
+  "alarms" : "Alerts",
+  "downloads" : "Downloads",
+  "devices" : "Devices",
+  "groups" : "Groups",
+  "templates" : "Templates",
+  "facialRecognition" : "Facial Recognition",
+  "rules" : "Rules",
+  "GeoTabRulesT" : "Geotab Rules",
+  "StreamaxRules": "Metricams Rules",
+  "reports" : "Reports",
+  "roles" : "Roles",
+  "users" : "Users",
+  "videos" : "Videos",
+  "classifications" : "Classifications",
+  "riskAnalytics": "Risk analytics",
+  "dataUsage": "Data usage",
+
+  "app.startingApp" : "",
+  "app.loggingOut" : "Logging Out",
+
+  "consulting": "Consulting...",
+  "complete": "Complete",
+  "incomplete": "Incomplete",
+  "geofence.title": "Evidence between rules MyGeotab",
+  "geofence.exclude": "Exclude events",
+  "geofence.firstRule": "Initial rule selection",
+  "geofence.finalRule": "Final rule selection",
+
+  "general.vehicle" : "Vehicle",
+  "general.vehicles" : "Vehicles",
+  "general.ok": "Ok",
+  "general.vin" : "VIN",
+  "general.model" : "Model",
+  "general.economicN" : "Name",
+  "general.economic" : "Economic",
+  "general.user" : "User",
+  "general.users" : "Users",
+  "general.userRole" : "User Role",
+  "general.template" : "Template",
+  "general.templates" : "Templates",
+  "general.help" : "Help",
+  "general.role": "Role",
+  "general.roles": "Roles",
+  "general.group": "Group",
+  "general.groups": "Groups",
+  "general.parentGroup" : "Child of",
+  "general.namelessGroup" : "Nameless Group",
+  "general.name" : "Name",
+  "general.lastName" : "Last Name",
+  "general.rule" : "Rule",
+  "general.rules" : "Rules",
+  "general.alarm" : "Alert",
+  "general.alarms" : "Alerts",
+  "general.channel" : "Channel",
+  "general.timezone" : "Time zone",
+  "general.date" : "Date",
+  "general.startDate" : "Start Date",
+  "general.endDate" : "End Date",
+  "general.address" : "Address",
+  "general.video" : "Video",
+  "general.mdvr" : "MDVR",
+  "general.plateNumber" : "Plate Number",
+  "general.plate" : "Plate",
+  "general.speed" : "Speed",
+  "general.email" : "Email",
+  "general.description" : "Description",
+  "general.comments" : "Comments",
+  "general.lasCommunication": "Last Update",
+  "general.password" : "Password",
+  "general.vehicleSelection" : "Vehicle Selection",
+  "general.ruleSelect" : "Rule Selection",
+  "general.cameraSelection" : "Camera Selection",
+  "general.templateSelection" : "Template Selection",
+  "general.selectAll" : "All",
+  "general.removeSelection" : "Remove",
+  "general.groupWithoutName" : "% Nameless Group %",
+  "general.loading" : "Loading",
+  "general.options": "Options",
+  "general.more" : "More",
+  "general.all" : "All",
+  "general.attended" : "Reviewed",
+  "general.notAttended" : "Not Reviewed",
+  "general.map": "Map",
+  "general.filter": "Filters",
+  "general.search" : "Search",
+  "general.save" : "Save",
+  "general.backupIn" : "Change references to",
+  "general.select" : "Select",
+  "general.from" : "From",
+  "general.to" : "To",
+  "general.accept" : "Accept",
+  "general.cancel" : "Cancel",
+  "general.add" : "Add",
+  "general.edit" : "Edit",
+  "general.delete" : "Delete",
+  "general.erase" : "Delete",
+  "general.play" : "Play",
+  "general.stop" : "Stop",
+  "general.close" : "Close",
+  "general.downloads" : "Downloads",
+  "general.download" : "Download",
+  "general.downloading" : "Downloading",
+  "general.generateReport" : "Download",
+  "general.today" : "Today",
+  "general.sunday" : "Sunday",
+  "general.monday" : "Monday",
+  "general.tuesday" : "Tuesday",
+  "general.wednesday" : "Wednesday",
+  "general.thursday" : "Thursday",
+  "general.friday" : "Friday",
+  "general.saturday" : "Saturday",
+  "general.sundayShort" : "Sun",
+  "general.mondayShort" : "Mon",
+  "general.tuesdayShort" : "Tue",
+  "general.wednesdayShort" : "Wed",
+  "general.thursdayShort" : "Thu",
+  "general.fridayShort" : "Fri",
+  "general.saturdayShort" : "Sat",
+  "general.sundayMin" : "Su",
+  "general.mondayMin" : "M",
+  "general.tuesdayMin" : "Tu",
+  "general.wednesdayMin" : "W",
+  "general.thursdayMin" : "Th",
+  "general.fridayMin" : "F",
+  "general.saturdayMin" : "Sa",
+  "general.january" : "January",
+  "general.february" : "February",
+  "general.march" : "March",
+  "general.april" : "April",
+  "general.may" : "May",
+  "general.june" : "June",
+  "general.july" : "July",
+  "general.august" : "August",
+  "general.september" : "September",
+  "general.octuber" : "October",
+  "general.november" : "November",
+  "general.dicember" : "December",
+  "general.januaryShort" : "jan",
+  "general.feberuaryShort" : "feb",
+  "general.marchShort" : "mar",
+  "general.aprilShort" : "apr",
+  "general.mayShort" : "may",
+  "general.juneShort" : "jun",
+  "general.julyShort" : "jul",
+  "general.agusutShort" : "aug",
+  "general.septemberShort" : "sep",
+  "general.octuberShort" : "oct",
+  "general.novemberShort" : "nov",
+  "general.dicemberShort" : "dic",
+  "general.total" : "Total",
+  "general.cameras" : "Cameras",
+  "general.errorHasOccurred": "An error has occurred",
+  "date.errorStartBiggerThanEnd" : "End date should be greater than Starting date",
+
+  "special-report": {
+    "title": "Special report",
+    "datePeriod" : "Date period",
+    "startDay": "Start of the week",
+    "messagePeriod": "The download may take some time due to the volume of data processed.",
+    "massageError": "No data found for this time period",
+    "all" : "All",
+    "drivers": "Drivers",
+    "driversMyGeotab": "Drivers MyGeotab",
+    "selectDrivers": "Driver Selection"
+  },
+
+  "watchdog": {
+    "title": "Watchdog",
+    "date": "Report date",
+    "totalDevices": "Total devices",
+    "timeZone": "Time zone",
+    "last24hours": "Communication in the last 24hrs",
+    "last7days": "Communication in the last 7 days",
+    "lastMonth": "Communication in the last month",
+    "moreMonth": "More than a month without communication",
+    "noCommunicated": "Has not communicated",
+    "table": "Table",
+    "graphic": "Graphic",
+    "filterByColor": "Filter by color"
+  },
+
+  "riskRep": {
+    "totalEvents": "Total events",
+    "riskAverage": "Risk average",
+    "riskType": "Risk type",
+    "risk": "Riesgo",
+    "Low": "Low",
+    "Medium": "Medium",
+    "High": "High",
+    "vehicles": "Vehicles",
+    "searchPeriod": "Search period",
+    "start": "Start",
+    "end": "End"
+  },
+
+  "facial": {
+    "skyp": "Skyp",
+    "photoAssignment": "Photo Assignment",
+    "photoAssignmentB": "Assign photos",
+    "takeCapture": "Take a capture",
+    "errorCapture": "Failed to take capture",
+    "numID": "Identification number",
+    "offCam": "Could not get live video from this device"
+  },
+
+  "download.downloadStarting" : "Starting download...",
+  "download.downloadStarted" : "Video download started",
+  "download.downloadingVideo" : "Downloading video",
+  "download.obtainingVideo" : "Obtaining Video",
+  "download.generatingVideo" : "Generating video",
+  "download.analyzing" : "Analyzing",
+  "download.errorConflict" : "Download error, cameras out of service.",
+  "download.errorDeviceDC" : "Analyzing, device disconnected or no video",
+  "download.errorFailedDownload" : "Error while attempting download",
+  "download.errorInDownload" : "Error in download",
+  "download.errorDuringDownload" : "Error during download",
+  "download.errorDonwloadTimeout" : "Download error, timed out",
+  "download.errorDownloadDelay1" : "Video download",
+  "download.errorDownloadDelay2" : "was delayed. Possible device disconnection.",
+  "download.errorTimeout": "Download aborted, it was taking too long",
+  "download.downloadingEvidence": "Downloading evidence",
+  "download.waitingForResponse": "Waiting for device response",
+  "download.abnormalExecution": "Abnormal execution",
+  "download.executionReserve": "Execution reserve",
+  "download.waitingForDevice": "Waiting for the device to come online",
+  "download.waitingForNetworkChange": "Waiting for network type change",
+  "download.waitingForSerialExecution": "Waiting for serial execution",
+  "download.executionFailed": "Execution failed",
+  "download.finishingDownload": "Finishing download",
+  "download.evidenceNotFoundOnDevice": "Evidence not found on the device",
+  "download.problemUploadingEvidence": "Problem uploading evidence to the server",
+
+  "events.vehicleFilter" : "Filter by Vehicles",
+  "events.rulesFilter" : "Filter by Rules",
+  "events.attendAllAlerts" : "Review all alerts",
+  "events.attended" : "Reviewed",
+  "events.eventAttended" : "Reviewed",
+  "events.attend" : "Review",
+  "events.eventNotAttended" : "Not Reviewed",
+  "events.attendingAlert" : "Reviewing Alerts",
+  "events.attendingAlertOne" : "Reviewing Alert",
+  "events.videoDownloadPreview" : "Video Preview",
+  "events.deviceIsOff" : "Device off",
+  "events.errorNoImagesFound" : "No images found",
+  "events.qAttendAlert" : "Mark the alert as reviewed",
+  "events.qAttendTheseAlerts" : "Mark all alerts as reviewed",
+  "events.videoFoundInServer" : "Video found in server, downloading.",
+  "events.amountEvidence": "Amount evidence of this device",
+  "events.sort" : "Sort",
+  "events.asc" : "A-Z",
+  "events.desc" : "Z-A",
+  "events.clear" : "Clear",
+  "events.sAttendAlert" : "Do you want to mark all selected alerts as reviewed?",
+  "events.sAttendNote" : "Classification, comments, and AI performance will be assigned for all selected alerts.",
+
+  "events.obtainingEvents" : "Loading...",
+  "events.nothingFound" : "No records found",
+  "events.alarm" : "Alarm",
+  "events.correctlyAttended" : "succesfully reviewed",
+  "events.haveBeenCorrectlyAttended" : "have been succesfully reviewed",
+  "events.videoDownloadSuccess" : "Video downloaded succesfully",
+  "events.errorUnavailableGeneration" : "Video not found. Unit not connected, impossible to generate video.",
+  "events.errorVideoUnitUnavailable": "Video not available",
+
+  "login.nameIsRequired" : "Name is required",
+  "login.invalidEmailFormat" : "Invalid email format",
+  "login.passwordRequired" : "Password required",
+  "login.login" : "Log In",
+  "login.forgotPassword" : "I Forgot my Password",
+  "login.passwordChange" : "Password Recovery",
+  "login.passwordRecoveryInfo" : "Enter your email, you will receive a link to change your password",
+  "login.emailIsRequired" : "Email is required",
+  "login.sendEmail" : "Send Email",
+  "login.continueGeotab" : "Continue with MyGeotab",
+  "login.database" : "Database",
+  "login.server" : "Server",
+
+  "login.errorLoginFailed" : "Problems while logging in",
+  "login.sentLinkToEmail" : "Link has been sent to your email",
+  "login.errorServerCommunicationFailed" : "Error trying to reach server.",
+
+  "login.summerTime": "(central dayligth time)",
+  "login.standarTime": "(central standar time)",
+  "login.updatedTimeZone": "Time zone updated successfully",
+  "login.errorUpdatedTimeZone": "Problems updating the time zone",
+  "login.changeTimeZone": "Do you want to adjust the Add-in's time zone to match your computer?",
+  "login.addinTimeZone": "Add-in time zone:",
+  "login.computerTimeZone": "Computer time zone:",
+
+  "mm-cam-card.MBof" : "MB of",
+  "mm-cam-card.MB" : "MB",
+  "mm.cam-card.consumed" : "consumed",
+  "mm-cam-card.on" : "Device On",
+  "mm-cam-card.off" : "Device Off",
+  "mm-cam-card.stopped" : "Stopped",
+  "mm-cam-card.driving" : "Driving",
+  "mm-cam-card.daysAlarms" : "Day's Alerts",
+
+  "data-device.generateVideo" : "Request Video",
+  "data-device.MBConsumption" : "MB Consumption",
+  "data-device.MBTotal" : "Total MB",
+  "data-device.MBConsumed" : "Consumed MB",
+  "data-device.MBRemaining" : "Remaining MB",
+  "data-device.ConsumptionPercentage" : "Consumption Percentage",
+  "data-device.selectCamera" : "Select Camera",
+  "data-device.lastCommunication" : "Last Contact",
+  "data-device.audioActivation" : "Enable Audio",
+  "mm-list-grid.indicators" : "Map Icons",
+  "mm-list-grid.searchByGroupOrEconomic" : "Search by group / vehicle / MDVR",
+  "mm-list-grid.namelessGroup" : "Nameless Group",
+  "mm-list-grid.pOn" : "Devices On",
+  "mm-list-grid.filterStatus": "Filter by status",
+
+  "device-item.videoLengthError": "The length of the video cannot be longer than 2 minutes",
+  "device-item.videoLengthError2": "The length of the video must be longer than 6 seconds",
+  "device-item.datesError": "You must select a time range",
+  "device-item.videoLength": "Video length:(sec)",
+  "device-item.selectMonth": "Select month",
+  "device-item.selectDay": "Select day",
+
+  "map-real.obtainingInfo" : "Obtaining Information",
+  "map-real.moreEvents" : "More Events",
+  "map-real.generateVideo" : "Generate Video",
+  "map-real.downloadOptions" : "Download Options",
+  "map-real.downloadVideo" : "Video Download",
+
+  "mm-cam-one.generateVideo" : "Generate Video",
+  "mm-cam-one.downloadVideo" : "Download Video",
+  "mm-cam-one.cameraSelection" : "Camera Selection",
+  "mm-cam-one.deviceOnMoreKm" : "Device Online \r Speed Higher than 5 km/H",
+  "mm-cam-one.deviceOnLessKm" : "Device Online \r Speed Lower than 5 km/H",
+  "mm-cam-one.deviceOffMoreKm" : "Device Offline \r Speed Higher than 5 km/H",
+  "mm-cam-one.deviceOffLessKm" : "Device Offline \r Speed is 0 km/H",
+  "mm-cam-one.searchByGroupOrEconomic" : "Search by name or group",
+  "mm-cam-one.noCommDate" : "No Communication Date",
+  "mm-cam-one.noAddressFound" : "No address found",
+  "mm-cam-one.moreEvents" : "More Events",
+
+  "mm-snap.snapshots": "Snapshots",
+  "mm-snap.historic": "Snapshots history",
+  "mm-snap.download": "Download all",
+  "mm-snap.dashboard": "View all the snapshots from each camera of every vehicle",
+  "mm-snap.betaVer": "This module will be enabled until March 24th at 23:59:59",
+
+  "settings.add" : "Add",
+  "settings.adding" : "Adding",
+  "settings.edit" : "Edit",
+  "settings.editing" : "Editing",
+  "settings.delete" : "Delete",
+  "settings.deleting" : "Deleting",
+  "settings.export" : "Download",
+  "settings.isRequired": "is required",
+  "settings.isUserMM": "User Métrica Móvil",
+  "settings.noteDevicesFR": "Currently only works with C6D AI",
+  "settings.groups&recording": "Groups and Recording",
+  "settings.groups&roles": "Groups and Roles",
+  "settings.channels": "Channels",
+  "settings.errorGroup": "You must select a group",
+  "settings.economicRequired" : "Name is required",
+  "settings.condition": "Condition",
+  "settings.intervalphoto": "Shooting interval time for photo",
+  "settings.faceComparisonSimilarity": "Threshold of face comparison/similarity",
+  "settings.serialMdvrRequired" : "MDVR's serial number is required",
+  "settings.mdvrSerialNumber" : "Device Serial Number",
+  "settings.geotabGORequired" : "GO designation is required",
+  "settings.vehiclePlate" : "Vehicle's Plate Number",
+  "settings.modelVehicleYear" : "Model - Manufacturing Year",
+  "settings.telephoneNumber" : "Phone Number",
+  "settings.commentsCharacteristics" : "Comments / Features",
+  "settings.descriptionComments" : "Description / Comments",
+  "settings.secondsBefore" : "Seconds before alert (00-29)",
+  "settings.secondsAfter" : "Seconds after alert (00-29)",
+  "settings.seconds0029" : "Seconds (00-29)",
+  "settings.disableRecordingByGeofences" : "Disable recording by geofences",
+  "settings.disableRecordingBySchedule" : "Disable recording by schedule",
+  "settings.searchVehicle" : "Search vehicle",
+  "settings.channelSelection" : "Channel selection",
+  "settings.cameraName" : "Camera name",
+  "settings.fileName" : "Internal File Name",
+  "settings.groupSelection" : "Group Selection",
+  "settings.fileSelection" : "File Selection",
+  "settings.selectGroup" : "Select Group",
+  "settings.templateHelp" : "Help (File format '.xlsx')",
+  "settings.availableTemplates" : "Available Templates",
+  "settings.programmedReports" : "Scheduled Reports",
+  "settings.facialRecognition" : "Facial Recognition",
+  "settings.next" : "Next",
+  "settings.form" : "Form",
+  "settings.assignImages" : "Assign images",
+  "settings.driver" : "Driver",
+  "settings.photosLength": "Photos selected",
+  "settings.addDriver" : "Add driver",
+  "settings.editDriver" : "Edit driver",
+  "settings.deleteDriver" : "Delete driver",
+  "settings.resume" : "Overview of the driver",
+  "settings.driverInfo":"Driver information",
+  "settings.driverDelete": "Are you sure you want to delete this driver? ",
+  "settings.driverDeleteImages": "Remove the driver images from the devices. ",
+  "settings.driverGallery":"Photo gallery",
+  "settings.driverDeleted":"was succesfully deleted.",
+  "settings.noPictures1":"The vehicle that was previously selected does not have any images to be assigned to this driver. For a device to contain images of a person, that person must have driven the vehicle with the C6D AI camera.",
+  "settings.noPictures2":"You can continue on to the next step and assign pictures later on or change the vehicle.",
+  "settings.loadingImages": "Loading images...",
+  "settings.findDriver": "Find driver",
+  "settings.noPicturesSelected": "No images selected",
+  "settings.noDriverImages": "This driver does not have images.",
+  "settings.birthday": "Birthday",
+  "settings.SSN": "Social Security Number",
+  "settings.employeeNumber": "Employee number",
+  "settings.errorSSNIsRequired": "Social Security Number is required",
+  "settings.noDrivers": "No registered drivers",
+  "settings.deliveryPeriod" : "Delivery Period",
+  "settings.mondayThruSunday" : "Monday to Sunday",
+  "settings.daySelection" : "Day selection",
+  "settings.dateSelection" : "Date selection",
+  "settings.monthSelection" : "Month selection",
+  "settings.deviceSelection" : "Device selection",
+  "settings.alarmSelection" : "Alert Selection",
+  "settings.selectionByVehicle" : "Vehicle Selection",
+  "settings.selectOnlyVehicles" : "Switch to vehicle selection",
+  "settings.noGroupsFound" : "No groups were found",
+  "settings.noVehiclesFound" : "No vehicles were found",
+  "settings.addHour" : "Add Hour",
+  "settings.visibilityPermissions" : "Visibility Permissions",
+  "settings.emailList" : "Email List",
+  "settings.emailsBesides" : "Besides",
+  "settings.sendEmails" : ", who else should receive the event emails?",
+  "settings.createScheduledReport" : "Create Scheduled Report",
+  "settings.editScheduledReport": "Edit Report",
+  "settings.qDeleteReport" : "Delete Scheduled Report",
+  "settings.notificationSettings" : "Notification Settings",
+  "settings.private" : "Private",
+  "settings.public" : "Public",
+  "settings.status" : "Status",
+  "settings.popup" : "Pop-Up",
+  "settings.downloadVideoLinkAttach" : "Include video download link",
+  "settings.attachGif" : "Attach GIF",
+  "settings.changeParentGroup" : "Child of",
+  "settings.groupCompany" : "Company Group",
+  "settings.addGroup" : "Add Group",
+  "settings.editGroup" : "Edit Group",
+  "settings.deleteGroup" : "Delete Group",
+  "settings.group" : "Group",
+  "settings.groupAddedSuccessfully" : "added successfully",
+  "settings.groupEditedSuccessfully" : "edited successfully",
+  "settings.groupDeletedSuccessfully" : "deleted successfully",
+  "settings.economicIsRequired" : "name is required",
+  "settings.filterByGroup" : "Filter by group",
+  "settings.filterByVehicle" : "Filter by vehicle",
+  "settings.filterByRule" : "Filter by rule",
+  "settings.filterByUser" : "Filter by user",
+  "settings.addDevice" : "Add Vehicle",
+  "settings.editDevice" : "Edit Vehicle",
+  "settings.deleteDevice" : "Delete Vehicle",
+  "settings.deleteDevices" : "Delete Vehicles",
+  "settings.device" : "Device",
+  "settings.geotabGO" : "GO",
+  "settings.successfullyAdded" : "added successfully",
+  "settings.successfullyEdited" : "edited successfully",
+  "settings.successfullyDeleted" : "deleted successfully",
+  "settings.searchRules" : "Search Rules",
+  "settings.searchUser" : "Search user",
+  "settings.addRule" : "Add Rule",
+  "settings.editRule" : "Edit Rule",
+  "settings.deleteRule" : "Delete Rule",
+  "settings.deleteRules" : "Delete Rules",
+  "settings.rule" : "Rule",
+  "settings.user" : "User",
+  "settings.addUser" : "Add User",
+  "settings.editUser" : "Edit User",
+  "settings.deleteUser" : "Delete User",
+  "settings.deleteUsers" : "Delete Users",
+  "settings.role" : "The Role",
+  "settings.template" : "Template",
+  "settings.templateAccepted" : "Template Accepted",
+  "settings.templateUploading" : "Uploading Template",
+  "settings.downloadingTemplate" : "Downloading Template",
+  "settings.createReport" : "Create Report",
+  "settings.deleteReport" : "Delete Report",
+  "settings.summerSchedule" : "Summer Schedule",
+  "settings.fieldRequired" : "Required",
+  "settings.fieldRequiredInvalidData" : "Required, Invalid Data",
+  "settings.fieldInvalidNumber" : "Invalid Number (00-29)",
+  "settings.creationDate" : "Creation Date",
+  "settings.successfullyCreatedReport" : "Scheduled Report successfully added",
+  "settings.successfullyEditedReport" : "Scheduled Report successfully edited",
+  "settings.successfullyDeletedReport" : "Scheduled Report successfully deleted",
+  "settings.reportNameIsRequired" : "Report name is required",
+  "settings.oneGroupOrDeviceRequired" : "At least one group or device must be selected",
+  "settings.errorGroupExistsInside1" : "Group",
+  "settings.errorGroupExistsInside2" : "already exists inside the selected parent",
+  "settings.errorDeviceMustHaveGroup" : "The device must belong to a group",
+  "settings.errorChannelNameRequired" : "All channels must have an assigned name",
+  "settings.errorChannelCameraRequired": "All channels must have their camera type assigned",
+  "settings.errorAlarmIsRequired" : "An alert must be selected",
+  "settings.errorRuleIsRequired" : "At least one rule must be selected",
+  "settings.errorVehicleIsRequired" : "A vehicle must be selected",
+  "settings.errorSelectionIsRequired" : "A selection is necessary",
+  "settings.errorGroupIsRequired" : "At least one group must be selected",
+  "settings.errorEmailIsRequired" : "An email is required",
+  "settings.errorInvalidEmail1" : "Email",
+  "settings.errorInvalidEmail2" : "is invalid",
+  "settings.errorInvalidEmailFormat" : "Invalid Email format",
+  "settings.errorNoAlarmsFound" : "No alarms were found",
+  "settings.errorUserMustHaveGroup" : "User must belong to a group",
+  "settings.errorRoleNameRequired" : "Role name is required",
+  "settings.errorAlreadyRegistered" : "has already been registered",
+  "settings.errorInvalidFileFormat" : "Invalid file format. The following format is required",
+  "settings.errorNameIsRequired" : "Name is required",
+  "settings.errorLastNameIsRequired" : "Last name is required",
+  "settings.errorWhileCreatingReport" : "Error occurred creating scheduled report",
+  "settings.errorWhileEditingReport" : "Error occurred editing scheduled report",
+  "settings.errorWhileDeletingReport" : "Error occurred deleting scheduled report",
+  "settings.errorPermits": "The role must have at least one enabled permit",
+  "settings.qDeleteRole" : "Delete role",
+  "settings.qDeleteFile" : "Delete template",
+  "settings.alertform": "Alert",
+  "settings.alertGeotabform": "Geotab alert:",
+  "settings.select": "Select",
+  "settings.category": "Classification:",
+  "settings.basicConfiguration": "Basic settings",
+  "settings.advancedConfiguration": "Advanced settings",
+  "settings.groupsandvehicles": "Groups and vehicles",
+  "settings.alertEmail": "Email alert",
+  "settings.enabled": "Enabled",
+  "settings.includeLink": "Includes video download link",
+  "settings.emails": "Emails",
+  "settings.video": "Length of video alert",
+  "settings.errorCategoryIsRequired": "Category is required",
+  "settings.sucessfullyDeleted":"was deleted.",
+  "settings.onlyMe":"Only Me",
+  "settings.onOffCams":"Turning Cameras On and Off",
+  "settings.ruleNameRequired":"You must assign a name to the rule",
+  "settings.ruleName":"Rule name",
+  "settings.dayTimeEmail":"Date and time of mailing",
+  "settings.report":"Report",
+  "settings.selectRole":"Select role",
+
+  "riskAnalitycs.dash": "Monitors and calculates the level of accident risk in drivers based on a score generated by driving behaviors and habits.",
+
+  "settings.errorNoEditableClassification": "It is not possible to edit this classification",
+  "settings.errorClassificationMustHaveName": "The classification must have a name",
+  "settings.errorClassificationMustHaveGroup": "Classification must belong to a group",
+
+  "tables.cameraListing" : "Cameras",
+  "tables.ruleListing" : "List of Rules",
+  "tables.groupListing" : "List of Groups",
+  "tables.vehicleListing" : "List of Vehicles",
+  
+  "mm-cam.dash1" : "View vehicles' real-time position",
+  "mm-cam.dash2" : "Review and classify alerts, and download video evidence of events.",
+  "mm-cam.dash3" : "Manage users, groups, vehicles, rules, and more",
+  "mm-cam.dash4" : "View live camera footage from vehicles",
+  "mm-cam.dashboard" : "Dashboard",
+  "mm-cam.mapVideo" : "Map",
+  "mm-cam.exceptions" : "Exceptions",
+  "mm-cam.settings" : "Settings",
+  "mm-cam.attendedAlerts" : "Reviewed Alerts",
+  "mm-cam.pendingAlerts" : "Pending Alerts",
+  "mm-cam.alertsGraphic" : "Alerts Graphic",
+  "mm-cam.update" : "Update",
+  "mm-cam.alarmSettings" : "Alert Settings",
+  "mm-cam.noPendingDownloads" : "No pending downloads",
+  "mm-cam.activatePopups" : "Enable Pop-Ups",
+  "mm-cam.alertsFromLogin" : "Alerts since login",
+  "mm-cam.editProfile" : "Edit Profile",
+  "mm-cam.editUserInfo" : "Edit User Information",
+  "mm-cam.changePassword" : "Change Password",
+  "mm-cam.alarmSelection": "Alerts Selection",
+  "mm-cam.historicVideo": "Historic Video",
+  "mm-cam.muteVideo": "Mute",
+  "mm-cam.unmuteVideo": "Unmute",
+  "mm-cam.errorWhileSelectingTime": "Invalid Time Selection",
+  "mm-cam.noVideoFoundOnRequestedResource" : "Video not found on requested resource",
+  "mm-cam.noAlarmChartDataFound" : "No data found with the requested parameters",
+  "mm-cam.noCamerasSelected" : "Please select a camera to show live-video feed from",
+  "mm-cam.multipleTitle" : "Multiple Camera View",
+  "mm-cam.StatsGraph" : "Statistics charts",
+  "mm-cam.generatedEvents" : "Generated events",
+  "mm-cam.generatedEventsBy" : "Generated events by",
+  "mm-cam.topDrivers" : "Top 5 divers with most events generated",
+  "mm-cam.severity" : "Severity",
+  "mm-cam.lowRisk" : "Low risk",
+  "mm-cam.moderated" : "Moderated",
+  "mm-cam.highRisk" : "High risk",
+  "mm-cam.totalAlerts" : "Total alerts",
+  "mm-cam.totalDrivers" : "Total drivers",
+  "mm-cam.totalVehicles" : "Total vehicles",
+  "mm-cam.alertAtended" : "Alerts attended",
+  "mm-cam.Atended" : "Attended",
+  "mm-cam.notAtended" : "Not attended",
+  "mm-cam.alertClassified" : "Classified alerts",
+  "mm-cam.classified" : "Classified",
+  "mm-cam.notClassified" : "Not classified ",
+  "mm-cam.alertSeverity" : "Severity of alerts",
+  "mm-cam.limitData" : "Data limit",
+  "mm-cam.liveVideo" : "Live video",
+  "mm-cam.timeUse" : "Time used",
+  "mm-cam.timeLeft" : "Time left",
+  "mm-cam.historicalDownload" : "Historical download",
+  "mm-cam.secondsDownloaded" : "Seconds downloaded",
+  "mm-cam.secondsLeft" : "Seconds left",
+  "mm-cam.cutoffDate" : "Cutoff date",
+  "mm-cam.snapshotsTaken" : "Snapshots taken",
+  "mm-cam.snapshotsRemaining" : "Snapshots remaining",
+  "mm-cam.riskAnalitycs" : "Risk Analytics",
+  "mm-cam.dataCutoffDate" : "th of each month",
+
+
+  "webapp.profileUpdated": "Profile updated successfully",
+  "webapp.passwordsDoNotMatch": "Passwords do not match",
+  "webapp.passwordChangedSuccessfully": "The password has been changed successfully",
+  "webapp.newPassword": "New Password",
+  "webapp.confirmPassword": "Confirm Password",
+  "webapp.popupEvent": "Event",
+  "webapp.popupDateTime": "Date",
+  "webapp.popupAddress": "Address",
+
+  "service.device": "Device",
+  "service.rule": "Rule",
+  "service.deletedSuccessfully": "deleted successfully",
+  "service.attentionDate": "Handling Date",
+  "service.noData": "NO DATA",
+  "service.exceptionReport": "Exception Report",
+  "service.registeredVehicles": "Registered Vehicles",
+  "service.eventsReport": "Events Report",
+  "service.errorConflictWhileDeletingRule": "Error while deleting rule",
+  "service.errorConflictWhileAddingRule": "Error while adding rule",
+  "service.errorConflictWhileUpdatingRule": "Error while updating rule",
+  "service.errorConflictWhileDeletingUser": "Error while deleting user",
+  "service.errorConflictWhenDeletingDevice": "Error while deleting device",
+  "service.errorConflictWhenDeletingClassification": "Error while deleting classification",
+
+  "classifications.classification": "Classification",
+  "classifications.addClassification": "Add classification",
+  "classifications.editClassification": "Edit classification",
+  
+  "error.handlingTitle": "Sorry, an unexpected error has occurred.",
+  "error.handlingMessage": "We are facing technical difficulties and are actively working on a fix. Sorry for the inconvenience.",
+  "error.somethingWentWrong": "Something went wrong. Please try again later",
+
+  "constants.columnsDevice" : [
+    {
+      "header": "Name",
+      "key": "name"
+    },
+    {
+      "header": "Plate",
+      "key": "plateNumber"
+    },
+    {
+      "header": "VIN",
+      "key": "vin"
+    },
+    {
+      "header": "Device Serial Number",
+      "key": "serialMDVR"
+    },
+    {
+      "header": "Group",
+      "key": "groupName"
+    },
+    {
+      "header": "Rules",
+      "key": "rules"
+    },
+    {
+      "header": "Cameras",
+      "key": "cameras"
+    }
+  ],
+  "constants.columnsRules": [
+    {
+      "header": "Name",
+      "key": "name"
+    },
+    {
+      "header": "Alert",
+      "key": "alarmName"
+    },
+    {
+      "header": "Status",
+      "key": "isPublic"
+    },
+    {
+      "header": "Email",
+      "key": "isEmail"
+    },
+    {
+      "header": "Pop Up",
+      "key": "isPopup"
+    },
+    {
+      "header": "Groups",
+      "key": "groups"
+    },
+    {
+      "header": "Creation Date",
+      "key": "creationDate"
+     }
+  ],
+  "constants.columnsRulesStreamax": [
+    {
+      "header": "Name",
+      "key": "name"
+    },
+    {
+      "header": "Alert",
+      "key": "alarmName"
+    },
+    {
+      "header": "Status",
+      "key": "isPublic"
+    },
+    {
+      "header": "Email",
+      "key": "isEmail"
+    },
+    {
+      "header": "Pop Up",
+      "key": "isPopup"
+    }
+  ],
+  "constants.columnsRulesGeotab": [
+    {
+      "header": "Alert",
+      "key": "name"
+    },
+    {
+      "header": "Status",
+      "key": "isPublic"
+    },
+    {
+      "header": "Email",
+      "key": "isEmail"
+    },
+    {
+      "header": "Pop Up",
+      "key": "isPopup"
+    }
+  ],
+  "constants.columnsUsers": [
+    {
+      "header": "Name",
+      "key": "name"
+    },
+    {
+      "header": "Last Name",
+      "key": "lastname"
+    },
+    {
+      "header": "Email",
+      "key": "email"
+    },
+    {
+      "header": "Groups",
+      "key": "groups"
+    },
+    {
+      "header": "Role",
+      "key": "secLevel"
+     }
+  ],
+  "constants.columnsClassifications": [
+    {
+      "header": "Name",
+      "key": "name"
+    },
+    {
+      "header": "Groups",
+      "key": "groups"
+    }
+  ],
+  "constants.columnsRoles": [
+      {
+        "header": "Module",
+        "key": "name"
+      },
+      {
+        "header": "View",
+        "key": "read"
+      },
+      {
+        "header": "Create",
+        "key": "write"
+      },
+      {
+        "header": "Edit",
+        "key": "edit"
+      },
+      {
+        "header": "Delete",
+        "key": "delete"
+      }
+  ],
+  "constants.columnsWatchdog": [
+    {
+      "header": "Name",
+      "key": "eco"
+    },
+    {
+      "header": "GO",
+      "key": "nameGo"
+    },
+    {
+      "header": "VIN",
+      "key": "vin"
+    },
+    {
+      "header": "Plate",
+      "key": "plate"
+    },
+    {
+      "header": "Serial MDVR",
+      "key": "serialMdvr"
+    },
+    {
+      "header": "Operative unit",
+      "key": "groups"
+    },
+    {
+      "header": "Last communication",
+      "key": "dateTime"
+    },
+    {
+      "header": "Latitude",
+      "key": "latitude"
+    },
+    {
+      "header": "Longitude",
+      "key": "longitude"
+    },
+    {
+      "header": "Address",
+      "key": "address"
+    },
+    {
+      "header": "Last Event",
+      "key": "lastEvent.type"
+    }
+  ],
+  "constants.columnsEvents": [
+      {
+        "header": "Vehicle",
+        "key": "deviceName"
+      },
+      {
+        "header": "MDVR",
+        "key": "serialMDVR"
+      },
+      {
+        "header": "Operative unit",
+        "key": "groups"
+      },
+      {
+        "header": "Driver",
+        "key": "driverName"
+      },
+      {
+        "header": "Rule",
+        "key": "ruleName"
+      },
+      {
+        "header": "Date / Time",
+        "key": "dateTimeF"
+      },
+      {
+        "header": "Address",
+        "key": "address"
+      },
+      {
+        "header": "Evidence",
+        "key": "cameras"
+      },
+      {
+        "header": "Status",
+        "key": "status"
+      },
+      {
+        "header": "AI",
+        "key": "verified"
+      },
+      {
+        "header": "Classification",
+        "key": "classify"
+      },
+      {
+        "header": "Comments",
+        "key": "comments"
+      },
+      {
+        "header": "Time",
+        "key": "time"
+      }
+  ],
+  "constants.riskA":[
+    {
+      "header": "Vehicle",
+      "key": "deviceName"
+    },
+    {
+      "header": "MDVR",
+      "key": "serialMDVR"
+    },
+    {
+      "header": "Operative unit",
+      "key": "groups"
+    },
+    {
+      "header": "Driver",
+      "key": "driverName"
+    },
+    {
+      "header": "Date / Time",
+      "key": "dateTimeF"  
+    },
+    {
+      "header": "Risk percentage",
+      "key": "riskPercent"
+    },
+    {
+      "header": "Risk level",
+      "key": "risklevel"
+    }
+  ],
+  "constants.helps": [
+    {
+      "num": 1,
+      "text": "Template must have 3 pages; page number one will be used for the alerts summary, page number two is a list for the handled or pending alerts, and page number 3 will be used for a graphic if chosen."
+    },
+    {
+      "num": 2,
+      "text": "Table data will be written starting from line 11, keeping in mind that line 10 will be for cell name or fields which can be obtained from the templaes. Eg: MMCam Template (Events Report)"
+    },
+    {
+      "num": 3,
+      "text": "Page number one will be used for 'Alert's Summary' table"
+    },
+    {
+      "num": 4,
+      "text": "Cells K7 and K8 will be used for event totals and the respective vehicles with related data. (Just page 1)"
+    },
+    {
+      "num": 5,
+      "text": "Cells B7 and B8 will be filled with the search period for pages 1, 2 and 3. (Start date and final date)"
+    },
+    {
+      "num": 6,
+      "text": "Data such as handled and pending alerts will be written on page 2"
+    },
+    {
+      "num": 7,
+      "text": "E7 cell will contain event totals. F7 cell will have the total of handled alerts and G7 will have the total of pending alerts. (Page two)"
+    },
+    {
+      "num": 8,
+      "text": "If chosen, page three will have a graphic showing data from page 2 (Handled alerts and pending alerts)"
+    },
+    {
+      "num": 9,
+      "text": "Cells B14, C14 and D14 of page 3 will containg the total number of alerts, number of handled alerts and pending alerts"
+    },
+    {
+      "num": 10,
+      "text": "In order to obtain the percentage of handled and pending alerts, the necessary values can be found on C15 cells with the next formula '=C14/B14' y D15 '=D14/B14'. (Both cells must have the 'percentage' format)"
+    },
+    {
+      "num": 11,
+      "text": "In order to add a graphic on page three, the values from cells B15, C15 and D15 can be adapted to fit such needs."
+    },
+    {
+      "num": 12,
+      "text": "Page names can be chosen by the user."
+    }
+  ],
+  "constants.locale": {
+    "format": "YYYY-MM-DD HH:mm:ss",
+    "applyLabel": "Aceptar",
+    "weekLabel": "W",
+    "daysOfWeek": [
+      "DO",
+      "LU",
+      "MA",
+      "MI",
+      "JU",
+      "VI",
+      "SA"
+    ],
+    "monthNames": [
+        "January",
+        "February",
+        "March",
+        "April",
+        "May",
+        "June",
+        "July",
+        "August",
+        "September",
+        "October",
+        "November",
+        "December"
+    ]
+  },
+  "constants.periodicity": [
+    {
+      "type": 1,
+      "label": "Daily"
+    },
+    {
+      "type": 2,
+      "label": "Weekly"
+    },
+    {
+      "type": 3,
+      "label": "Monthly"
+    }
+  ],
+  "months": [
+    {
+      "value": 0,
+      "name": "January"
+    },
+    {
+      "value": 1,
+      "name": "February"
+    },
+    {
+      "value": 2,
+      "name": "March"
+    },
+    {
+      "value": 3,
+      "name": "April"
+    },
+    {
+      "value": 4,
+      "name": "May"
+    },
+    {
+      "value": 5,
+      "name": "June"
+    },
+    {
+      "value": 6,
+      "name": "July"
+    },
+    {
+      "value": 7,
+      "name": "August"
+    },
+    {
+      "value": 8,
+      "name": "September"
+    },
+    {
+      "value": 9,
+      "name": "Octubre"
+    },
+    {
+      "value": 10,
+      "name": "November"
+    },
+    {
+      "value": 11,
+      "name": "December"
+    }
+  ],
+  "DatePickerLocale" : {
+    "firstDayOfWeek": 1,
+    "dayNames": [
+      "Sunday",
+      "Monday",
+      "Tuesday",
+      "Wednesday",
+      "Thursday",
+      "Friday",
+      "Saturday"
+    ],
+    "dayNamesShort": [
+      "Sun",
+      "Mon",
+      "Tue",
+      "Wed",
+      "Thu",
+      "Fri",
+      "Sat"
+    ],
+    "dayNamesMin": [
+      "Su",
+      "M",
+      "Tu",
+      "W",
+      "Th",
+      "F",
+      "Sa"
+    ],
+    "monthNames": [
+      "January",
+      "February",
+      "March",
+      "April",
+      "May",
+      "June",
+      "July",
+      "August",
+      "September",
+      "October",
+      "November",
+      "December"
+    ],
+    "monthNamesShort": [
+      "Jan",
+      "Feb",
+      "Mar",
+      "Apr",
+      "May",
+      "Jun",
+      "Jul",
+      "Aug",
+      "Sep",
+      "Oct",
+      "Nov",
+      "Dec"
+    ],
+    "today": "Today",
+    "clear": "Clear"
+  },
+  "multi.noCameras" : "No Camera Footage to Display",
+  "multi.loading" : "Loading camara footage please wait..",
+  "multi.back" : "Go back",
+  "multi.remove" : "Stop all videos",
+  "multi.help" : "Help",
+  "multi.helpMsg" : "In this module you can see live footage of multiple cameras of multiple vehicles. Vehicles are selected by clicking on them, and de-selected by clicking on them again. To focus on a single camera's footage one must select a vehicle and then click on the camera's name. Light gray vehicles are off, black vehicles are on and green vehicles are the selected vehicles.",
+  "multi.cameraTypes" : "Camera Types",
+  "multi.camera" : "Vehicle's Cameras",
+  "multi.off" : "  has been turned off",
+  "multi.vehicle" : "Vehicle ",
+  "multi.modalTitle" : "Live video viewing",
+  "multi.deviceVideo" : "Video from device ",
+  "multi.stopVideo" : " will be stopped in ",
+  "multi.seconds" : " seconds",
+  "multi.continue" : "Continue",
+  "exceptions.withEvidence": "With evidence",
+  "exceptions.automaticUpdate": "Automatic update",
+  "exceptions.noEvidence": "No evidence",
+  "exceptions.evidence": "Evidence",
+  "exceptions.classify" : "Classification",
+  "exceptions.classifyType" : "Classification Type",
+  "exceptions.veracity" : "Verification",
+  "exceptions.aiClass" : "AI Accuracy",
+  "exceptions.true" : "Accurate",
+  "exceptions.false" : "Mistaken",
+  "exceptions.pending" : "Pending",
+  "exceptions.classified" : "Classified",
+  "exceptions.notClassified" : "Not Classified",
+  "exceptions.ruleCategories" : "Rule Category",
+  "exceptions.timeNotVerified" : "Time Not Verified",
+  "exceptions.eventTypes" : "Event Types",
+  "exceptions.semaphoreTitle" : "Color Configuration",
+  "exceptions.greenConfig" : "Green, less than or equal to: ",
+  "exceptions.yellowConfig" : "Yellow, less than or equal to: ",
+  "exceptions.configHours" : " hours ",
+  "exceptions.configMinutes" : " minutes ",
+  "exceptions.editClassify" : "Edit Classification",
+  "exceptions.modify" : "Modify",
+  "exceptions.noComment" : "No comments",
+  "exceptions.noClassification" : "Not Classified",
+  "exceptions.attention" : "Warning",
+  "exceptions.attComments" : "Alerts will not be classified.",
+  "exceptions.nothing" : "No classification history to show.",
+  "exceptions.classifySuccess" : "Alert classified successfully.",
+  "exceptions.classifyError" : "Alert not classified",
+  "exceptions.selectCamera" : "You must select one or more cameras",
+  "exceptions.noVideos" : "No videos were found",
+  "exceptions.classifying" : "Classifying Alert",
+  "exceptions.errorSearch" : "Search Failed",
+  "exceptions.table" : "Table",
+  "exceptions.List" : "List",
+
+  "riskAnalitycs.noIfo": "No information found. Risk analytics are only available for ADPLUS and MDVR X1N devices."
+}

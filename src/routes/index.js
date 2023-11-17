@@ -1,24 +1,25 @@
-const router = require("express").Router();
+const express = require('express');
 
-const { baseLimit } = require('../middlewares/rateLimit.middleware');
-const SecurityMiddleware = require('../middlewares/security.middleware');
-const ErrorMiddlware = require('../middlewares/error.middleware');
-const TokenMiddleware = require('../middlewares/token.middleware');
+const app = express();
+const hasApiKey = require('../middlewares/security.middleware');
+const sessionIdMiddleware = require('../middlewares/sessionId.middleware');
+const { verify: verifyToken } = require('../middlewares/token.middleware');
 
-router.use(
-  baseLimit(),
-  require('./status.router'),
+app.use(
+  require('./status.router'), 
   require('./language.router'),
-  SecurityMiddleware.verifyApiKey,
+  hasApiKey,
   require('./video-download.router'),
   require('./urlClient.router'),
   require('./functions'),
   require('./auth.router'),
   require('./apiConnector.router'),
   require('./user.router'),
+  sessionIdMiddleware,
   require('./views'),
   require('./streamax'),
   require('./template.router'),
+  require('./chart.router'),
   require('./alarmConfig.router'),
   require('./report.router'),
   require('./driver.router'),
@@ -44,13 +45,22 @@ router.use(
   require('./limit.router'),
   require('./catalogue.router'),
   require('./surfsight.router'),
-  TokenMiddleware.verify,
+  verifyToken,
   require('./group.router'),
   require('./diagnosticAlarm.router'),
   require('./exception.router'),
   require('./humanFactor.router'),
-  ErrorMiddlware.handleNotFound,
-  ErrorMiddlware.handleError,
+  (err, req, res, next) => {
+    if (typeof err.code !== 'number') err.code = 400;
+    res.status(err.code || 400).send({
+      ok: false,
+      code: err.code,
+      message: err.message || 'Bad request',
+      errorCode: err.errorCode || err.code || 400
+    });
+  }
 );
 
-module.exports = router;
+module.exports = app;
+
+/********************* Propiedad de Métrica Móvil SA de CV **************************/
