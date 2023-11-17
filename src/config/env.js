@@ -147,7 +147,7 @@ module.exports = {
     environment: validateEnv.ENVIRONMENT,
     corsAllowed: validateEnv.CORS_ALLOWED,
     optionsSuccessStatus: validateEnv.OPTIONS_SUCCESS_STATUS,
-    apiKeyName: validateEnv.API_KEY_NAME,
+    apiKeyName: validateEnv.API_KEY_NAME.toLowerCase(),
     apiKeyValue: validateEnv.API_KEY_VALUE,
     baseMaxRequest: validateEnv.API_BASE_MAX_REQUEST,
     baseIntervalMin: validateEnv.API_BASE_INTERVAL_MIN,
