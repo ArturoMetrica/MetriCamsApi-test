@@ -4,6 +4,7 @@ const { baseLimit } = require('../middlewares/rateLimit.middleware');
 const SecurityMiddleware = require('../middlewares/security.middleware');
 const ErrorMiddlware = require('../middlewares/error.middleware');
 const TokenMiddleware = require('../middlewares/token.middleware');
+const hasSessionId = require('../middlewares/sessionId.middleware');
 
 router.use(
   baseLimit(),
@@ -16,6 +17,8 @@ router.use(
   require('./auth.router'),
   require('./apiConnector.router'),
   require('./user.router'),
+  TokenMiddleware.verify,
+  hasSessionId,
   require('./views'),
   require('./streamax'),
   require('./template.router'),
@@ -44,7 +47,6 @@ router.use(
   require('./limit.router'),
   require('./catalogue.router'),
   require('./surfsight.router'),
-  TokenMiddleware.verify,
   require('./group.router'),
   require('./diagnosticAlarm.router'),
   require('./exception.router'),
