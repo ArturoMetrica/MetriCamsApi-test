@@ -5,12 +5,15 @@ const moment = require('moment');
 const streamaxMiddleware = require('../middlewares/streamaxRules.middleware');
 const streamaxController = require('../controllers/streamaxRules.controller');
 
-const { apiKeyName, apiKeyValue, baseURL, getLastPositionURL } = require('../config/env').alarmCollector
-
+const { alarmCollector, ftAPI: { credentials: { _sign, _tenantid } } } = require('../config/env');
 const router = express.Router();
 const agent = new https.Agent({ rejectUnauthorized: false });
 const app = express();
 
+const config = {
+  headers: { 'Content-Type': 'application/json', _sign, _tenantid },
+  httpsAgent: agent
+};
 
 router.post('/lastposition', async (req, res) => {
   try {
@@ -21,9 +24,9 @@ router.post('/lastposition', async (req, res) => {
 
     // setToken(req.get('token'));
     const headers = {};
-    headers[apiKeyName] = apiKeyValue;
+    headers[alarmCollector.apiKeyName] = alarmCollector.apiKeyValue;
     vehicles = req.body.vehicles;
-    const { data } = await axios.put(baseURL + getLastPositionURL, { mdvrArr: vehicles }, { headers });
+    const { data } = await axios.put(alarmCollector.baseURL + alarmCollector.getLastPositionURL, { mdvrArr: vehicles }, { headers });
 
     const mappedResult = data.data.map((gpsRecord) => {
       const time = moment.utc(gpsRecord.dateTime || new Date().getTime()).format('YYYY-MM-DD HH:mm:ss');
