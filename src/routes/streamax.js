@@ -5,7 +5,7 @@ const moment = require('moment');
 const streamaxMiddleware = require('../middlewares/streamaxRules.middleware');
 const streamaxController = require('../controllers/streamaxRules.controller');
 
-const { alarmCollector, ftAPI: { credentials: { _sign, _tenantid } } } = require('../config/env');
+const { alarmCollector, ftAPI: { credentials: { _sign, _tenantid }, baseURL, getListDevicesURL } } = require('../config/env');
 const router = express.Router();
 const agent = new https.Agent({ rejectUnauthorized: false });
 const app = express();
@@ -57,7 +57,7 @@ router.post('/status', async (req, res) => {
       throw { message: 'Los parámetros proporcionados no son los correctos' };
     const uniqueIds = req.body.vehicles;
 
-    const apiURL = `${process.env.FT_API_BASE_URL + process.env.FT_API_GET_LIST_DEVICES_URL}`;
+    const apiURL = `${baseURL + getListDevicesURL}`;
     const ftconfig = { ...config, params: { uniqueIds, onlineState: 1 }, headers: { ...config.headers } };
     const status = [];
 

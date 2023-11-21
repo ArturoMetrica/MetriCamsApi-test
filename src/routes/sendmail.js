@@ -1,7 +1,10 @@
 const nodemailer = require('nodemailer');
 const fs = require('fs');
 const { lang } = require('moment');
-const { IS_DEV } = process.env;
+const { environment } = require('../config/env').server;
+
+const { database } = require('../config/env').geotab;
+const { user, password, name } = require('../config/env').email;
 
 const transporter = nodemailer.createTransport({
     host: 'smtp.gmail.com',
@@ -10,25 +13,25 @@ const transporter = nodemailer.createTransport({
     requireTLS: true,
     service: 'gmail',
     auth: {
-        user: process.env.EMAIL,
-        pass: process.env.EMAILPASS
+        user,
+        password
     }
 });
 const htmlTemplate = '';
 let mailOptions = {
-    from: process.env.EMAILNAME,
+    from: name,
 }
 
 async function send(email, { code, language }) {
     try {
         let mailTemplateLang;
-        if (IS_DEV === 'true') {
+        if (environment === 'true') {
             mailTemplateLang = language.code === 'en' ? 'htmlTemplateEN' : 'htmlTemplateES';
         } else {
             mailTemplateLang = language.code === 'en' ? 'htmlTemplateENProd' : 'htmlTemplateESProd';
         }
         mailOptions.subject = language.code === 'en' ? 'User register' : 'Registro de usuario';
-        mailOptions.html = await fs.readFileSync(`./email_templates/${mailTemplateLang}.txt`, { encoding: 'utf-8' }).replace('@', code).replace('$', process.env.DB_ACCESS);
+        mailOptions.html = await fs.readFileSync(`./email_templates/${mailTemplateLang}.txt`, { encoding: 'utf-8' }).replace('@', code).replace('$', database);
         mailOptions.to = email;
         await transporter.sendMail(mailOptions, function (error, info) {
             if (error)
@@ -44,13 +47,13 @@ async function send(email, { code, language }) {
 async function sendMailPass(email, { code, language }) {
     try {
         let mailTemplateLang;
-        if (IS_DEV === 'true') {
+        if (environment === 'true') {
             mailTemplateLang = language.code === 'en' ? 'htmlTemplatePassEN' : 'htmlTemplatePassES';
         } else {
             mailTemplateLang = language.code === 'en' ? 'htmlTemplatePassENProd' : 'htmlTemplatePassESProd'
         }
         mailOptions.subject = language.code === 'en' ? 'User data update' : 'Actualización de datos de usuario';
-        mailOptions.html = await fs.readFileSync(`./email_templates/${mailTemplateLang}.txt`, { encoding: 'utf-8' }).replace('@', code).replace('$', process.env.GEOTAB_DB);
+        mailOptions.html = await fs.readFileSync(`./email_templates/${mailTemplateLang}.txt`, { encoding: 'utf-8' }).replace('@', code).replace('$', database);
         mailOptions.to = email;
         await transporter.sendMail(mailOptions, function (error, info) {
             if (error)
