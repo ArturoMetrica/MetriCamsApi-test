@@ -118,6 +118,18 @@ class GeotabService extends GeotabHelper {
     return drivers;
   }
 
+  async getLastCommunication (deviceId) {
+    const api = await super.getApi();
+    const lastCommunication = await api.callAsync('Get', {
+      typeName: 'DeviceStatusInfo',
+      search: {
+        deviceId: deviceId
+      }
+    });
+
+    return lastCommunication[0];
+  }
+
 }
 
 module.exports = GeotabService;
