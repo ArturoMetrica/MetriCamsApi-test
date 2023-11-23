@@ -26,7 +26,6 @@ class ClassificationMessageController {
 
             const serialsReport = new Set(dataReport.map(objeto => objeto.serial));
             const filterData = data_.filter(objeto => !serialsReport.has(objeto.serial));
-
             dataReport = dataReport.concat(filterData);
 
             for (const info of dataReport) {
