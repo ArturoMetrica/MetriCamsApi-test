@@ -31,7 +31,7 @@ async function send(email, { code, language }) {
             mailTemplateLang = language.code === 'en' ? 'htmlTemplateENProd' : 'htmlTemplateESProd';
         }
         mailOptions.subject = language.code === 'en' ? 'User register' : 'Registro de usuario';
-        mailOptions.html = await fs.readFileSync(`./email_templates/${mailTemplateLang}.txt`, { encoding: 'utf-8' }).replace('@', code).replace('$', database);
+        mailOptions.html = await fs.readFileSync(`./email_templates/${mailTemplateLang}.txt`, { encoding: 'utf-8' }).replace('@', code).replace('$', environment);
         mailOptions.to = email;
         await transporter.sendMail(mailOptions, function (error, info) {
             if (error)
@@ -53,7 +53,7 @@ async function sendMailPass(email, { code, language }) {
             mailTemplateLang = language.code === 'en' ? 'htmlTemplatePassENProd' : 'htmlTemplatePassESProd'
         }
         mailOptions.subject = language.code === 'en' ? 'User data update' : 'Actualización de datos de usuario';
-        mailOptions.html = await fs.readFileSync(`./email_templates/${mailTemplateLang}.txt`, { encoding: 'utf-8' }).replace('@', code).replace('$', database);
+        mailOptions.html = await fs.readFileSync(`./email_templates/${mailTemplateLang}.txt`, { encoding: 'utf-8' }).replace('@', code).replace('$', environment);
         mailOptions.to = email;
         await transporter.sendMail(mailOptions, function (error, info) {
             if (error)
