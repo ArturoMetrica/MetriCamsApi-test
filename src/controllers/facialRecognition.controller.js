@@ -1,5 +1,7 @@
 const ftService = require('../services/FT_API.service');
 const DBService = require('../services/database');
+const GeotabService = require('../services/geotab.service');
+const geotabService = new GeotabService();
 const config = require('../config/env').ftAPI.credentials;
 const { geotab } = require('../config/env');
 const { async } = require('mg-api-js');
@@ -71,8 +73,9 @@ class FacialRecController {
   createDriverDB = async (req, res) => {
     try {
       const dbGroup = [];
+      let geotabId = null, password = '';
       const { sessionid } = req.sessionid;
-      const { name, lastName, groups, vehicles, nss, ruleId, rule, geotabId, employeeNumber, birthday, phone, license, email, faceList, profilePicture } = req.driver;
+      const { name, lastName, groups, vehicles, nss, ruleId, rule, employeeNumber, birthday, phone, license, email, faceList, profilePicture, isMGDriver } = req.driver;
 
       const driverName = `${name} ${lastName}`;
 
@@ -84,7 +87,16 @@ class FacialRecController {
         await codesService.deleteDriver(driverCode.nss);
         throw 'Fleet does not exit, try again';
       }
-      dbGroup.push(groups[0].groupId)
+      dbGroup.push(groups[0].groupId);
+
+      if (isMGDriver === true) {
+          const caracteres = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+          for (let i = 0; i < 10; i++) {
+            const caracterAleatorio = caracteres.charAt(Math.floor(Math.random() * caracteres.length));
+            password += caracterAleatorio;
+          }
+        geotabId = await geotabService.addDriver(email, name, lastName, password);
+      }
 
       const dataFT = await ftService.createDriverFR(driverCode.nss, driverName, fleet.data[0].fleetId);
       if (dataFT.code != 200) {
@@ -92,7 +104,7 @@ class FacialRecController {
         throw { status: false, message: 'Driver creation failed. Try again', data: null };
       }
 
-      const { data, message, status } = await dbService.createDriverFT(sessionid, name, lastName, dbGroup, vehicles, nss, ruleId, rule, geotabId, employeeNumber, birthday, phone, license, email, faceList, dataFT.data.driverId, profilePicture);
+      const { data, message, status } = await dbService.createDriverFT(sessionid, name, lastName, dbGroup, vehicles, nss, ruleId, rule, geotabId, employeeNumber, birthday, phone, license, email, faceList, dataFT.data.driverId, profilePicture, password);
 
       if (!status) {
         await codesService.deleteDriver(driverCode.nss);
@@ -181,9 +193,19 @@ class FacialRecController {
 
   updateDriverDB = async (req, res) => {
     try {
+      let password = '';
       const { idDriver, name, lastName, groups, vehicles, nss, geotabId, employeeNumber, birthday, phone, license, email, faceList } = req.driver, { sessionid } = req.sessionid;
 
-      const dataDB = await dbService.updateDriverFT(sessionid, idDriver, name, lastName, groups, vehicles, nss, geotabId, employeeNumber, birthday, phone, license, email, faceList);
+      if (geotabId === null) {
+        const caracteres = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+          for (let i = 0; i < 10; i++) {
+            const caracterAleatorio = caracteres.charAt(Math.floor(Math.random() * caracteres.length));
+            password += caracterAleatorio;
+          }
+        geotabId = await geotabService.addDriver(email, name, lastName, password);
+      }
+
+      const dataDB = await dbService.updateDriverFT(sessionid, idDriver, name, lastName, groups, vehicles, nss, geotabId, employeeNumber, birthday, phone, license, email, faceList, password);
 
       res.status(200).json({
         status: true,

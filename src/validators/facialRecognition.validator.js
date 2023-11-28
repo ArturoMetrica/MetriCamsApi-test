@@ -50,7 +50,8 @@ class FacialRecValidator {
       email: Joi.string().optional().allow('').default(null),
       profilePicture: Joi.string().allow('').optional(),
       ruleId: Joi.number().required(),
-      rule: Joi.string().required()
+      rule: Joi.string().required(),
+      isMGDriver: Joi.boolean().optional().default(null)
     }).options({ allowUnknown: true, stripUnknown: true });
   }
 

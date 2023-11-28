@@ -130,6 +130,32 @@ class GeotabService extends GeotabHelper {
     return lastCommunication[0];
   }
 
+  async addDriver (email, firstName, lastName, password) {
+    const api = await super.getApi();
+    const newDriver = await api.callAsync('Add', {
+      typeName: 'User',
+      entity: {
+        name: email,
+        firstName: firstName,
+        lastName: lastName,
+        password: password,
+        isDriver: true,
+        companyGroups : [{
+          id : "GroupCompanyId"
+        }],
+        securityGroups : [{
+          id : "GroupEverythingSecurityId"
+        }],
+        userAuthenticationType : "BasicAuthentication",
+        activeFrom : new Date().toISOString(),
+        activeTo : "2050-01-01T00:00:00.000Z",
+        // driverGroups : driverGroups
+      }
+    });
+
+    return newDriver;
+  }
+
 }
 
 module.exports = GeotabService;

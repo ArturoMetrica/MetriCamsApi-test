@@ -1077,9 +1077,9 @@ class DBData {
     throw new Error(result.message);
   }
 
-  async createDriverFT(sessionid, name, lastName, groups, vehicles, nss, ruleId, rule, geotabId, employeeNumber, birthday, phone, license, email, faceList, ftaDriverId, profilePicture) {
+  async createDriverFT(sessionid, name, lastName, groups, vehicles, nss, ruleId, rule, geotabId, employeeNumber, birthday, phone, license, email, faceList, ftaDriverId, profilePicture, password) {
     const result = await getData(
-      `SELECT * FROM driver_insert_fn($1, $2, $3, $4::JSON, $5::JSON, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15::JSON, $16, $17) as query`,
+      `SELECT * FROM driver_insert_fn($1, $2, $3, $4::JSON, $5::JSON, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15::JSON, $16, $17, $18) as query`,
       [
         sessionid,
         name,
@@ -1097,7 +1097,8 @@ class DBData {
         email,
         faceList ? JSON.stringify(faceList) : '[]',
         ftaDriverId,
-        profilePicture
+        profilePicture,
+        password
       ]
     );
 
@@ -1112,9 +1113,9 @@ class DBData {
     throw new Error(result.message);
   }
 
-  async updateDriverFT(sessionid, driverId, name, lastName, groups, vehicles, nss, geotabId, employeeNumber, birthday, phone, license, email, faces) {
+  async updateDriverFT(sessionid, driverId, name, lastName, groups, vehicles, nss, geotabId, employeeNumber, birthday, phone, license, email, faces, password) {
     const result = await getData(
-      `SELECT * FROM driver_update_fn($1, $2, $3, $4, $5::JSON, $6::JSON, $7, $8, $9, $10, $11, $12, $13, $14::JSON) as query`,
+      `SELECT * FROM driver_update_fn($1, $2, $3, $4, $5::JSON, $6::JSON, $7, $8, $9, $10, $11, $12, $13, $14::JSON, $15) as query`,
       [
         sessionid,
         driverId,
@@ -1129,7 +1130,8 @@ class DBData {
         phone,
         license,
         email,
-        JSON.stringify(faces)
+        JSON.stringify(faces),
+        password
       ]
     );
     if (result.data && result.data[0] && result.data[0].query) return result.data[0].query;
