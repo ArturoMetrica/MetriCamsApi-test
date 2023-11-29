@@ -1,10 +1,7 @@
 const nodemailer = require('nodemailer');
 const fs = require('fs');
 const { lang } = require('moment');
-const { environment } = require('../config/env').server;
-
-const { database } = require('../config/env').geotab;
-const { user, password, name } = require('../config/env').email;
+const { server: { environment }, geotab, email } = require('../config/env');
 
 const transporter = nodemailer.createTransport({
     host: 'smtp.gmail.com',
@@ -13,32 +10,33 @@ const transporter = nodemailer.createTransport({
     requireTLS: true,
     service: 'gmail',
     auth: {
-        user,
-        password
+        user: email.user,
+        pass: email.password
     }
 });
 const htmlTemplate = '';
 let mailOptions = {
-    from: name,
+    from: email.name,
 }
 
 async function send(email, { code, language }) {
     try {
         let mailTemplateLang;
-        if (environment === 'true') {
+        if (environment === 'dev') {
             mailTemplateLang = language.code === 'en' ? 'htmlTemplateEN' : 'htmlTemplateES';
         } else {
             mailTemplateLang = language.code === 'en' ? 'htmlTemplateENProd' : 'htmlTemplateESProd';
         }
         mailOptions.subject = language.code === 'en' ? 'User register' : 'Registro de usuario';
-        mailOptions.html = await fs.readFileSync(`./src/email_templates/${mailTemplateLang}.txt`, { encoding: 'utf-8' }).replace('@', code).replace('$', environment);
+
+        if (environment == 'dev')
+            mailOptions.html = await fs.readFileSync(`./src/email_templates/${mailTemplateLang}.txt`, { encoding: 'utf-8' }).replace('@', code).replace('$', environment);
+        else
+            mailOptions.html = await fs.readFileSync(`./src/email_templates/${mailTemplateLang}.txt`, { encoding: 'utf-8' }).replace('@', code).replace('$', geotab.database);
+
         mailOptions.to = email;
-        await transporter.sendMail(mailOptions, function (error, info) {
-            if (error)
-                console.log(error.message);
-            else
-                console.log('Email Sent: ' + info.response);
-        });
+
+        await transporter.sendMail(mailOptions);
     } catch (error) {
         console.log(error);
     }
@@ -47,20 +45,21 @@ async function send(email, { code, language }) {
 async function sendMailPass(email, { code, language }) {
     try {
         let mailTemplateLang;
-        if (environment === 'true') {
+        if (environment === 'dev') {
             mailTemplateLang = language.code === 'en' ? 'htmlTemplatePassEN' : 'htmlTemplatePassES';
         } else {
             mailTemplateLang = language.code === 'en' ? 'htmlTemplatePassENProd' : 'htmlTemplatePassESProd'
         }
         mailOptions.subject = language.code === 'en' ? 'User data update' : 'Actualización de datos de usuario';
-        mailOptions.html = await fs.readFileSync(`./src/email_templates/${mailTemplateLang}.txt`, { encoding: 'utf-8' }).replace('@', code).replace('$', environment);
+
+        if (environment == 'dev')
+            mailOptions.html = await fs.readFileSync(`./src/email_templates/${mailTemplateLang}.txt`, { encoding: 'utf-8' }).replace('@', code).replace('$', environment);
+        else
+            mailOptions.html = await fs.readFileSync(`./src/email_templates/${mailTemplateLang}.txt`, { encoding: 'utf-8' }).replace('@', code).replace('$', geotab.database);
+
         mailOptions.to = email;
-        await transporter.sendMail(mailOptions, function (error, info) {
-            if (error)
-                console.log(error.message);
-            else
-                console.log('Email Sent : ' + info.response);
-        });
+
+        await transporter.sendMail(mailOptions);
     } catch (error) {
         console.log(error);
     }
