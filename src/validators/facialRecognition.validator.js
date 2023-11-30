@@ -91,6 +91,7 @@ class FacialRecValidator {
       phone: Joi.string().optional().allow('').default(null),
       license: Joi.string().optional(),
       email: Joi.string().optional().allow('').default(null),
+      isNewGeotabDriver: Joi.boolean().optional().default(null)
     }).options({ allowUnknown: true, stripUnknown: true });
   }
 

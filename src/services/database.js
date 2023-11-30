@@ -1113,9 +1113,9 @@ class DBData {
     throw new Error(result.message);
   }
 
-  async updateDriverFT(sessionid, driverId, name, lastName, groups, vehicles, nss, geotabId, employeeNumber, birthday, phone, license, email, faces, password) {
+  async updateDriverFT(sessionid, driverId, name, lastName, groups, vehicles, nss, geotabId, employeeNumber, birthday, phone, license, email, faces, password, isNewGeotabDriver) {
     const result = await getData(
-      `SELECT * FROM driver_update_fn($1, $2, $3, $4, $5::JSON, $6::JSON, $7, $8, $9, $10, $11, $12, $13, $14::JSON, $15) as query`,
+      `SELECT * FROM driver_update_fn($1, $2, $3, $4, $5::JSON, $6::JSON, $7, $8, $9, $10, $11, $12, $13, $14::JSON, $15, $16) as query`,
       [
         sessionid,
         driverId,
@@ -1131,7 +1131,8 @@ class DBData {
         license,
         email,
         JSON.stringify(faces),
-        password
+        password,
+        isNewGeotabDriver
       ]
     );
     if (result.data && result.data[0] && result.data[0].query) return result.data[0].query;
