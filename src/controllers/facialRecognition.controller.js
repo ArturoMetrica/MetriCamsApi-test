@@ -77,6 +77,14 @@ class FacialRecController {
       const { sessionid } = req.sessionid;
       const { name, lastName, groups, vehicles, nss, ruleId, rule, employeeNumber, birthday, phone, license, email, faceList, profilePicture, isMGDriver } = req.driver;
 
+      if (isMGDriver === true) {
+        const caracteres = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+        for (let i = 0; i < 10; i++) {
+          const caracterAleatorio = caracteres.charAt(Math.floor(Math.random() * caracteres.length));
+          password += caracterAleatorio;
+        }
+      geotabId = await geotabService.addDriver(email, name, lastName, password);
+    }
       const driverName = `${name} ${lastName}`;
 
       // Cambiar campo NSS por códigos generados desde el servicio de facial-recognition
@@ -88,15 +96,6 @@ class FacialRecController {
         throw 'Fleet does not exit, try again';
       }
       dbGroup.push(groups[0].groupId);
-
-      if (isMGDriver === true) {
-          const caracteres = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
-          for (let i = 0; i < 10; i++) {
-            const caracterAleatorio = caracteres.charAt(Math.floor(Math.random() * caracteres.length));
-            password += caracterAleatorio;
-          }
-        geotabId = await geotabService.addDriver(email, name, lastName, password);
-      }
 
       const dataFT = await ftService.createDriverFR(driverCode.nss, driverName, fleet.data[0].fleetId);
       if (dataFT.code != 200) {
