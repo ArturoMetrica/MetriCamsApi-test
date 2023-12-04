@@ -121,13 +121,10 @@ class GeotabService extends GeotabHelper {
   async getLastCommunication (deviceId) {
     const api = await super.getApi();
     const lastCommunication = await api.callAsync('Get', {
-      typeName: 'DeviceStatusInfo',
-      search: {
-        deviceId: deviceId
-      }
+      typeName: 'DeviceStatusInfo'
     });
 
-    return lastCommunication[0];
+    return lastCommunication;
   }
 
   async addDriver (email, firstName, lastName, password) {
@@ -156,7 +153,7 @@ class GeotabService extends GeotabHelper {
     return newDriver;
   }
 
-  async deleteDriver (email, firstName, lastName, password) {
+  async deleteDriver (email, firstName, lastName, password, idDriver) {
     const api = await super.getApi();
     const newDriver = await api.callAsync('Remove', {
       typeName: 'User',
@@ -166,6 +163,7 @@ class GeotabService extends GeotabHelper {
         lastName: lastName,
         password: password,
         isDriver: true,
+        id: idDriver,
         companyGroups : [{
           id : "GroupCompanyId"
         }],

@@ -93,6 +93,7 @@ class FacialRecController {
       const fleet = await ftService.getFleetList(groups[0].group);
       if (!fleet.data.length) {
         await codesService.deleteDriver(driverCode.nss);
+        await geotabService.deleteDriver(email, name, lastName, password, geotabId);
         throw 'Fleet does not exit, try again';
       }
       dbGroup.push(groups[0].groupId);
@@ -100,6 +101,7 @@ class FacialRecController {
       const dataFT = await ftService.createDriverFR(driverCode.nss, driverName, fleet.data[0].fleetId);
       if (dataFT.code != 200) {
         await codesService.deleteDriver(driverCode.nss);
+        await geotabService.deleteDriver(email, name, lastName, password, geotabId);
         throw { status: false, message: 'Driver creation failed. Try again', data: null };
       }
 
@@ -107,6 +109,7 @@ class FacialRecController {
 
       if (!status) {
         await codesService.deleteDriver(driverCode.nss);
+        await geotabService.deleteDriver(email, name, lastName, password, geotabId);
         await ftService.deleteDriverFR(dataFT.data.driverId);
         throw message;
       }

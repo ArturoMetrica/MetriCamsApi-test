@@ -28,12 +28,23 @@ class ClassificationMessageController {
             const filterData = data_.filter(objeto => !serialsReport.has(objeto.serial));
             dataReport = dataReport.concat(filterData);
 
+            const deviceStatusInfo = await geotabService.getLastCommunication();
+
+            const goIds = dataReport.filter(info => info.goId !== '').map(info => info.goId);
+
+            const filteredInfo = deviceStatusInfo.filter(info => {
+                const deviceId = info.device.id; // Asumiendo que el ID está en info.device.id
+                return goIds.includes(deviceId);
+            });
+
             for (const info of dataReport) {
                 if (info.goId === '') continue;
-                const deviceStatusInfo = await geotabService.getLastCommunication(info.goId);
-                info.latitudeGo = deviceStatusInfo.latitude;
-                info.longitudeGo = deviceStatusInfo.longitude;
-                info.dateTimeGo = deviceStatusInfo.dateTime;
+                const matchingInfo = filteredInfo.find(filteredInfo => filteredInfo.device.id === info.goId);
+                if (matchingInfo) {
+                    info.latitudeGo = matchingInfo.latitude;
+                    info.longitudeGo = matchingInfo.longitude;
+                    info.dateTimeGo = matchingInfo.dateTime;
+                }
             }
 
             res.status(200).json({
