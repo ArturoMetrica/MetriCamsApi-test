@@ -496,11 +496,11 @@ class FTAPIController {
 
         await insertMdvrAccess(channels, message, user, uniqueId);
         
-        data.mediaType = isMac ? 2 : mediaType
         res.status(200).json({
           ok: success,
           message: message !== 'Success' ? message : undefined,
           secondsLeft: req.media.secondsLeft,
+          mediaType: isMac ? 2 : mediaType,
           data: data ? data : null,
         });
       }
