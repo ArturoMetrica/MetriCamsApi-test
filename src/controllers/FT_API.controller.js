@@ -452,6 +452,8 @@ class FTAPIController {
       const dbAccess = await dbService.getCameraAccess();
       let cantMdvr = dbAccess.data ? countMdvrAccess(uniqueId, dbAccess.data) : 0;
 
+      const { isMac } = req.useragent;
+
       if (cantMdvr > 7) {
         const [finalCh, availableCh, fullCh] = countChannels(uniqueId, channels.split(','), dbAccess.data);
         if (availableCh.length < 1) {
@@ -469,7 +471,7 @@ class FTAPIController {
           audio,
           quality,
           streamType,
-          mediaType
+          isMac ? 2 : mediaType
         );
 
         await insertMdvrAccess(channels, message, user, uniqueId);
@@ -489,7 +491,7 @@ class FTAPIController {
           audio,
           quality,
           streamType,
-          mediaType
+          isMac ? 2 : mediaType
         );
 
         await insertMdvrAccess(channels, message, user, uniqueId);
