@@ -1,7 +1,7 @@
 <p>Estimado Usuario.</p>
 <p> </p>
 <p>El sistema de <b>MM-Cam V5.10.0</b> ha recibido su petición para cambiar su contraseña</p>
-<p>Favor de ingresar en el siguiente <a href='https://metricams.metricamovil.com/MM-Cam_ChangePasswordProdTest/index.html?code=@'>enlace</a> para realizar el cambio.</p>
+<p>Favor de ingresar en el siguiente <a href='https://metricams-addin-lnx.metricamovil.com/changepass/index.html?code=@&bd=$'>enlace</a> para realizar el cambio.</p>
 <p>En caso de haber un error, favor de hacer caso omiso. </p>
 <p></p>
 <img src="https://www.metricamovil.com/contenido/themes/mm/images/logo-metrica-movil.png" alt="Métrica Móvil">
