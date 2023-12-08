@@ -7,6 +7,7 @@ const axiosRetry = require('axios-retry');
 axiosRetry(axios, { retries: 3, retryDelay: axiosRetry.exponentialDelay });
 
 const { apiKeyName, apiKeyValue, baseURL, getLastPositionURL } = require('../config/env').alarmCollector;
+const { database } = require('../config/env').geotab;
 
 
 class ClassificationMessageController {
@@ -28,11 +29,14 @@ class ClassificationMessageController {
             const filterData = data_.filter(objeto => !serialsReport.has(objeto.serial));
             dataReport = dataReport.concat(filterData);
 
-            const deviceStatusInfo = await geotabService.getLastCommunication();
+            let goIds = dataReport.filter(info => info.goId !== '').map(info => info.goId);
 
-            const goIds = dataReport.filter(info => info.goId !== '').map(info => info.goId);
-
-            const filteredInfo = deviceStatusInfo.filter(info => {
+            if (goIds.length) {
+                if (database === 'fleet_mexico') {
+                    goIds = goIds.slice(0, 600);
+                }
+                const deviceStatusInfo = await geotabService.getLastCommunication();
+                const filteredInfo = deviceStatusInfo.filter(info => {
                 const deviceId = info.device.id; // Asumiendo que el ID está en info.device.id
                 return goIds.includes(deviceId);
             });
@@ -46,6 +50,7 @@ class ClassificationMessageController {
                     info.dateTimeGo = matchingInfo.dateTime;
                 }
             }
+        }
 
             res.status(200).json({
                 status: true,

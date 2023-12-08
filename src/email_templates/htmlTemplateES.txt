@@ -1,7 +1,7 @@
 <p>Estimado Usuario.</p>
 <p> </p>
 <p>Su email fue registrado en el sistema de <b>MM-Cam V5.10.0</b> </p>
-<p>Favor de ingresar en el siguiente <a href='https://metricams.metricamovil.com/MM-Cam_RegisterDev/index.html?code=@'>enlace</a> para completar su registro.</p>
+<p>Favor de ingresar en el siguiente <a href='https://metricams-addin-lnx.metricamovil.com/register/index.html?code=@&bd=$'>enlace</a> para completar su registro.</p>
 <p>En caso de haber un error, favor de hacer caso omiso. </p>
 <p></p>
 <img src="https://www.metricamovil.com/contenido/themes/mm/images/logo-metrica-movil.png" alt="Métrica Móvil">
