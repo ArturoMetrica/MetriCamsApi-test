@@ -181,6 +181,17 @@ class FTAPIValidator {
     }).options({ allowUnknown: true, stripUnknown: true });
   }
 
+  queryStreamingVideoLink() {
+    return Joi.object().keys({
+      uniqueId: Joi.string().required(),
+      channels: Joi.string().required(),
+      audio: Joi.string().optional().default('ON').valid('OFF', 'ON'),
+      quality: Joi.string().optional().default('SMOOTH').valid('SMOOTH', 'STANDARD', 'CLEAR'),
+      streamType: Joi.string().optional().default('MAIN_STREAM').valid('MAIN_STREAM', 'SUB_STREAM'),
+      streamingProtocol: Joi.string().optional().default('FLV').valid('FLV', 'HLS'),   
+    }).options({ allowUnknown: true, stripUnknown: true });
+  }
+
   getTheMaintenancePlatformLink() {
     return Joi.object().keys({
       token: Joi.string().optional(),
@@ -345,7 +356,7 @@ class FTAPIValidator {
     }).options({ allowUnknown: true, stripUnknown: true });
   }
 
-  getMonthlyCalendar () {
+  getMonthlyCalendar() {
     return Joi.object().keys({
       // token: Joi.string().optional(),
       uniqueId: Joi.string().required(),
@@ -356,7 +367,7 @@ class FTAPIValidator {
     }).options({ allowUnknown: true, stripUnknown: true });
   }
 
-  getDailyCalendar () {
+  getDailyCalendar() {
     return Joi.object().keys({
       // token: Joi.string().optional(),
       uniqueId: Joi.string().required(),
@@ -368,7 +379,7 @@ class FTAPIValidator {
     }).options({ allowUnknown: true, stripUnknown: true });
   }
 
-  getMinuteCalendar () {
+  getMinuteCalendar() {
     return Joi.object().keys({
       // token: Joi.string().optional(),
       uniqueId: Joi.string().required(),

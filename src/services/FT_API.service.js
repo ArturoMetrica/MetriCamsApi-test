@@ -325,6 +325,24 @@ class FTAPIService {
     }
   }
 
+  async queryStreamingVideoLink(channels, uniqueId, audio, quality, streamType, streamingProtocol) {
+    try {
+      const  data  = await axios.get(ftAPI.baseURL + `/devices/${uniqueId}/live-links`, { // TODO: 
+        headers: { _sign, _tenantid },
+        params: {
+          audio,
+          channels,
+          quality,
+          streamType,
+          streamingProtocol
+        }
+      });
+      return data;
+    } catch (e) {
+      throw e;
+    }
+  }
+
   async getTheMaintenancePlatformLink(oldToken, timeZone) {
     try {
       const { data } = await axios.get(ftAPI.baseURL + ftAPI.getTheMaintenancePlatformLinkURL, {
@@ -796,7 +814,7 @@ class FTAPIService {
           headers: { _sign, _tenantid }
         });
 
-        return data ? data : null;
+      return data ? data : null;
     } catch (error) {
       return null;
     }
@@ -808,7 +826,7 @@ class FTAPIService {
         {
           headers: { _sign, _tenantid }
         });
-        console.log('object');
+      console.log('object');
       return data ? data : null;
     } catch (error) {
       return null;
