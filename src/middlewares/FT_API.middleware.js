@@ -254,7 +254,7 @@ class FTAPIMiddleware {
         ...req.query,
       });
 
-      if (true) req.stream.streamingProtocol = 'HLS';
+      if (isMac) req.stream.streamingProtocol = 'HLS';
 
       next();
     } catch (error) {

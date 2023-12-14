@@ -327,7 +327,7 @@ class FTAPIService {
 
   async queryStreamingVideoLink(channels, uniqueId, audio, quality, streamType, streamingProtocol) {
     try {
-      const  data  = await axios.get(ftAPI.baseURL + `/devices/${uniqueId}/live-links`, { // TODO: 
+      const { data } = await axios.get(ftAPI.baseURL + `/openapi/v2/devices/${uniqueId}/live-links`, { // TODO: 
         headers: { _sign, _tenantid },
         params: {
           audio,
