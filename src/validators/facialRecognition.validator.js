@@ -85,13 +85,13 @@ class FacialRecValidator {
       groups: Joi.array().optional(),
       vehicles: Joi.array().allow('[]').optional(),
       nss: Joi.string().required(),
-      geotabId: Joi.string().optional(),
+      geotabId: Joi.string().allow(null).optional(),
       employeeNumber: Joi.string().optional().allow('').default(null),
       birthday: Joi.string().optional().allow(''),
       phone: Joi.string().optional().allow('').default(null),
       license: Joi.string().optional(),
       email: Joi.string().optional().allow('').default(null),
-      isNewGeotabDriver: Joi.boolean().optional().default(null)
+      isMGDriver: Joi.boolean().optional().default(null)
     }).options({ allowUnknown: true, stripUnknown: true });
   }
 

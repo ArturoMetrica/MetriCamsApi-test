@@ -196,7 +196,8 @@ class FacialRecController {
   updateDriverDB = async (req, res) => {
     try {
       let password = '';
-      const { idDriver, name, lastName, groups, vehicles, nss, geotabId, employeeNumber, birthday, phone, license, email, faceList, isNewGeotabDriver } = req.driver, { sessionid } = req.sessionid;
+      const { idDriver, name, lastName, groups, vehicles, nss, employeeNumber, birthday, phone, license, email, faceList, isMGDriver } = req.driver, { sessionid } = req.sessionid;
+      let { geotabId } = req.driver;
 
       if (geotabId === null) {
         const caracteres = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
@@ -207,7 +208,7 @@ class FacialRecController {
         geotabId = await geotabService.addDriver(email, name, lastName, password);
       }
 
-      const dataDB = await dbService.updateDriverFT(sessionid, idDriver, name, lastName, groups, vehicles, nss, geotabId, employeeNumber, birthday, phone, license, email, faceList, password, isNewGeotabDriver);
+      const dataDB = await dbService.updateDriverFT(sessionid, idDriver, name, lastName, groups, vehicles, nss, geotabId, employeeNumber, birthday, phone, license, email, faceList, password, isMGDriver);
 
       res.status(200).json({
         status: true,
