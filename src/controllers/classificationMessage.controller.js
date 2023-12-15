@@ -69,6 +69,28 @@ class ClassificationMessageController {
         }
     }
 
+    async classificateAllPages (req, res) {
+        try {
+            const { sessionid} = req.sessionid;
+            const { startTime, endTime, vehicles, rulesG, rulesS, dataC, offset } = req.classification;
+
+            const { data, message } = await dbService.classificationForAllPages(sessionid, startTime, endTime, vehicles, rulesG, rulesS, dataC, offset);
+            res.status(200).json({
+                status: true,
+                message,
+                data
+            });
+        } catch (error) {
+            await dbService.errorLogs('API', error, '/api/classification/pages');
+
+            res.status(500).json({
+                status: false,
+                message: error.message || error,
+                data: null
+            });
+        }
+    }
+
 }
 
 module.exports = new ClassificationMessageController();

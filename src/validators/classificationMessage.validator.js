@@ -21,6 +21,18 @@ class ClassificationMessageValidator {
             classifications: Joi.string().required()
         }).options({ allowUnknown: true, stripUnknown: true });
     }
+
+    classificateAllPages() {
+        return Joi.object().keys({
+            startTime: Joi.date().required(),
+            endTime: Joi.date().required(),
+            vehicles: Joi.array().required(),
+            rulesG: Joi.array().required(),
+            rulesS: Joi.array().required(),
+            dataC: Joi.array().required(),
+            offset: Joi.number().default(-6).optional()
+        }).options({ allowUnknown: true, stripUnknown: true});
+    }
 }
 
 module.exports = new ClassificationMessageValidator();
