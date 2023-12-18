@@ -30,8 +30,8 @@ class ClassificationMessageValidator {
 			rulesG: Joi.array().required(),
 			rulesS: Joi.array().required(),
 			dataC: Joi.object().keys({
-				idClassificationMessage: Joi.number().required(),
-				comment: Joi.string().required(),
+				idClassificationMessage: Joi.number().optional(),
+				comment: Joi.string().optional(),
 				calification: Joi.boolean().required(),
 			}).required(),
 			offset: Joi.number().default(-6).optional()
