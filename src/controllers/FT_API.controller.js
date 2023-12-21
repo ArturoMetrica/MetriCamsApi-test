@@ -495,7 +495,7 @@ class FTAPIController {
         );
 
         await insertMdvrAccess(channels, message, user, uniqueId);
-        
+
         res.status(200).json({
           ok: success,
           message: message !== 'Success' ? message : undefined,
@@ -513,6 +513,29 @@ class FTAPIController {
       });
     }
   }
+
+  queryStreamingVideoLink = async (req, res) => {
+    try {
+      const { channels, uniqueId, audio, quality, streamType, streamingProtocol } = req.stream;
+
+      const { data } = await FTAPIService.queryStreamingVideoLink(channels, uniqueId, audio, quality, streamType, streamingProtocol)
+
+      res.status(200).json({
+        status: true,
+        message: '',
+        // secondsLeft: req.media.secondsLeft,
+        streamingProtocol,
+        data
+      });
+    } catch (error) {
+      res.status(500).json({
+        status: false,
+        message: error.message || error,
+        data: null
+      });
+    }
+  }
+
 
   async getTheMaintenancePlatformLink(req, res) {
     try {

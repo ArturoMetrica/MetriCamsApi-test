@@ -1536,6 +1536,23 @@ class DBData {
 
     throw new Error(result.message);
   }
+
+  async classificationForAllPages(sessionId, startTime, endTime, vehicles, rulesG, rulesS, dataC, offset) {
+    const result = await getData('SELECT * FROM classification_for_all_pages($1::TEXT, $2::TIMESTAMP(0), $3::TIMESTAMP(0), $4::BIGINT[], $5::BIGINT[], $6::BIGINT[], $7, $8::INT) AS query', [
+      sessionId,
+      startTime,
+      endTime,
+      vehicles,
+      rulesG,
+      rulesS,
+      dataC ? JSON.stringify(dataC) : '[]',
+      offset
+    ]);
+
+    if (result.data && result.data[0]) return result;
+
+    throw new Error(result.message);
+  }
 }
 
 

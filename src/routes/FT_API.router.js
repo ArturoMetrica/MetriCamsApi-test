@@ -117,6 +117,13 @@ router.get(
 );
 
 router.get(
+  '/api/streaming',
+  FTAPIMiddleware.queryStreamingVideoLink,
+  // getLiveLimit,
+  FTAPIController.queryStreamingVideoLink
+);
+
+router.get(
   '/api/ftapi/maintenance',
   FTAPIMiddleware.sessionId,
   FTAPIMiddleware.getTheMaintenancePlatformLink,
