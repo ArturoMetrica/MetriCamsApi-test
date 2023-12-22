@@ -42,7 +42,7 @@ class FacialRecValidator {
       groups: Joi.array().required(),
       vehicles: Joi.array().allow('').optional(),
       nss: Joi.string().required(),
-      geotabId: Joi.string().allow('').optional(),
+      geotabId: Joi.string().allow('', null).default(null).optional(),
       employeeNumber: Joi.string().optional().allow('').default(null),
       birthday: Joi.string().optional().allow(''),
       phone: Joi.string().optional().allow('').default(null),

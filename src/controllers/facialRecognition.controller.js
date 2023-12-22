@@ -73,9 +73,9 @@ class FacialRecController {
   createDriverDB = async (req, res) => {
     try {
       const dbGroup = [];
-      let geotabId = null, password = '';
+      let password = '';
       const { sessionid } = req.sessionid;
-      const { name, lastName, groups, vehicles, nss, ruleId, rule, employeeNumber, birthday, phone, license, email, faceList, profilePicture, isMGDriver } = req.driver;
+      const { name, lastName, groups, vehicles, nss, ruleId, rule, employeeNumber, birthday, phone, license, email, faceList, profilePicture, isMGDriver, geotabId } = req.driver;
 
       if (isMGDriver === true) {
         const caracteres = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
