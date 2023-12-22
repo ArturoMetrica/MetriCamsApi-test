@@ -246,6 +246,22 @@ class FTAPIMiddleware {
     }
   }
 
+  async queryStreamingVideoLink(req, res, next) {
+    try {
+      const { isMac } = req.useragent;
+
+      req.stream = await FTAPIValidator.queryStreamingVideoLink().validateAsync({
+        ...req.query,
+      });
+
+      if (isMac) req.stream.streamingProtocol = 'HLS';
+
+      next();
+    } catch (error) {
+      res.json({ ok: false, message: error.message });
+    }
+  }
+
   async getTheMaintenancePlatformLink(req, res, next) {
     try {
       req.maintenance = await FTAPIValidator.getTheMaintenancePlatformLink().validateAsync({
@@ -448,7 +464,7 @@ class FTAPIMiddleware {
         ...req.query
       });
 
-      next ();
+      next();
     } catch (error) {
       res.json({ ok: false, message: error.message });
     }
@@ -461,7 +477,7 @@ class FTAPIMiddleware {
         ...req.query
       });
 
-      next ();
+      next();
     } catch (error) {
       res.json({ ok: false, message: error.message });
     }
@@ -474,7 +490,7 @@ class FTAPIMiddleware {
         ...req.query
       });
 
-      next ();
+      next();
     } catch (error) {
       res.json({ ok: false, message: error.message });
     }

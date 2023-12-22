@@ -452,6 +452,8 @@ class FTAPIController {
       const dbAccess = await dbService.getCameraAccess();
       let cantMdvr = dbAccess.data ? countMdvrAccess(uniqueId, dbAccess.data) : 0;
 
+      const { isMac } = req.useragent;
+
       if (cantMdvr > 7) {
         const [finalCh, availableCh, fullCh] = countChannels(uniqueId, channels.split(','), dbAccess.data);
         if (availableCh.length < 1) {
@@ -469,7 +471,7 @@ class FTAPIController {
           audio,
           quality,
           streamType,
-          mediaType
+          isMac ? 2 : mediaType
         );
 
         await insertMdvrAccess(channels, message, user, uniqueId);
@@ -489,7 +491,7 @@ class FTAPIController {
           audio,
           quality,
           streamType,
-          mediaType
+          isMac ? 2 : mediaType
         );
 
         await insertMdvrAccess(channels, message, user, uniqueId);
@@ -498,6 +500,7 @@ class FTAPIController {
           ok: success,
           message: message !== 'Success' ? message : undefined,
           secondsLeft: req.media.secondsLeft,
+          mediaType: isMac ? 2 : mediaType,
           data: data ? data : null,
         });
       }
@@ -510,6 +513,29 @@ class FTAPIController {
       });
     }
   }
+
+  queryStreamingVideoLink = async (req, res) => {
+    try {
+      const { channels, uniqueId, audio, quality, streamType, streamingProtocol } = req.stream;
+
+      const { data } = await FTAPIService.queryStreamingVideoLink(channels, uniqueId, audio, quality, streamType, streamingProtocol)
+
+      res.status(200).json({
+        status: true,
+        message: '',
+        // secondsLeft: req.media.secondsLeft,
+        streamingProtocol,
+        data
+      });
+    } catch (error) {
+      res.status(500).json({
+        status: false,
+        message: error.message || error,
+        data: null
+      });
+    }
+  }
+
 
   async getTheMaintenancePlatformLink(req, res) {
     try {

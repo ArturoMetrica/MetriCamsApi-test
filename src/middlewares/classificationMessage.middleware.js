@@ -59,6 +59,26 @@ class ClassificationMessageMiddleware {
             });
         }
     }
+
+    async classificateAllPages(req, res, next) {
+        try {
+            req.classification = await Validator.classificateAllPages().validateAsync({
+                ...req.query,
+                ...req.params,
+                ...req.headers,
+                ...req.body
+            });
+
+            next ();
+        } catch (error) {
+            console.log(error);
+            res.status(400).json({
+                status: false,
+                message: error.message || error,
+                data: null
+            });
+        }
+    }
 }
 
 module.exports = new ClassificationMessageMiddleware();
