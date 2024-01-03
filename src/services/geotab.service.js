@@ -185,27 +185,36 @@ class GeotabService extends GeotabHelper {
   getIdxZoneName = async () => {
     try {
       const api = await super.getApi();
-
+  
       const zones = await api.callAsync("Get", {
         "typeName": "Zone",
       });
-
-      return zones.reduce((a, b) => ({ ...a, [b.id]: b.name }), {})
+  
+      return zones;
+    } catch (error) {
+      throw error;
+    }
+  }
+  
+  formatAddressResponse = async (addressInfo) => {
+    try {
+      const zones = await this.getIdxZoneName();
+  
+      return addressInfo.map(a => ({
+        location: Array.isArray(a?.zones) ? a.zones.map(z => {
+          const matchedZone = zones.find(zone => zone.id === z.id);
+          return matchedZone ? matchedZone.name : null;
+        }) : a.formattedAddress
+      }));
     } catch (error) {
       throw error;
     }
   }
 
-  // formatAddressResponse = (addressInfo) => addressInfo.map(a => ({ formattedAddress: a.formattedAddress, zones: Array.isArray(a?.zones) ? a.zones.join(',') : null }))
-  formatAddressResponse = (addressInfo, idxZones) => addressInfo.map(a => ({
-    location: Array.isArray(a?.zones) ? a.zones.map(z => idxZones[z.id]) : a.formattedAddress
-  }));
-
   async getAddresses(coordinates, partitionNumber) {
     try {
       const api = await super.getApi();
       // coordinates = coordinates.filter(x => Number(x.x) && Number(x.y))
-      const idxZones = await this.getIdxZoneName();
       coordinates = coordinates.map(c => ({ x: c?.x || 0, y: c?.y || 0 }))
       if (!coordinates.length > 0) {
         throw new Error(`coordinates is empty`)
@@ -223,16 +232,16 @@ class GeotabService extends GeotabHelper {
           ]
         })
 
-        const result = await Promise.map(_.chunk(calls, 3), call => api.multiCallAsync(call), { concurrency: 1 })
+        const result = await Promise.map(_.chunk(calls, 10), call => api.multiCallAsync(call), { concurrency: 1 })
 
         const addresses = _.flatMapDeep(result)
-        return this.formatAddressResponse(addresses, idxZones)
+        return this.formatAddressResponse(addresses)
       } else {
         const address = await api.callAsync('GetAddresses', {
           coordinates,
           "fields": ["formattedAddress", "zones"]
         })
-        return this.formatAddressResponse(address, idxZones)
+        return this.formatAddressResponse(address)
       }
     } catch (error) {
       throw error
