@@ -54,8 +54,8 @@ class ClassificationMessageController {
 			}
 
 			const dataZOA = await getAddresses(dataReport);
-			dataReport = dataReport.map((item, index) => ({ ...item, location: dataZOA[index]?.location || null }));
 
+			dataReport = dataReport.map((item, index) => ({ ...item, location: dataZOA[index]?.location || '' }));
 
 			res.status(200).json({
 				status: true,
