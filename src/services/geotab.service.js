@@ -1,6 +1,8 @@
 const _ = require('lodash');
 const { geotab } = require('../config/env');
 const GeotabHelper = require('../helpers/geotab.helper');
+const Promise = require('bluebird');
+
 
 class GeotabService extends GeotabHelper {
   constructor({ username = geotab.username, password = geotab.password, database = geotab.database, server = geotab.server, sessionId, userName, name } = {}) {
@@ -118,7 +120,7 @@ class GeotabService extends GeotabHelper {
     return drivers;
   }
 
-  async getLastCommunication (deviceId) {
+  async getLastCommunication(deviceId) {
     const api = await super.getApi();
     const lastCommunication = await api.callAsync('Get', {
       typeName: 'DeviceStatusInfo'
@@ -127,7 +129,7 @@ class GeotabService extends GeotabHelper {
     return lastCommunication;
   }
 
-  async addDriver (email, firstName, lastName, password) {
+  async addDriver(email, firstName, lastName, password) {
     const api = await super.getApi();
     const newDriver = await api.callAsync('Add', {
       typeName: 'User',
@@ -137,15 +139,15 @@ class GeotabService extends GeotabHelper {
         lastName: lastName,
         password: password,
         isDriver: true,
-        companyGroups : [{
-          id : "GroupCompanyId"
+        companyGroups: [{
+          id: "GroupCompanyId"
         }],
-        securityGroups : [{
-          id : "GroupEverythingSecurityId"
+        securityGroups: [{
+          id: "GroupEverythingSecurityId"
         }],
-        userAuthenticationType : "BasicAuthentication",
-        activeFrom : new Date().toISOString(),
-        activeTo : "2050-01-01T00:00:00.000Z",
+        userAuthenticationType: "BasicAuthentication",
+        activeFrom: new Date().toISOString(),
+        activeTo: "2050-01-01T00:00:00.000Z",
         // driverGroups : driverGroups
       }
     });
@@ -153,7 +155,7 @@ class GeotabService extends GeotabHelper {
     return newDriver;
   }
 
-  async deleteDriver (email, firstName, lastName, password, idDriver) {
+  async deleteDriver(email, firstName, lastName, password, idDriver) {
     const api = await super.getApi();
     const newDriver = await api.callAsync('Remove', {
       typeName: 'User',
@@ -164,15 +166,15 @@ class GeotabService extends GeotabHelper {
         password: password,
         isDriver: true,
         id: idDriver,
-        companyGroups : [{
-          id : "GroupCompanyId"
+        companyGroups: [{
+          id: "GroupCompanyId"
         }],
-        securityGroups : [{
-          id : "GroupEverythingSecurityId"
+        securityGroups: [{
+          id: "GroupEverythingSecurityId"
         }],
-        userAuthenticationType : "BasicAuthentication",
-        activeFrom : new Date().toISOString(),
-        activeTo : "2050-01-01T00:00:00.000Z",
+        userAuthenticationType: "BasicAuthentication",
+        activeFrom: new Date().toISOString(),
+        activeTo: "2050-01-01T00:00:00.000Z",
         // driverGroups : driverGroups
       }
     });
@@ -180,6 +182,62 @@ class GeotabService extends GeotabHelper {
     return newDriver;
   }
 
+  getIdxZoneName = async () => {
+    try {
+      const api = await super.getApi();
+
+      const zones = await api.callAsync("Get", {
+        "typeName": "Zone",
+      });
+
+      return zones.reduce((a, b) => ({ ...a, [b.id]: b.name }), {})
+    } catch (error) {
+      throw error;
+    }
+  }
+
+  // formatAddressResponse = (addressInfo) => addressInfo.map(a => ({ formattedAddress: a.formattedAddress, zones: Array.isArray(a?.zones) ? a.zones.join(',') : null }))
+  formatAddressResponse = (addressInfo, idxZones) => addressInfo.map(a => ({
+    location: Array.isArray(a?.zones) ? a.zones.map(z => idxZones[z.id]) : a.formattedAddress
+  }));
+
+  async getAddresses(coordinates, partitionNumber) {
+    try {
+      const api = await super.getApi();
+      // coordinates = coordinates.filter(x => Number(x.x) && Number(x.y))
+      const idxZones = await this.getIdxZoneName();
+      coordinates = coordinates.map(c => ({ x: c?.x || 0, y: c?.y || 0 }))
+      if (!coordinates.length > 0) {
+        throw new Error(`coordinates is empty`)
+      }
+
+      if (coordinates.length > partitionNumber) {
+        const lstCoordinates = _.chunk(coordinates, partitionNumber)
+
+        const calls = lstCoordinates.map(x => {
+          return [
+            'GetAddresses', {
+              coordinates: x,
+              "fields": ["formattedAddress", "zones"]
+            }
+          ]
+        })
+
+        const result = await Promise.map(_.chunk(calls, 3), call => api.multiCallAsync(call), { concurrency: 1 })
+
+        const addresses = _.flatMapDeep(result)
+        return this.formatAddressResponse(addresses, idxZones)
+      } else {
+        const address = await api.callAsync('GetAddresses', {
+          coordinates,
+          "fields": ["formattedAddress", "zones"]
+        })
+        return this.formatAddressResponse(address, idxZones)
+      }
+    } catch (error) {
+      throw error
+    }
+  }
 }
 
 module.exports = GeotabService;
