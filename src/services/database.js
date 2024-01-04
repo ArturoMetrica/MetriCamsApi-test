@@ -1553,6 +1553,17 @@ class DBData {
 
     throw new Error(result.message);
   }
+
+  async getVehiclesAndDriversByGroupsLevel(sessionId, idFleet) {
+    const result = await getData('SELECT * FROM get_vehicles_and_drivers_by_groups_level_fn($1::TEXT, $2) AS query', [
+      sessionId,
+      idFleet
+    ]);
+
+    if (result.data && result.data[0].query) return result.data[0].query;
+
+    throw new Error(result.message);
+  }
 }
 
 

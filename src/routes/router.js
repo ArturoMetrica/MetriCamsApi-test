@@ -51,6 +51,7 @@ router.use(
   require('./diagnosticAlarm.router'),
   require('./exception.router'),
   require('./humanFactor.router'),
+  require('./dashboardRiskAnalytics.router'),
   ErrorMiddlware.handleNotFound,
   ErrorMiddlware.handleError,
 );
