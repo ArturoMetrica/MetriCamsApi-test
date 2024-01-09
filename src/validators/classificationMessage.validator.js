@@ -33,6 +33,8 @@ class ClassificationMessageValidator {
 				idClassificationMessage: Joi.number().optional(),
 				comment: Joi.string().optional(),
 				calification: Joi.boolean().required(),
+				ruleName: Joi.string().optional(),
+				ruleId: Joi.number().optional()
 			}).required(),
 			offset: Joi.number().default(-6).optional()
 		}).options({ allowUnknown: true, stripUnknown: true });
