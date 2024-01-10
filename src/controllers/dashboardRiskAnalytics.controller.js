@@ -27,7 +27,7 @@ class Controller {
             startDate,
             endDate,
             vehicles: serials
-          },
+        },
           {
             headers
           });
@@ -37,6 +37,10 @@ class Controller {
         eventsData.data.forEach(event => {
           const fleetIdObject = data_.vehicle_data.find(fleet => fleet.vehicles.some(vehicle => vehicle.serial === event.serial_mdvr));
           const fleetId = fleetIdObject ? fleetIdObject.fleet_id : null;
+
+          if (!fleetId) {
+            return;
+          }
 
           if (!groupedEvents[fleetId]) {
             groupedEvents[fleetId] = { low: 0, medium: 0, high: 0, vehicles: {} };
@@ -50,6 +54,28 @@ class Controller {
           groupedEvents[fleetId][event.risk_level.toLowerCase()] += 1;
           groupedEvents[fleetId].vehicles[event.serial_mdvr][event.risk_level.toLowerCase()] += 1;
         });
+
+          // Lógica para agrupar drivers por ftapi_driver_id y driver_id y contarlos
+          const groupedDrivers = {};
+
+          for (const driverGroup of data_.drivers_data) {
+            for (const driver of driverGroup.drivers) {
+              if (!groupedDrivers[driver.ftapi_driver_id]) {
+                groupedDrivers[driver.ftapi_driver_id] = { low: 0, medium: 0, high: 0 };
+              }
+            }
+          }
+
+          for (const event of eventsData.data) {
+            for (const driverGroup of data_.drivers_data) {
+              for (const driver of driverGroup.drivers) {
+                if (driver.ftapi_driver_id === event.driver_id) {
+                  // Incrementar el contador según el risk_level y el match entre ftapi_driver_id y driver_id
+                  groupedDrivers[driver.ftapi_driver_id][event.risk_level.toLowerCase()] += 1;
+                }
+              }
+            }
+          }
     
         // Construir la respuesta con la estructura deseada
         const resultData = {
@@ -74,7 +100,33 @@ class Controller {
               }),
             };
           }),
-          drivers_data: data_.drivers_data,
+          drivers_data: data_.drivers_data.map(driverGroup => {
+            return {
+              drivers: driverGroup.drivers.map(driver => {
+                return {
+                  driver_id: driver.driver_id,
+                  ftapi_driver_id: driver.ftapi_driver_id,
+                  driver_name: driver.driver_name,
+                  low: groupedDrivers[driver.ftapi_driver_id] ? groupedDrivers[driver.ftapi_driver_id].low : 0,
+                  medium: groupedDrivers[driver.ftapi_driver_id] ? groupedDrivers[driver.ftapi_driver_id].medium : 0,
+                  high: groupedDrivers[driver.ftapi_driver_id] ? groupedDrivers[driver.ftapi_driver_id].high : 0,
+                };
+              }),
+            };
+          }),
+          groups_data: data_.groups_data.map(group => {
+            return {
+              fleet_id: group.fleet_id,
+              fleet_name: group.fleet_name,
+              id_parent_fleet: group.id_parent_fleet,
+              id_ftapi_fleet: group.id_ftapi_fleet,
+              id_ftapi_parent_fleet: group.id_ftapi_parent_fleet,
+              low: groupedEvents[group.fleet_id] ? groupedEvents[group.fleet_id].low : 0,
+              medium: groupedEvents[group.fleet_id] ? groupedEvents[group.fleet_id].medium : 0,
+              high: groupedEvents[group.fleet_id] ? groupedEvents[group.fleet_id].high : 0,
+            }
+          }),
+          group_parent_data: data_.group_parent_data,
         };
     
         res.status(200).json({
@@ -84,7 +136,7 @@ class Controller {
         });
     
       } catch (error) {
-        await dbService.errorLogs('API', error, '/api/dashboard-statistics');
+        await dbService.errorLogs('API', error, '/api/dashboard-analytics');
     
         res.status(500).json({
           status: false,
