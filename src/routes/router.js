@@ -25,7 +25,7 @@ router.use(
   require('./report.router'),
   require('./driver.router'),
   require('./codeGroup.router'),
-  require('./vehicle.router'),
+  require('./vehicles.router'),
   require('./FT_API.router'),
   require('./commands.router'),
   require('./geotabRule.router'),
@@ -52,7 +52,7 @@ router.use(
   require('./exception.router'),
   require('./humanFactor.router'),
   require('./dashboardRiskAnalytics.router'),
-  require('./device.router'),
+  require('./vehicle.router'),
   ErrorMiddlware.handleNotFound,
   ErrorMiddlware.handleError,
 );

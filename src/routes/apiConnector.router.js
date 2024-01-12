@@ -1,6 +1,6 @@
 const router = require('express').Router();
 const Controller = require('../controllers/mdvr.controller');
-const cController = require('../controllers/vehicle.controller');
+const cController = require('../controllers/vehicles.controller');
 const eController = require('../controllers/evidence.controller');
 const eMiddleware = require('../middlewares/evidence.middleware');
 
