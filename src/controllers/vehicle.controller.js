@@ -7,10 +7,7 @@ class VehicleController {
     try {
       const data = await vehicleService.addVehicle(req.sessionid.sessionid, req.vehicle);
 
-      res.status(200).json({
-        status: true,
-        ...data
-      });
+      res.status(data[0].query.code || 200).json(data[0].query);
     } catch (error) {
       await errorLogs('API', error, '/api/vehicle');
 
