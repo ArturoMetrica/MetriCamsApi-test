@@ -1,5 +1,8 @@
 const moment = require('moment');
 
+const axios = require('axios').default;
+const axiosRetry = require('axios-retry');
+axiosRetry(axios, { retries: 3, retryDelay: axiosRetry.exponentialDelay });
 const ReportsService = require('../services/report.service.js');
 const DBService = require('../services/database');
 const dbService = new DBService();
@@ -121,6 +124,29 @@ class ReportsController {
 		} catch (error) {
 			await dbService.errorLogs('API', error, '/api/advanced-report');
 
+			res.status(500).json({
+				status: false,
+				message: error.message || error,
+				data: null
+			});
+		}
+	}
+
+	deleteExcel = async (req, res) => {
+		try {
+			const { id } = req.report;
+
+			const { data } = await axios.delete(`https://lnx2.metricamovil.com/reports-service/template/${id}`, 
+			{
+				headers: { "key": 'OGSQ7RjKkU' },
+		});
+
+		res.status(200).json({
+			status: true,
+			message: data.message,
+			data: ''
+		});
+		} catch (error) {
 			res.status(500).json({
 				status: false,
 				message: error.message || error,

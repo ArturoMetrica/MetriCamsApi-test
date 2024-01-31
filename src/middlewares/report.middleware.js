@@ -90,6 +90,19 @@ class ReportsMiddleware {
 			res.status(400).json({ status: false, message: error.message || error, data: null });
 		}
 	}
+
+	deleteExcel = async (req, res, next) => {
+		try {
+			req.report = await ReportsValidator.deleteExcel().validateAsync({
+				...req.query,
+				...req.params
+			});
+
+			next ();
+		} catch (error) {
+			res.status(400).json({ status: false, message: error.message || error, data:null });
+		}
+	}
 	
 }
 
