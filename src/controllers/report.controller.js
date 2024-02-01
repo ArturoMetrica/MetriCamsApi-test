@@ -7,6 +7,8 @@ const ReportsService = require('../services/report.service.js');
 const DBService = require('../services/database');
 const dbService = new DBService();
 
+const { baseUrl, apiKeyName, apiKeyValue, deleteTemplate } = require('../config/env').genExcel;
+
 const formatReport = async (startTime, endTime, vehicles, rules, drivers, language, initialDay, offset, geotab = false) => {
 	const data = !geotab ?
 		await dbService.getAdvancedReport(startTime, endTime, vehicles, rules, language, offset, drivers) :
@@ -135,10 +137,12 @@ class ReportsController {
 	deleteExcel = async (req, res) => {
 		try {
 			const { id } = req.report;
+			const headers = {};
+      		headers[apiKeyName] = apiKeyValue;
 
-			const { data } = await axios.delete(`https://lnx2.metricamovil.com/reports-service/template/${id}`, 
+			const { data } = await axios.delete(`${baseUrl}${deleteTemplate}${id}`, 
 			{
-				headers: { "key": 'OGSQ7RjKkU' },
+				headers
 			});
 
 			if (data.ok != true) throw new Error(data.message);
