@@ -139,13 +139,15 @@ class ReportsController {
 			const { data } = await axios.delete(`https://lnx2.metricamovil.com/reports-service/template/${id}`, 
 			{
 				headers: { "key": 'OGSQ7RjKkU' },
-		});
+			});
 
-		res.status(200).json({
-			status: true,
-			message: data.message,
-			data: ''
-		});
+			if (data.ok != true) throw new Error(data.message);
+
+			res.status(200).json({
+				status: true,
+				message: "The template has been deleted.",
+				data: ''
+			});
 		} catch (error) {
 			res.status(500).json({
 				status: false,
