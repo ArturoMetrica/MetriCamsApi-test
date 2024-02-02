@@ -129,6 +129,33 @@ class ReportsController {
 		}
 	}
 
+	deleteExcel = async (req, res) => {
+		try {
+			const { id } = req.report;
+			const headers = {};
+      		headers[apiKeyName] = apiKeyValue;
+
+			const { data } = await axios.delete(`${baseUrl}${deleteTemplate}${id}`, 
+			{
+				headers
+			});
+
+			if (data.ok != true) throw new Error(data.message);
+
+			res.status(200).json({
+				status: true,
+				message: "The template has been deleted.",
+				data: ''
+			});
+		} catch (error) {
+			res.status(500).json({
+				status: false,
+				message: error.message || error,
+				data: null
+			});
+		}
+	}
+
 }
 
 module.exports = new ReportsController()

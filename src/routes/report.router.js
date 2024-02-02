@@ -10,6 +10,9 @@ router.put('/api/reports/:id', ReportsMiddleware.update, ReportsController.updat
 router.delete('/api/reports/:id', ReportsMiddleware.delete, ReportsController.delete);
 router.put('/api/advanced-report', ReportsMiddleware.getAdvancedReport, ReportsController.getAdvancedReport);
 
+// External service of GenExcel
+router.delete('/api/template', ReportsMiddleware.deleteExcel, ReportsController.deleteExcel);
+
 module.exports = router
 
 /********************* Propiedad de Métrica Móvil SA de CV **************************/
