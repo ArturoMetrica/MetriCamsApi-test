@@ -1,8 +1,13 @@
 const moment = require('moment');
 
+const axios = require('axios').default;
+const axiosRetry = require('axios-retry');
+axiosRetry(axios, { retries: 3, retryDelay: axiosRetry.exponentialDelay });
 const ReportsService = require('../services/report.service.js');
 const DBService = require('../services/database');
 const dbService = new DBService();
+
+const { baseUrl, apiKeyName, apiKeyValue, deleteTemplate } = require('../config/env').genExcel;
 
 const formatReport = async (startTime, endTime, vehicles, rules, drivers, language, initialDay, offset, geotab = false) => {
 	const data = !geotab ?
