@@ -1,10 +1,13 @@
 const { query } = require('./dbconnection');
 
 class DeviceService {
-    addDevice = async () => {
+    addDevice = async (vehicleId, deviceId, data, userLng) => {
         try {
-            return await query('SELECT * FROM addDevice() AS QUERY', [
-
+            return await query('SELECT * FROM insert_camera_to_device_fn($1,$2,$3,$4) AS QUERY', [
+                vehicleId,
+                deviceId,
+                data ? JSON.stringify(data) : '[]',
+                userLng
             ])
         } catch (error) {
             throw error;
