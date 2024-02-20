@@ -54,6 +54,17 @@ class UserValidator {
       })
       .options({ allowUnknown: true, stripUnknown: true });
   }
+
+  setUserDuration() {
+    return Joi.object().keys({
+      username: Joi.string().required(),
+      module: Joi.string().required(),
+      startDate: Joi.string().required(),
+      endDate: Joi.string().required(),
+      seconds: Joi.number().required(),
+    })
+      .options({ allowUnknown: true, stripUnknown: true });
+  }
 }
 
 module.exports = new UserValidator();

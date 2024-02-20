@@ -1,3 +1,4 @@
+const handleResponseUtil = require('../utils/handleResponse.util');
 const Validator = require('../validators/user.validator');
 
 class ssoMiddleware {
@@ -57,6 +58,18 @@ class ssoMiddleware {
       next();
     } catch (error) {
       res.status(400).json({ code: 400, status: false, message: error.message, data: null });
+    }
+  }
+
+  async setUserDuration(req, res, next) {
+    try {
+      req.user = await Validator.setUserDuration().validateAsync({
+        ...req.body,
+      });
+
+      next();
+    } catch (error) {
+      handleResponseUtil(res, 400, false, error.message, null);
     }
   }
 }
