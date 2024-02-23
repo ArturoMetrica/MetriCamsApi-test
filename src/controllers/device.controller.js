@@ -2,111 +2,104 @@ const FTService = require('../services/FT_API.service');
 const deviceService = require('../services/device.service');
 const DBService = require('../services/database');
 const { errorLogs } = new DBService();
+const handleResponseUtil = require('../utils/handleResponse.util');
 
 class DeviceController {
-    addDevice = async () => {
-        try {
+	addDevice = async () => {
+		try {
+			const { deviceData, cameras, streamaxFleetId } = req.device;
 
-          const { deviceId, vehicleId, dataJSON, userLng, serialMDVR, streamaxFleetId } = req.device;
+			switch (deviceData.deviceType) {
+				case 'GO':
+					await deviceService.cudDevice(req.sessionid.sessionid, req.device)
+					break;
+				case 'MDVR':
+					const { success, message } = await FTService.addListDevices('', [{
+						channels: cameras.map(camera => camera.chl).join(','),
+						uniqueId: deviceData.deviceSerial,
+					}]);
 
-          switch (deviceId) {
-            case 1:
-              const { success, message, code, data } = await FTService.addListDevices('',[{
-                channels: dataJSON.cameras.map(camera => camera.chl).join(','),
-                uniqueId: serialMDVR,
-              }]);
+					if (!success)
+						return handleResponseUtil(res, 500, false, message || 'Streamax error', null);
 
-              if (!success) {
-                return res.status(400).json({
-                  status: false,
-                  message,
-                  data: null
-                });
-              }
+					await FTService.changeDeviceFleet(streamaxFleetId, deviceData.deviceSerial);
 
-              await FTService.changeDeviceFleet(streamaxFleetId, serialMDVR);
-              // await DBService.addDevice(vehicleId, deviceId, dataJSON, userLng); PENDING
-              break;
-            case 2:
-              console.log("Hi, this is for GO device");
-          
-            default:
-              console.log("Hi, this is for Lytx device");
-              break;
-          }
-          
-            // await FTService.changeDeviceFleet(req.vehicle.streamaxFleetId, req.vehicle.serialMDVR);
+					await deviceService.cudDevice(req.sessionid.sessionid, req.device)
+					break;
+				case 'LYTX':
+					await deviceService.cudDevice(req.sessionid.sessionid, req.device)
+					break;
+				default:
+					break;
+			}
+		} catch (error) {
+			await errorLogs('API', error, '/api/device');
 
-            const data = await deviceService.addDevice(req.vehicle.vehicleId, req.vehicle.deviceId, req.vehicle.data, req.vehicle.userLng);
+			handleResponseUtil(res, 500, false, error.message || error, null);
+		}
+	}
 
-            res.status(data[0].query.code || 200).json(data[0].query);
-        } catch (error) {
-            await errorLogs('API', error, '/api/device');
+	updateDevice = async () => {
+		try {
+			const { deviceData, cameras, streamaxFleetId } = req.device;
 
-            res.status(500).json({
-                status: false,
-                message: error.message || error,
-                data: null
-            });
-        }
-    }
+			switch (deviceData.deviceType) {
+				case 'GO':
+					await deviceService.cudDevice(req.sessionid.sessionid, req.device)
+					break;
+				case 'MDVR':
+					await FTService.deleteDevice('', deviceData.deviceSerial);
 
-    updateDevice = async () => {
-        try {
-            const deleteDevice = await FTService.deleteDevice('', req.vehicle.serialMDVR);
-            let { success, message, code, data: res } = await FTService.addListDevices('', [{
-            channels: req.vehicle.cameras.map(camera => camera.chl).join(','),
-            uniqueId: req.vehicle.serialMDVR,
-            }]);
+					const { success, message } = await FTService.addListDevices('', [{
+						channels: cameras.map(camera => camera.chl).join(','),
+						uniqueId: deviceData.deviceSerial,
+					}]);
 
-            if (!success) {
-                return res.status(400).json({
-                  status: false,
-                  message,
-                  data: null
-                });
-              }
-          
-            await FTService.changeDeviceFleet(req.vehicle.streamaxFleetId, req.vehicle.serialMDVR);
+					if (!success)
+						return handleResponseUtil(res, 500, false, message || 'Streamax error', null);
 
-            const data = await deviceService.updateDevice();
+					await FTService.changeDeviceFleet(streamaxFleetId, deviceData.deviceSerial);
 
-            res.status(data[0].query.code || 200).json(data[0].query);
-        } catch (error) {
-            await errorLogs('API', error, '/api/device');
+					await deviceService.cudDevice(req.sessionid.sessionid, req.device)
+					break;
+				case 'LYTX':
+					await deviceService.cudDevice(req.sessionid.sessionid, req.device)
+					break;
+				default:
+					break;
+			}
+		} catch (error) {
+			await errorLogs('API', error, '/api/device');
 
-            res.status(500).json({
-                status: false,
-                message: error.message || error,
-                data: null
-            });
-        }
-    }
+			handleResponseUtil(res, 500, false, error.message || error, null);
+		}
+	}
 
-    deleteDevice = async () => {
-        try {
-            const { success, message } = await FTService.deleteDevice(req.vehicle.token, req.vehicle.serialMDVR);
+	deleteDevice = async () => {
+		try {
+			const { deviceData } = req.device;
 
-            if (!success) {
-            return res.status(400).json({
-                status: false,
-                message,
-                data: null
-            });
-            }
-            const data = await deviceService.deleteDevice();
+			switch (deviceData.deviceType) {
+				case 'GO':
+					await deviceService.cudDevice(req.sessionid.sessionid, req.device)
+					break;
+				case 'MDVR':
+					await FTService.deleteDevice('', deviceData.deviceSerial);
 
-            res.status(data[0].query.code || 200).json(data[0].query);
-        } catch (error) {
-            await errorLogs('API', error, '/api/device');
+					await deviceService.cudDevice(req.sessionid.sessionid, req.device)
+					break;
+				case 'LYTX':
+					await deviceService.cudDevice(req.sessionid.sessionid, req.device)
+					break;
+				default:
+					break;
+			}
+		} catch (error) {
+			await errorLogs('API', error, '/api/device');
 
-            res.status(500).json({
-                status: false,
-                message: error.message || error,
-                data: null
-            });
-        }
-    }
+			handleResponseUtil(res, 500, false, error.message || error, null);
+		}
+	}
 }
 
 module.exports = new DeviceController();
