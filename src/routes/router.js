@@ -53,6 +53,7 @@ router.use(
   require('./humanFactor.router'),
   require('./dashboardRiskAnalytics.router'),
   require('./vehicle.router'),
+  require('./device.router'),
   ErrorMiddlware.handleNotFound,
   ErrorMiddlware.handleError,
 );

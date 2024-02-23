@@ -1,22 +1,46 @@
 const { query } = require('./dbconnection');
 
-class DeviceService {
-	// CUD porque no puede obtener los datos, solo insertar, editar y eliminar
-	cudDevice = async (token, { action, vehicleId, deviceData, cameras }) => {
-		try {
-			return await query('SELECT * FROM insert_device_data_fn($1,$2,$3,$4,$5) AS QUERY', [
-				token,
-				action,
-				vehicleId,
-				deviceData ? JSON.stringify(data) : '[]',
-				cameras ? JSON.stringify(data) : '[]',
-			])
-		} catch (error) {
-			throw error;
-		}
+const addDevice = async (token, vehicleId, deviceData, cameras) => {
+	try {
+		return await query('SELECT * FROM add_new_device_fn($1,$2,$3,$4) AS QUERY', [
+			token,
+			vehicleId,
+			deviceData ? JSON.stringify(data) : '[]',
+			cameras ? JSON.stringify(data) : '[]',
+		])
+	} catch (error) {
+		throw error;
 	}
-
-
 }
 
-module.exports = new DeviceService();
+const updateDevice = async (token, vehicleId, deviceData, cameras) => {
+	try {
+		return await query('SELECT * FROM update_device_fn($1,$2,$3,$4) AS QUERY', [
+			token,
+			vehicleId,
+			deviceData ? JSON.stringify(data) : '[]',
+			cameras ? JSON.stringify(data) : '[]',
+		])
+	} catch (error) {
+		throw error;
+	}
+}
+
+const deleteDevice = async (token, vehicleId, deviceData, cameras) => {
+	try {
+		return await query('SELECT * FROM delete_device_fn($1,$2,$3,$4) AS QUERY', [
+			token,
+			vehicleId,
+			deviceData ? JSON.stringify(data) : '[]',
+			cameras ? JSON.stringify(data) : '[]',
+		])
+	} catch (error) {
+		throw error;
+	}
+}
+
+module.exports = {
+	addDevice,
+	updateDevice,
+	deleteDevice
+};
