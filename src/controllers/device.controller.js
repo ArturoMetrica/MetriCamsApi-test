@@ -79,20 +79,20 @@ const updateDevice = async (req, res) => {
 
 const deleteDevice = async (req, res) => {
 	try {
-		const { vehicleId, deviceData, cameras } = req.device;
+		const { vehicleId, deviceData } = req.device;
 		for (let i = 0; i < deviceData.length; i++) {
 			const device = deviceData[i];
 			switch (device.deviceType) {
 				case 1:
-					await deviceService.deleteDevice(req.sessionid.sessionid, vehicleId, [device], cameras);
+					await deviceService.deleteDevice(req.sessionid.sessionid, vehicleId, [device]);
 					break;
 				case 2:
 					await FTService.deleteDevice('', device.deviceSerial);
 
-					await deviceService.deleteDevice(req.sessionid.sessionid, vehicleId, [device], cameras);
+					await deviceService.deleteDevice(req.sessionid.sessionid, vehicleId, [device]);
 					break;
 				case 3:
-					await deviceService.deleteDevice(req.sessionid.sessionid, vehicleId, [device], cameras);
+					await deviceService.deleteDevice(req.sessionid.sessionid, vehicleId, [device]);
 					break;
 			}
 		}
