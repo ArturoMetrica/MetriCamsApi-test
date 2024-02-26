@@ -26,13 +26,12 @@ const updateDevice = async (token, vehicleId, deviceData, cameras) => {
 	}
 }
 
-const deleteDevice = async (token, vehicleId, deviceData, cameras) => {
+const deleteDevice = async (token, vehicleId, deviceData) => {
 	try {
-		return await query('SELECT * FROM delete_device_fn($1,$2,$3,$4) AS QUERY', [
+		return await query('SELECT * FROM delete_device_fn($1,$2,$3) AS QUERY', [
 			token,
 			vehicleId,
 			deviceData ? JSON.stringify(deviceData) : '[]',
-			cameras ? JSON.stringify(cameras) : '[]',
 		])
 	} catch (error) {
 		throw error;
