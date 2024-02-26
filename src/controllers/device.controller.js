@@ -12,7 +12,7 @@ const addDevice = async (req, res) => {
 			const device = deviceData[i];
 			switch (device.deviceType) {
 				case 1:
-					await deviceService.addDevice(req.sessionid.sessionid, vehicleId, device, cameras);
+					await deviceService.addDevice(req.sessionid.sessionid, vehicleId, [device], cameras);
 					break;
 				case 2:
 					const { success, message } = await FTService.addListDevices('', [{
@@ -28,7 +28,7 @@ const addDevice = async (req, res) => {
 					await deviceService.addDevice(req.sessionid.sessionid, vehicleId, [device], cameras);
 					break;
 				case 3:
-					await deviceService.addDevice(req.sessionid.sessionid, vehicleId, device, cameras);
+					await deviceService.addDevice(req.sessionid.sessionid, vehicleId, [device], cameras);
 					break;
 			}
 		}
@@ -47,7 +47,7 @@ const updateDevice = async (req, res) => {
 			const device = deviceData[i];
 			switch (device.deviceType) {
 				case 1:
-					await deviceService.updateDevice(req.sessionid.sessionid, vehicleId, device, cameras);
+					await deviceService.updateDevice(req.sessionid.sessionid, vehicleId, [device], cameras);
 					break;
 				case 2:
 					await FTService.deleteDevice('', device.deviceSerial);
@@ -62,10 +62,10 @@ const updateDevice = async (req, res) => {
 
 					await FTService.changeDeviceFleet(streamaxFleetId, device.deviceSerial);
 
-					await deviceService.updateDevice(req.sessionid.sessionid, vehicleId, device, cameras);
+					await deviceService.updateDevice(req.sessionid.sessionid, vehicleId, [device], cameras);
 					break;
 				case 3:
-					await deviceService.updateDevice(req.sessionid.sessionid, vehicleId, device, cameras);
+					await deviceService.updateDevice(req.sessionid.sessionid, vehicleId, [device], cameras);
 					break;
 			}
 		}
@@ -84,15 +84,15 @@ const deleteDevice = async (req, res) => {
 			const device = deviceData[i];
 			switch (device.deviceType) {
 				case 1:
-					await deviceService.deleteDevice(req.sessionid.sessionid, vehicleId, device, cameras);
+					await deviceService.deleteDevice(req.sessionid.sessionid, vehicleId, [device], cameras);
 					break;
 				case 2:
 					await FTService.deleteDevice('', device.deviceSerial);
 
-					await deviceService.deleteDevice(req.sessionid.sessionid, vehicleId, device, cameras);
+					await deviceService.deleteDevice(req.sessionid.sessionid, vehicleId, [device], cameras);
 					break;
 				case 3:
-					await deviceService.deleteDevice(req.sessionid.sessionid, vehicleId, device, cameras);
+					await deviceService.deleteDevice(req.sessionid.sessionid, vehicleId, [device], cameras);
 					break;
 			}
 		}
