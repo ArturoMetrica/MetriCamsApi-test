@@ -123,7 +123,7 @@ const addDevice = async (req, res) => {
 
 					await FTService.changeDeviceFleet(streamaxFleetId, device.deviceSerial);
 
-					await deviceService.addDevice(req.sessionid.sessionid, vehicleId, device, cameras);
+					await deviceService.addDevice(req.sessionid.sessionid, vehicleId, [device], cameras);
 					break;
 				case 3:
 					await deviceService.addDevice(req.sessionid.sessionid, vehicleId, device, cameras);
