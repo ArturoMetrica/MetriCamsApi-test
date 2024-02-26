@@ -26,10 +26,10 @@ class DeviceValidator {
 				Joi.object().keys({
 					deviceType: Joi.number().valid(1, 2, 3).required(),
 					deviceSerial: Joi.string().required(),
-					deviceModel: Joi.string().optional().allow(null).default(null),
-					deviceImei: Joi.string().optional().allow(null).default(null),
-					deviceSim: Joi.string().optional().allow(null).default(null),
-					devicePhone: Joi.string().optional().allow(null).default(null)
+					deviceModel: Joi.string().optional().allow(null),
+					deviceImei: Joi.string().optional().allow(null),
+					deviceSim: Joi.string().optional().allow(null),
+					devicePhone: Joi.string().optional().allow(null)
 				})
 			).optional(),
 			cameras: Joi.array().optional(),
