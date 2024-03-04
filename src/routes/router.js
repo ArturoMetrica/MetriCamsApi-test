@@ -54,6 +54,7 @@ router.use(
   require('./dashboardRiskAnalytics.router'),
   require('./vehicle.router'),
   require('./device.router'),
+  require('./shortcut.router'),
   ErrorMiddlware.handleNotFound,
   ErrorMiddlware.handleError,
 );
