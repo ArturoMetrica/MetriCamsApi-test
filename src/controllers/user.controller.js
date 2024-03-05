@@ -1,5 +1,7 @@
 const DBService = require('../services/database');
+const handleResponseUtil = require('../utils/handleResponse.util');
 const dbService = new DBService();
+const userService = require('../services/user.service');
 
 class UserController {
   updateUser = async (req, res) => {
@@ -108,6 +110,15 @@ class UserController {
       await dbService.errorLogs('API', error, '/user/complete-register');
 
       res.status(400).json(error.message);
+    }
+  }
+
+  setUserDuration = async (req, res) => {
+    try {
+      await userService.setUserDuration(req.user);
+      handleResponseUtil(res, 200, true, "ok", null);
+    } catch (error) {
+      handleResponseUtil(res, 500, false, error.message || error, null)
     }
   }
 }

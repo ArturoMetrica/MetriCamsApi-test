@@ -1,79 +1,9 @@
-const Validator = require('../validators/vehicle.validator');
-const PromiseHandler = require('../services/promiseHandler.service');
+const VehicleValidator = require('../validators/vehicle.validator');
 
 class VehicleMiddleware {
-  async getGroups(req, _, next) {
+  addVehicle = async (req, res, next) => {
     try {
-      req.vehicle = await Validator.getGroups().validateAsync({
-        ...req.body,
-        ...req.query,
-        ...req.params
-      });
-      next();
-    } catch (error) {
-      next(error);
-    }
-  }
-
-  async sessionid(req, _, next) {
-    const [result, error] = await PromiseHandler(
-      Validator.sessionid().validateAsync({
-        ...req.body,
-        ...req.query,
-        ...req.params
-      })
-    );
-
-    if (error) return next(error);
-
-    req.sessionid = result;
-    return next();
-  }
-
-  async get(req, _, next) {
-    try {
-      const [result, error] = await PromiseHandler(
-        Validator.get().validateAsync({
-          ...req.body,
-          ...req.query,
-          ...req.parmas
-        })
-      );
-
-      req.vehicle = result;
-      if (!result) next(error);
-      else next();
-    } catch (error) {
-      console.log(error);
-      next(error);
-    }
-  }
-
-  middleware(validator) {
-    const func = async (req, _, next) => {
-      const [result, error] = await PromiseHandler(
-        validator().validateAsync({
-          ...req.body,
-          ...req.query,
-          ...req.params,
-          ...req.headers
-        })
-      );
-
-      if (error) return next(error);
-
-      req.vehicle = result;
-      return next();
-    };
-
-    return func;
-  }
-
-  async deleteCameraAccess(req, res, next) {
-    try {
-      req.camera = await Validator.deleteCameraAccess().validateAsync({
-        ...req.body
-      });
+      req.vehicle = await VehicleValidator.addVehicle().validateAsync({ ...req.body });
 
       next();
     } catch (error) {
@@ -81,14 +11,21 @@ class VehicleMiddleware {
     }
   }
 
-  async getComponentVehicle(req, res, next) {
+  updateVehicle = async (req, res, next) => {
     try {
-      req.vehicle = await Validator.getComponentVehicle().validateAsync({
-        ...req.query,
-        ...req.headers
-      });
+      req.vehicle = await VehicleValidator.updateVehicle().validateAsync({ ...req.body });
 
-      next();
+      next ();
+    } catch (error) {
+      res.status(400).json({ status: false, message: error.message || error, data: null });
+    }
+  }
+
+  deleteVehicle = async (req, res, next) => {
+    try {
+      req.vehicle = await VehicleValidator.deleteVehicle().validateAsync({ ...req.query, ...req.params });
+
+      next ();
     } catch (error) {
       res.status(400).json({ status: false, message: error.message || error, data: null });
     }
@@ -96,5 +33,3 @@ class VehicleMiddleware {
 }
 
 module.exports = new VehicleMiddleware();
-
-/********************* Propiedad de Métrica Móvil SA de CV **************************/
