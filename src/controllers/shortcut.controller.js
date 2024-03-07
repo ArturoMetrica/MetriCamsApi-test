@@ -55,7 +55,7 @@ const getShortcuts = async (req, res) => {
 
 const getShortcutFlags = async (req, res) => {
   try {
-    const data = await shortcut.getShortcutFlags();
+    const { data } = await shortcut.getShortcutFlags();
 
     handleResponseUtil(res, 200, true, 'ok', data);
   } catch (error) {
