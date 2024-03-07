@@ -5,16 +5,16 @@ class ShortcutValidator {
         return Joi.object().keys({
             data: Joi.array().items(
                 Joi.object().keys({
-                    action: Joi.number().optional(),
-                    chip: Joi.number().optional(),
-                    filters: Joi.array().optional(),
-                    filters_sec: Joi.array().optional(),
-                    icon: Joi.string().optional(),
-                    module_id: Joi.number().optional(),
-                    name: Joi.string().optional(),
-                    view: Joi.number().optional()
+                    action: Joi.number().allow(null).required(),
+                    chip: Joi.number().allow(null).required(),
+                    filters: Joi.array().allow(null).required(),
+                    filters_sec: Joi.array().allow(null).required(),
+                    icon: Joi.string().allow(null).required(),
+                    module_id: Joi.number().allow(null).required(),
+                    name: Joi.string().allow(null).required(),
+                    view: Joi.number().allow(null).required()
                 })
-            ),
+            ).required(),
         }).options({ allowUnknown: true, stripUnknown: true });
     }
 
@@ -22,22 +22,22 @@ class ShortcutValidator {
         return Joi.object().keys({
             data: Joi.array().items(
                 Joi.object().keys({
-                    action: Joi.number().optional(),
-                    chip: Joi.number().optional(),
-                    filters: Joi.array().optional(),
-                    filters_sec: Joi.array().optional(),
-                    icon: Joi.string().optional(),
-                    module_id: Joi.number().optional(),
-                    name: Joi.string().optional(),
-                    view: Joi.number().optional()
+                    action: Joi.number().allow(null).required(),
+                    chip: Joi.number().allow(null).required(),
+                    filters: Joi.array().allow(null).required(),
+                    filters_sec: Joi.array().allow(null).required(),
+                    icon: Joi.string().allow(null).required(),
+                    module_id: Joi.number().allow(null).required(),
+                    name: Joi.string().allow(null).required(),
+                    view: Joi.number().allow(null).required()
                 })
-            ),
+            ).required(),
         }).options({ allowUnknown: true, stripUnknown: true });
     }
 
     deleteShortcut = () => {
         return Joi.object().keys({
-            shortcut_id: Joi.array().optional()
+            shortcut_id: Joi.array().allow(null).required()
         }).options({ allowUnknown: true, stripUnknown: true });
     }
 }
