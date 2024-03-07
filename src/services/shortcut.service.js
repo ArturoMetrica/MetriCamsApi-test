@@ -28,7 +28,7 @@ const deleteShortcut = async (sessionId, data) => {
 	try {
 		const result = await query('SELECT * FROM delete_shortcut_fn($1,$2) AS QUERY', [
 			sessionId,
-			data ? JSON.stringify(data) : '[]'
+			data ? JSON.stringify({shortcut_id:data}) : '[]'
 		]);
 		if (result[0] && result[0].query) return result[0].query;
 	} catch (error) {
