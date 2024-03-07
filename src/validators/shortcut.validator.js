@@ -14,7 +14,7 @@ class ShortcutValidator {
                     name: Joi.string().allow(null).required(),
                     view: Joi.number().allow(null).required()
                 })
-            ).required(),
+            ),
         }).options({ allowUnknown: true, stripUnknown: true });
     }
 
@@ -31,7 +31,7 @@ class ShortcutValidator {
                     name: Joi.string().allow(null).required(),
                     view: Joi.number().allow(null).required()
                 })
-            ).required(),
+            ),
         }).options({ allowUnknown: true, stripUnknown: true });
     }
 
