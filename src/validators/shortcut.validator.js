@@ -7,8 +7,8 @@ class ShortcutValidator {
                 Joi.object().keys({
                     action: Joi.number().allow(null).required(),
                     chip: Joi.number().allow(null).required(),
-                    filters: Joi.array().allow(null).required(),
-                    filters_sec: Joi.array().allow(null).required(),
+                    filters: Joi.object().allow(null).required(),
+                    filters_sec: Joi.object().allow(null).required(),
                     icon: Joi.string().allow(null).required(),
                     module_id: Joi.number().allow(null).required(),
                     name: Joi.string().allow(null).required(),
@@ -24,8 +24,8 @@ class ShortcutValidator {
                 Joi.object().keys({
                     action: Joi.number().allow(null).required(),
                     chip: Joi.number().allow(null).required(),
-                    filters: Joi.array().allow(null).required(),
-                    filters_sec: Joi.array().allow(null).required(),
+                    filters: Joi.object().allow(null).required(),
+                    filters_sec: Joi.object().allow(null).required(),
                     icon: Joi.string().allow(null).required(),
                     module_id: Joi.number().allow(null).required(),
                     name: Joi.string().allow(null).required(),
