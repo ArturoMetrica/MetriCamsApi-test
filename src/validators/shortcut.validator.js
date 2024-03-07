@@ -29,6 +29,7 @@ class ShortcutValidator {
                     icon: Joi.string().allow(null).required(),
                     module_id: Joi.number().allow(null).required(),
                     name: Joi.string().allow(null).required(),
+                    shortcut_id: Joi.number().allow(null).required(),
                     view: Joi.number().allow(null).required()
                 })
             ),
