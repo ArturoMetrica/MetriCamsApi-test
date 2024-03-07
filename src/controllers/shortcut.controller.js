@@ -1,24 +1,85 @@
-const shorcutStructure = require("../services/shortcut.service");
+const shortcut = require("../services/shortcut.service");
 const DBService = require('../services/database');
 const { errorLogs } = new DBService();
+const handleResponseUtil = require('../utils/handleResponse.util');
 
-class ShorcutController {
-  shorcutStructure = async (req, res) => {
-    try {
-      const data = await shorcutStructure.shortcutStructure();
+const addShorcut = async (req, res) => {
+  try {
+    const { sessionid } = req.sessionid;
+    const { data: params } = req.shortcut;
+    const { data } = await shortcut.addShortcut(sessionid, params[0]);
 
-      res.status(data[0].query.code || 200).json(data[0].query);
-    } catch (error) {
-      await errorLogs('API', error, '/api/shorcut');
-
-      res.status(500).json({
-        status: false,
-        message: error.message || error,
-        data: null
-      });
-    }
+    handleResponseUtil(res, 200, true, 'ok', data);
+  } catch (error) {
+    await errorLogs('API', error, '/api/shortcut');
+    handleResponseUtil(res, 500, false, error.message || error, null);
   }
-
 }
 
-module.exports = new ShorcutController();
+const updateShorcut = async (req, res) => {
+  try {
+    const { sessionid } = req.sessionid;
+    const { data: params } = req.shortcut;
+    const { data } = await shortcut.updateShortcut(sessionid, params[0]);
+
+    handleResponseUtil(res, 200, true, 'ok', data);
+  } catch (error) {
+    await errorLogs('API', error, '/api/shortcut');
+    handleResponseUtil(res, 500, false, error.message || error, null);
+  }
+}
+
+const deleteShorcut = async (req, res) => {
+  try {
+    const { sessionid } = req.sessionid, { shortcut_id } = req.shortcut;
+    const { data } = await shortcut.deleteShortcut(sessionid, shortcut_id);
+
+    handleResponseUtil(res, 200, true, 'ok', data);
+  } catch (error) {
+    await errorLogs('API', error, '/api/shortcut');
+    handleResponseUtil(res, 500, false, error.message || error, null);
+  }
+}
+
+const getShortcuts = async (req, res) => {
+  try {
+    const { sessionid } = req.sessionid;
+    const { data } = await shortcut.getShortcut(sessionid);
+
+    handleResponseUtil(res, 200, true, 'ok', data);
+  } catch (error) {
+    await errorLogs('API', error, '/api/shortcut');
+    handleResponseUtil(res, 500, false, error.message || error, null);
+  }
+}
+
+const getShortcutFlags = async (req, res) => {
+  try {
+    const data = await shortcut.getShortcutFlags();
+
+    handleResponseUtil(res, 200, true, 'ok', data);
+  } catch (error) {
+    await errorLogs('API', error, '/api/shortcut-flags');
+    handleResponseUtil(res, 500, false, error.message || error, null);
+  }
+}
+
+const shorcutStructure = async (req, res) => {
+  try {
+    const data = await shortcut.shortcutStructure();
+
+    handleResponseUtil(res, 200, true, 'ok', data);
+  } catch (error) {
+    await errorLogs('API', error, '/api/shorcut');
+    handleResponseUtil(res, 500, false, error.message || error, null);
+  }
+}
+
+module.exports = {
+  addShorcut,
+  updateShorcut,
+  deleteShorcut,
+  getShortcuts,
+  getShortcutFlags,
+  shorcutStructure
+}
