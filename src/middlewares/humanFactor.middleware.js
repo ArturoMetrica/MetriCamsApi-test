@@ -3,7 +3,7 @@ const HumanFactorValidator = require('../validators/humanFactor.validator');
 class HumanFactorMiddleware {
   getRiskAnalytics = async (req, res, next) => {
     try {
-      req.risk = await HumanFactorValidator.getRiskAnalytics().validateAsync({
+      req.analytics = await HumanFactorValidator.getRiskAnalytics().validateAsync({
         ...req.body
       });
 
