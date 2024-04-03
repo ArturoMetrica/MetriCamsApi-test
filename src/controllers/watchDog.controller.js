@@ -34,7 +34,7 @@ class ClassificationMessageController {
 
 			if (goIds.length) {
 				if (database === 'fleet_mexico') {
-					goIds = goIds.slice(0, 600);
+					goIds = goIds.slice(0, 500);
 				}
 				const deviceStatusInfo = await geotabService.getLastCommunication();
 				const filteredInfo = deviceStatusInfo.filter(info => {
