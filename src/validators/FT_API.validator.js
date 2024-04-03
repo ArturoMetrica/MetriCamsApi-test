@@ -363,7 +363,7 @@ class FTAPIValidator {
       streamType: Joi.number().optional().default(1),
       month: Joi.string().required(),
       storageType: Joi.number().optional().default(0),
-      timeZoneOffset: Joi.number().optional().default(0)
+      timeZoneOffset: Joi.number().optional().default(-360)
     }).options({ allowUnknown: true, stripUnknown: true });
   }
 
@@ -375,7 +375,7 @@ class FTAPIValidator {
       channels: Joi.string().optional(),
       day: Joi.string().optional(),
       storageType: Joi.number().optional().default(0),
-      timeZoneOffset: Joi.number().optional().default(0)
+      timeZoneOffset: Joi.number().optional().default(-360)
     }).options({ allowUnknown: true, stripUnknown: true });
   }
 

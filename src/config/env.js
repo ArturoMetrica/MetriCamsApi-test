@@ -38,6 +38,7 @@ const envSchema = Joi.object({
   ALARM_COLLECTOR_BASE_URL: Joi.string().required(),
   ALARM_COLLECTOR_GET_URL: Joi.string().required(),
   LAST_POSITION_GET_URL: Joi.string().required(),
+  GET_DASHBOARD_ANALYTICS: Joi.string().required(),
   // GEOTAB
   GEOTAB_USER: Joi.string().required(),
   GEOTAB_PASSWORD: Joi.string().required(),
@@ -126,6 +127,11 @@ const envSchema = Joi.object({
   FT_API_UPDATE_FLEET: Joi.string().required(),
   FT_API_GET_FLEET_LIST: Joi.string().required(),
   FT_API_CHANGE_DEVICE_FLEET: Joi.string().required(),
+  // GENEXCEL SERVICE
+  GENEXCEL_BASE_URL: Joi.string().required(),
+  GENEXCEL_DELETE_TEMPLATE: Joi.string().required(),
+  GENEXCEL_KEY_NAME: Joi.string().required(),
+  GENEXCEL_KEY_VALUE: Joi.string().required(),
 }).options({
   allowUnknown: true,
   stripUnknown: false
@@ -183,6 +189,7 @@ module.exports = {
     baseURL: validateEnv.ALARM_COLLECTOR_BASE_URL,
     getAlarmsURL: validateEnv.ALARM_COLLECTOR_GET_URL,
     getLastPositionURL: validateEnv.LAST_POSITION_GET_URL,
+    getDashboardAnalytics: validateEnv.GET_DASHBOARD_ANALYTICS,
   },
   mdvrApiSevice: {
     apiKey: validateEnv.MDVR_SERVICE_API_KEY,
@@ -277,5 +284,11 @@ module.exports = {
     updateFleet: validateEnv.FT_API_UPDATE_FLEET,
     getFleetList: validateEnv.FT_API_GET_FLEET_LIST,
     changeDeviceFleet: validateEnv.FT_API_CHANGE_DEVICE_FLEET,
+  },
+  genExcel: {
+    baseUrl: validateEnv.GENEXCEL_BASE_URL,
+    apiKeyName: validateEnv.GENEXCEL_KEY_NAME,
+    apiKeyValue: validateEnv.GENEXCEL_KEY_VALUE,
+    deleteTemplate: validateEnv.GENEXCEL_DELETE_TEMPLATE,
   },
 };

@@ -8,6 +8,8 @@ router.get('/registeredusers', Middleware.getRegisteredUsers, Controller.getRegi
 router.get('/user/complete-register', Middleware.completeRegister, Controller.completeRegister);
 router.put('/user', Middleware.updateUser, Controller.updateUser);
 router.delete('/user', Middleware.deleteUser, Controller.deleteUser);
+router.post('/user/duration', Middleware.setUserDuration, Controller.setUserDuration);
+
 
 baseRouter.use('/api', router);
 module.exports = baseRouter;

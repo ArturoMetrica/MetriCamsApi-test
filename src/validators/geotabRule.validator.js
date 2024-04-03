@@ -4,7 +4,9 @@ const baseClassification = {
   idAlarm: Joi.number().required(),
   idClassificationMessage: Joi.number().optional().default(null),
   calification: Joi.boolean().optional().default(null),
-  comment: Joi.string().optional().allow(null,"")
+  comment: Joi.string().optional().allow(null,""),
+  ruleName: Joi.string().allow('').optional(),
+  ruleId: Joi.number().allow('').optional()
 }
 
 const arrayOfNumbers = Joi.string()

@@ -462,8 +462,8 @@ class FacialRecController {
 
         return res.status(500).json({
           status: false,
-          message: '',
-          data: "Driver picture no faces recognized."
+          message: "Driver picture no faces recognized.",
+          data: null
         });
       }
 

@@ -596,11 +596,11 @@ class FTAPIService {
     }
   }
 
-  async getDailyCalendar(oldToken, uniqueId, streamType, channels, day, storageType, timeZoneOffsett) {
+  async getDailyCalendar(oldToken, uniqueId, streamType, channels, day, storageType, timeZoneOffset) {
     try {
       const { data } = await axios.get(ftAPI.baseURL + ftAPI.inquireDailyCalendarURL, {
         headers: { _sign, _tenantid },
-        params: { uniqueId, streamType, channels, day, storageType, timeZoneOffsett }
+        params: { uniqueId, streamType, channels, day, storageType, timeZoneOffset }
       });
 
       return data;
