@@ -1,9 +1,10 @@
 const alarmCollectorService = require("../services/alarmCollector.service");
+const humanFactorService = require('../services/humanFactor.service');
 
 class HumanFactorController {
   getRiskAnalytics = async (req, res) => {
     try {
-      const data = await alarmCollectorService.getRiskAnalytics(req.risk);
+      const data = await humanFactorService.getRiskAnalytics(req.analytics);
 
       res.status(200).json({
         status: true,
