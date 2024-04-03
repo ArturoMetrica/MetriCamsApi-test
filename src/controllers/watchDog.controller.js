@@ -34,7 +34,7 @@ class ClassificationMessageController {
 
 			if (goIds.length) {
 				if (database === 'fleet_mexico') {
-					goIds = goIds.slice(0, 600);
+					goIds = goIds.slice(0, 300);
 				}
 				const deviceStatusInfo = await geotabService.getLastCommunication();
 				const filteredInfo = deviceStatusInfo.filter(info => {
@@ -51,6 +51,15 @@ class ClassificationMessageController {
 						info.dateTimeGo = matchingInfo.dateTime;
 					}
 				}
+			}
+
+			// 03/04/2024 Se solicitó este parche solamente para fleet_mexico por parte del PO Hector Saldivar
+			if (database == "fleet_mexico") {
+				return res.status(200).json({
+					status: true,
+					message: '',
+					data: dataReport
+				})	
 			}
 
 			const dataZOA = await getAddresses(dataReport);
