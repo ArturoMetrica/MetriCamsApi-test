@@ -1,5 +1,5 @@
 const GroupsService = require('./groups.service');
-const { getData: queryReq } = require('./dbconnection');
+const { getData: queryReq, query } = require('./dbconnection');
 const moment = require('moment');
 
 async function getData(query, params) {
@@ -1563,6 +1563,31 @@ class DBData {
     if (result.data && result.data[0].query) return result.data[0].query;
 
     throw new Error(result.message);
+  }
+
+  getAlarmStatusByDate = async (serials, fromDate, toDate, minRecords) => {
+    try {
+      const [result] = await query('SELECT * FROM get_alarm_status_by_date_range($1,$2,$3,$4) AS QUERY', [
+        serials,
+        fromDate,
+        toDate,
+        minRecords
+      ]);
+
+      return result.query;
+    } catch (error) {
+      throw error;
+    }
+  }
+
+  getDeviceSerial = async () => {
+    try {
+      const [result] = await query('SELECT * FROM getDeviceSerial() AS QUERY');
+
+      return result.query;
+    } catch (error) {
+      throw error;
+    }
   }
 }
 
