@@ -1,4 +1,5 @@
 const DBService = require('../services/database');
+const handleResponseUtil = require('../utils/handleResponse.util');
 const dbService = new DBService();
 
 class Controller {
@@ -38,6 +39,16 @@ class Controller {
     }
   }
 
+  getAlarmStatusByDate = async (req, res) => {
+    try {
+      const { fromDate, toDate, minRecords } = req.alarms;
+      const serials = await dbService.getDeviceSerial();
+      const data = await dbService.getAlarmStatusByDate(serials, fromDate, toDate, minRecords);
+      handleResponseUtil(res, 200, true, 'ok', data);
+    } catch (error) {
+      handleResponseUtil(res, 500, false, error.message || error, null);
+    }
+  }
 }
 
 module.exports = new Controller();
