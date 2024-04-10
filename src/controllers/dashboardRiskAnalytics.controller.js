@@ -1,8 +1,10 @@
-const DBService = require('../services/database');
-const dbService = new DBService();
 const axios = require('axios').default;
 const axiosRetry = require('axios-retry');
 axiosRetry(axios, { retries: 3, retryDelay: axiosRetry.exponentialDelay });
+const DBService = require('../services/database');
+const dbService = new DBService();
+const riskAnalyticsService = require('../services/riskAnalytics.service');
+const { token } = require('morgan');
 
 const { baseURL, getDashboardAnalytics, apiKeyName, apiKeyValue } = require('../config/env').alarmCollector;
 
@@ -115,13 +117,6 @@ class Controller {
         headers[apiKeyName] = apiKeyValue;
     
         const data_ = await dbService.getVehiclesAndDriversByGroupsLevel(sessionid, idFleet);
-    
-        // const serials = [].concat(
-        //   ...data_.vehicle_data.map(objeto =>
-        //     objeto.vehicles.map(vehicle => vehicle.serial)
-        //   )
-        // );
-
         const vehicles = await dbService.getVehicles([sessionid]);
 
         let deviceIndex = [];
@@ -161,20 +156,22 @@ class Controller {
             });
         });
     
-        const { data: eventsData } = await axios.post(baseURL + getDashboardAnalytics,
-          {
-            startDate,
-            endDate,
-            vehicles: mdvrs
-        },
-          {
-            headers
-          });
+        // const { data: eventsData } = await axios.post(baseURL + getDashboardAnalytics,
+        //   {
+        //     startDate,
+        //     endDate,
+        //     vehicles: mdvrs
+        // },
+        //   {
+        //     headers
+        //   });
+
+        const eventsData = await riskAnalyticsService.getRiskAnalytics(sessionid, mdvrs, startDate, endDate, 0, 0, -6);
           
           deviceIndex.forEach(group => {
             group.vehicles.forEach(device => {
                 const serial = Object.keys(device)[0];
-                const serialEvents = eventsData.data.filter(e => e.serial_mdvr === serial);
+                const serialEvents = eventsData.filter(e => e.serial_mdvr === serial);
 
                 const count = {
                     "low": 0,
@@ -184,7 +181,9 @@ class Controller {
 
                 // Contar eventos
                 serialEvents.forEach(event => {
-                    count[event.risk_level.toLowerCase()]++;
+                  event.risk_details.forEach(d => {
+                    count[d.risk_level.toLowerCase()]++;
+                  });
                 });
 
                 device[serial] = count;
@@ -228,7 +227,7 @@ class Controller {
 
         // Lógica para agrupar eventos por fleet_id, risk_level y contarlos
         const groupedEvents = {};
-        eventsData.data.forEach(event => {
+        eventsData.forEach(event => {
           const fleetIdObject = data_.vehicle_data.find(fleet => fleet.vehicles.some(vehicle => vehicle.serial === event.serial_mdvr));
           const fleetId = fleetIdObject ? fleetIdObject.fleet_id : null;
 
@@ -245,8 +244,14 @@ class Controller {
           }
     
           // Incrementar el contador según el risk_level
-          groupedEvents[fleetId][event.risk_level.toLowerCase()] += 1;
-          groupedEvents[fleetId].vehicles[event.serial_mdvr][event.risk_level.toLowerCase()] += 1;
+          // groupedEvents[fleetId][event.risk_level.toLowerCase()] += 1;
+          // groupedEvents[fleetId].vehicles[event.serial_mdvr][event.risk_level.toLowerCase()] += 1;
+
+          event.risk_details.forEach(e => {
+            const riskLevel = e.risk_level.toLowerCase();
+            groupedEvents[fleetId][riskLevel] += 1;
+            groupedEvents[fleetId].vehicles[event.serial_mdvr][riskLevel] += 1;            
+          });
         });
 
           // Lógica para agrupar drivers por ftapi_driver_id y driver_id y contarlos
@@ -260,12 +265,15 @@ class Controller {
             }
           }
 
-          for (const event of eventsData.data) {
+          for (const event of eventsData) {
             for (const driverGroup of data_.drivers_data) {
               for (const driver of driverGroup.drivers) {
                 if (driver.ftapi_driver_id === event.driver_id) {
                   // Incrementar el contador según el risk_level y el match entre ftapi_driver_id y driver_id
-                  groupedDrivers[driver.ftapi_driver_id][event.risk_level.toLowerCase()] += 1;
+                  event.risk_details.forEach(e => {
+                    const riskLevel = e.risk_level.toLowerCase();
+                    groupedDrivers[driver.ftapi_driver_id][riskLevel] += 1;
+                  });
                 }
               }
             }
