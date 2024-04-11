@@ -8,7 +8,8 @@ class HumanFactorValidator {
     startDate: Joi.string().required(),
     endDate: Joi.string().required(),
     rowNumber: Joi.number().optional().default(0),
-    limit: Joi.number().optional().default(10)
+    limit: Joi.number().optional().default(10),
+    offset: Joi.number().optional().default(-6)
   }
 
   getRiskAnalytics = () => {
