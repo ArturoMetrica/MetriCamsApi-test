@@ -181,9 +181,10 @@ class Controller {
 
                 // Contar eventos
                 serialEvents.forEach(event => {
-                  event.risk_details.forEach(d => {
-                    count[d.risk_level.toLowerCase()]++;
-                  });
+                  // event.risk_details.forEach(d => {
+                  //   count[d.risk_level.toLowerCase()]++;
+                  // });
+                  count[event.risk_score_level.toLowerCase()]++;
                 });
 
                 device[serial] = count;
@@ -247,11 +248,13 @@ class Controller {
           // groupedEvents[fleetId][event.risk_level.toLowerCase()] += 1;
           // groupedEvents[fleetId].vehicles[event.serial_mdvr][event.risk_level.toLowerCase()] += 1;
 
-          event.risk_details.forEach(e => {
-            const riskLevel = e.risk_level.toLowerCase();
-            groupedEvents[fleetId][riskLevel] += 1;
-            groupedEvents[fleetId].vehicles[event.serial_mdvr][riskLevel] += 1;            
-          });
+          // event.risk_details.forEach(e => {
+          //   const riskLevel = e.risk_level.toLowerCase();
+          //   groupedEvents[fleetId][riskLevel] += 1;
+          //   groupedEvents[fleetId].vehicles[event.serial_mdvr][riskLevel] += 1;            
+          // });
+          groupedEvents[fleetId][event.risk_score_level.toLowerCase()] += 1;
+          groupedEvents[fleetId].vehicles[event.serial_mdvr][event.risk_score_level.toLowerCase()] += 1;
         });
 
           // Lógica para agrupar drivers por ftapi_driver_id y driver_id y contarlos
@@ -270,10 +273,11 @@ class Controller {
               for (const driver of driverGroup.drivers) {
                 if (driver.ftapi_driver_id === event.driver_id) {
                   // Incrementar el contador según el risk_level y el match entre ftapi_driver_id y driver_id
-                  event.risk_details.forEach(e => {
-                    const riskLevel = e.risk_level.toLowerCase();
-                    groupedDrivers[driver.ftapi_driver_id][riskLevel] += 1;
-                  });
+                  // event.risk_details.forEach(e => {
+                  //   const riskLevel = e.risk_level.toLowerCase();
+                  //   groupedDrivers[driver.ftapi_driver_id][riskLevel] += 1;
+                  // });
+                  groupedDrivers[driver.ftapi_driver_id][event.risk_score_level.toLowerCase()] += 1;
                 }
               }
             }
