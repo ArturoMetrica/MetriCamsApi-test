@@ -75,7 +75,8 @@ class FacialRecController {
       const dbGroup = [];
       let password = '';
       const { sessionid } = req.sessionid;
-      const { name, lastName, groups, vehicles, nss, ruleId, rule, employeeNumber, birthday, phone, license, email, faceList, profilePicture, isMGDriver, geotabId } = req.driver;
+      const { name, lastName, groups, vehicles, nss, ruleId, rule, employeeNumber, birthday, phone, license, email, faceList, profilePicture, isMGDriver } = req.driver;
+      let { geotabId } = req.driver;
 
       if (isMGDriver === true) {
         const caracteres = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
