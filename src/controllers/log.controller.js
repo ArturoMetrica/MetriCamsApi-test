@@ -33,6 +33,38 @@ class LogController {
             });
         }
     }
+
+    async exceptionsLog(req, res) {
+        try {
+            const { sessionid } = req.sessionid;
+            const data = await dbService.exceptionsLogs(req.log, sessionid);
+
+            res.status(200).json({data});
+            
+        } catch (error) {
+            res.status(500).json({
+                status: false,
+                message: error.message || error,
+                data: null
+            });
+        }
+    }
+
+    async getExceptionsLog(req, res) {
+        try {
+            const { sessionid } = req.sessionid;
+            const data = await dbService.getExceptionsLogs(req.log, sessionid);
+
+            res.status(200).json({data});
+            
+        } catch (error) {
+            res.status(500).json({
+                status: false,
+                message: error.message || error,
+                data: null
+            });
+        }
+    }
 }
 
 module.exports = new LogController()
