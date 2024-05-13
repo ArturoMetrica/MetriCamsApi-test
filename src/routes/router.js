@@ -56,6 +56,7 @@ router.use(
   require('./device.router'),
   require('./shortcut.router'),
   require('./auditlog.router'),
+  require('./templateService.router'),
   ErrorMiddlware.handleNotFound,
   ErrorMiddlware.handleError,
 );
