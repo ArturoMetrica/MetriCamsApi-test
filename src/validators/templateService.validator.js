@@ -11,10 +11,11 @@ class templateService {
 
     updateTemplate = () => {
         return Joi.object().keys({
-            templateId: Joi.number().optional(),
-            templateName: Joi.string().optional(),
-            templateType: Joi.number().optional(),
-            downloadId: Joi.string().optional()
+            templateId: Joi.number().required(),
+            templateName: Joi.string().required(),
+            templateType: Joi.number().required(),
+            downloadId: Joi.string().required(),
+            isDefault: Joi.boolean().required()
         }).options({ allowUnknown: true, stripUnknown: true });
     }
 
@@ -22,7 +23,8 @@ class templateService {
         return Joi.object().keys({
             templateId: Joi.string().required(),
             templateType: Joi.number().required(),
-            downloadId: Joi.string().required()
+            downloadId: Joi.string().required(),
+            isDefault: Joi.boolean().required()
         }).options({ allowUnknown: true, stripUnknown: true });
     }
 

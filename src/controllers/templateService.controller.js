@@ -7,15 +7,11 @@ class TemplateController {
     addTemplate = async (req, res) => {
         try {
             // Subir plantilla a través de servicio
-            if (!req.file && !req.files) {
-                return res.status(400).send('No files were uploaded.');
-              }
+            if (!req.file && !req.files) { return res.status(400).send('No files were uploaded.'); }
           
-              if (!req.file && req.files && req.files.template) {
-                req.file = req.files.template;
-              }
-            const downloadId = await TemplateHelper.uploadTemplate(req.file);
+            if (!req.file && req.files && req.files.template) { req.file = req.files.template; }
 
+            const downloadId = await TemplateHelper.uploadTemplate(req.file);
             if (!downloadId) throw { status: false, message: 'Template upload failed. Try again', data: null };
 
             const data = await TemplateService.addTemplate(req.sessionid.sessionid, req.body.templateName, req.body.templateType, downloadId, false);
@@ -47,7 +43,7 @@ class TemplateController {
 
             if (!req.file && !req.files) { return res.status(400).send('No files were uploaded.'); }
           
-              if (!req.file && req.files && req.files.template) { req.file = req.files.template; }
+            if (!req.file && req.files && req.files.template) { req.file = req.files.template; }
 
             await TemplateHelper.deleteTemplate(req.body.downloadId);
             const downloadId = await TemplateHelper.uploadTemplate(req.file);
@@ -116,9 +112,9 @@ class TemplateController {
         try {
             let data = await TemplateService.getTemplate(req.sessionid.sessionid, req.query.templateId);
 
-            // Integrar base64 para descargar plantilla
             if (!data.data[0]) throw 'This template does not exist.'
 
+            // Integrar base64 para descargar plantilla
             const base64 = await TemplateHelper.downloadTemplate(data.data[0].downloadId);
             data.data[0].base64 = base64.data.excelBase64;
 
