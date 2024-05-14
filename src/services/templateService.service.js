@@ -11,9 +11,9 @@ class TemplateService {
                 isDefault
             ]);
 
-            if (result[0] && result[0].query.data) return result[0];
+            if (result[0] && result[0].query) return result[0].query;
         } catch (error) {
-            throw error.message;
+            throw error;
         }
     }
 
@@ -27,7 +27,7 @@ class TemplateService {
                 downloadId
             ]);
 
-            if (result[0] && result[0].query.data) return result[0];
+            if (result[0] && result[0].query) return result[0].query;
         } catch (error) {
             throw error;
         }
@@ -41,7 +41,7 @@ class TemplateService {
                 templateType
             ]);
 
-            if (result[0] && result[0].query.data) return result[0].query;
+            if (result[0] && result[0].query) return result[0].query;
         } catch (error) {
             throw error;
         }

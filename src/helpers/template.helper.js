@@ -67,7 +67,7 @@ class TemplateHelper {
             };
             return await axios(getTemplateConfig);
         } catch (error) {
-            throw new Error('Failed to delete template');
+            throw new Error('Template can not be deleted. Try again.');
         }
     }
 }

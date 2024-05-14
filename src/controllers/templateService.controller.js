@@ -20,18 +20,22 @@ class TemplateController {
 
             const data = await TemplateService.addTemplate(req.sessionid.sessionid, req.body.templateName, req.body.templateType, downloadId, false);
 
-            res.status(data.query.code || 200).json(data.query);
-            // res.status(200).json({
-            //     status: true,
-            //     message,
-            //     data: "",
-            //   });
+            if (data.code != 200) {
+                await TemplateHelper.deleteTemplate(downloadId);
+                throw data.message;
+            }
+
+            res.status(data.code || 200).json({
+                status: true,
+                message: data.message,
+                data: ''
+            });
         } catch (error) {
             await errorLogs('API', error, '/api/template');
 
             res.status(500).json({
                 status: false,
-                message: error.message || error,
+                message: error.error || error,
                 data: null
             });
         }
@@ -41,19 +45,19 @@ class TemplateController {
         try {
             if (req.body.isDefault === true) throw { status: false, message: 'This template can not be deleted.', data: null };
 
-            if (!req.file && !req.files) {
-                return res.status(400).send('No files were uploaded.');
-              }
+            if (!req.file && !req.files) { return res.status(400).send('No files were uploaded.'); }
           
-              if (!req.file && req.files && req.files.template) {
-                req.file = req.files.template;
-              }
+              if (!req.file && req.files && req.files.template) { req.file = req.files.template; }
 
             await TemplateHelper.deleteTemplate(req.body.downloadId);
             const downloadId = await TemplateHelper.uploadTemplate(req.file);
             const data = await TemplateService.updateTemplate(req.sessionid.sessionid, req.body.templateId, req.body.templateName, req.body.templateType, downloadId);
 
-            res.status(data.query.code || 200).json(data.query);
+            res.status(data.code || 200).json({
+                status: true,
+                message: data.message,
+                data: ''
+            });
         } catch (error) {
             await errorLogs('API', error, '/api/template');
 
@@ -72,11 +76,15 @@ class TemplateController {
 
             const data = await TemplateService.deleteTemplate(req.sessionid.sessionid, req.query.templateId, req.query.templateType);
 
-            const deleteTemplate = await TemplateHelper.deleteTemplate(req.query.downloadId);
+            if(data.code !== 200) throw data.message; 
 
-            if(deleteTemplate.status !== 200) throw { status: false, message: 'Template can not be deleted. Try again.', data: null };
+            await TemplateHelper.deleteTemplate(req.query.downloadId);
 
-            res.status(data.code || 200).json(data);
+            res.status(data.code || 200).json({
+                status: true,
+                message: data.message,
+                data: ''
+            });
         } catch (error) {
             await errorLogs('API', error, '/api/template');
 
@@ -109,6 +117,7 @@ class TemplateController {
             let data = await TemplateService.getTemplate(req.sessionid.sessionid, req.query.templateId);
 
             // Integrar base64 para descargar plantilla
+            if (!data.data[0]) throw 'This template does not exist.'
 
             const base64 = await TemplateHelper.downloadTemplate(data.data[0].downloadId);
             data.data[0].base64 = base64.data.excelBase64;
