@@ -27,6 +27,33 @@ class LogMiddleware {
             console.log(error);
         }
     }
+
+    async exceptionsLog(req, res, next) {
+        try {
+            req.log = await LogValidator.exceptionsLog().validateAsync({
+                ...req.headers,
+                ...req.body
+            });
+
+            next ();
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
+    async getExceptionsLog(req, res, next) {
+        try {
+            req.log = await LogValidator.getExceptionsLog().validateAsync({
+                ...req.headers,
+                ...req.query,
+                ...req.params
+            });
+
+            next ();
+        } catch (error) {
+            console.log(error);
+        }
+    }
 }
 
 module.exports = new LogMiddleware();

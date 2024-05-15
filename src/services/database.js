@@ -1259,6 +1259,40 @@ class DBData {
     throw new Error(result.message);
   }
 
+  async exceptionsLogs(data, sessionid) {
+    const { status, message } = await getData(`SELECT * FROM exception_log_insert_fn($1::TEXT, $2::BIGINT[], $3::BIGINT[], $4::BIGINT[], $5::VARCHAR[], $6::VARCHAR[], $7::BOOLEAN, 
+                                              $8::BOOLEAN, $9::BOOLEAN, $10::TIMESTAMP(0), $11::TIMESTAMP(0), $12::INTEGER, $13::INTEGER) AS query`, [
+      
+      sessionid,
+      data.vehicles,
+      data.rulesS,
+      data.rulesG,
+      data.classification,
+      data.severity,
+      data.evidence,
+      data.isAttended,
+      data.isAutomaticUpdate,
+      data.startTime,
+      data.endTime,
+      data.limit,
+      data.totalRows,
+    ]);
+
+    if (!status) throw new Error(message);
+  }
+
+  async getExceptionsLogs(data, sessionid) {
+    const result = await getData('SELECT * FROM exception_log_select_fn($1::TEXT, $2::TIMESTAMP(0), $3::TIMESTAMP(0), $4::INTEGER) AS query', [
+      sessionid,
+      data.fromDate,
+      data.toDate,
+      data.offset
+    ]);
+
+    if (result.data && result.data[0] && result.data[0].query) return result.data[0].query;
+    throw new Error(result.message);
+  }
+
   async errorLogs(identifier, error, module) {
     const { status, message } = await getData('SELECT * FROM error_logs_fn($1, $2::JSON, $3) AS query', [
       identifier,

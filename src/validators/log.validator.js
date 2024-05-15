@@ -16,6 +16,31 @@ class LogValidator {
             module: Joi.string().required()
         }).options({ allowUnknown: true, stripUnknown: true });
     }
+
+    exceptionsLog () {
+        return Joi.object().keys({
+            vehicles: Joi.array().required(),
+            rulesS: Joi.array().required(),
+            rulesG: Joi.array().required(),
+            classification: Joi.array().required().allow(null),
+            severity: Joi.array().required().allow(null),
+            evidence: Joi.boolean().required(),
+            isAttended: Joi.boolean().required(),
+            isAutomaticUpdate: Joi.boolean().required(),
+            startTime: Joi.string().required(),
+            endTime: Joi.string().required(),
+            limit: Joi.number().required(),
+            totalRows: Joi.number().required(),
+        }).options({ allowUnknown: true, stripUnknown: true });
+    }
+
+    getExceptionsLog () {
+        return Joi.object().keys({
+            fromDate: Joi.string().required(),
+            toDate: Joi.string().required(),
+            offset: Joi.number().optional().default(-6),
+        }).options({ allowUnknown: true, stripUnknown: true });
+    }
 }
 
 module.exports = new LogValidator()

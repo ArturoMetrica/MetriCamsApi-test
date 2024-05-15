@@ -62,6 +62,9 @@ const envSchema = Joi.object({
   BUCKET_SERVICE_DELETE: Joi.string().required(),
   BUCKET_SERVICE_UPLOAD_PROFILE: Joi.string().required(),
   BUCKET_SERVICE_DELETE_PROFILE: Joi.string().required(),
+  BUCKET_SERVICE_UPLOAD_TEMPLATE: Joi.string().required(),
+  BUCKET_SERVICE_DOWNLOAD_TEMPLATE: Joi.string().required(),
+  BUCKET_SERVICE_DELETE_TEMPLATE: Joi.string().required(),
   // FACIAL RECOGNITION API SERVICE
   API_CODES_FACIAL_RECOGNITION_URL: Joi.string().required(),
   API_CODES_FACIAL_RECOGNITION_API_KEY_NAME: Joi.string().required(),
@@ -211,6 +214,9 @@ module.exports = {
     delete: validateEnv.BUCKET_SERVICE_DELETE,
     uploadProfile: validateEnv.BUCKET_SERVICE_UPLOAD_PROFILE,
     deleteProfile: validateEnv.BUCKET_SERVICE_DELETE_PROFILE,
+    uploadTemplate: validateEnv.BUCKET_SERVICE_UPLOAD_TEMPLATE,
+    downloadTemplate: validateEnv.BUCKET_SERVICE_DOWNLOAD_TEMPLATE,
+    deleteTemplate: validateEnv.BUCKET_SERVICE_DELETE_TEMPLATE,
   },
   facialRecService: {
     baseURL: validateEnv.API_CODES_FACIAL_RECOGNITION_URL,
