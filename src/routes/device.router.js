@@ -9,6 +9,7 @@ routes.post('/device', deviceMiddleware.addDevice, deviceController.addDevice);
 routes.put('/device', deviceMiddleware.updateDevice, deviceController.updateDevice);
 routes.delete('/device', deviceMiddleware.deleteDevice, deviceController.deleteDevice);
 routes.post('/device/wakeup', deviceMiddleware.wakeUpDevice, deviceController.wakeUpDevice);
+routes.post('/devices/details', deviceMiddleware.deviceDetails, deviceController.deviceDetails);
 
 baseRouter.use('/api', routes);
 

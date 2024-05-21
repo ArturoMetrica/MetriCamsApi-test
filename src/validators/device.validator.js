@@ -55,6 +55,11 @@ class DeviceValidator {
 		}).options({ allowUnknown: true, stripUnknown: true });
 	}
 
+	deviceDetails = () => {
+		return Joi.object().keys({
+			devices: Joi.array().required()
+		}).options({ allowUnknown: true, stripUnknown: true });
+	}
 }
 
 module.exports = new DeviceValidator();

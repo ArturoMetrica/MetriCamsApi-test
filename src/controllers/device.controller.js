@@ -129,9 +129,42 @@ const wakeUpDevice = async (req, res) => {
 	}
 }
 
+const deviceDetails = async (req, res) => {
+	try {
+		const { devices } = req.device;
+		
+		const details = await Promise.all(devices.map(async (d) => {
+		const data = await FTService.getDeviceDetail(d);
+
+			if (data.code === '404') {
+				return {
+					device: d,
+					dormantState: null
+				}
+			}
+
+			return {
+				device: d,
+				dormantState: data.dormantState
+			};
+		}));
+
+		res.status(200).json({
+			status: true,
+			message: '',
+			data: details
+		  });
+	} catch (error) {
+		await errorLogs('API', error, '/api/device/wakeup');
+
+		handleResponseUtil(res, error.code || 500, false, error.message || error, null);
+	}
+}
+
 module.exports = {
 	addDevice,
 	updateDevice,
 	deleteDevice,
-	wakeUpDevice
+	wakeUpDevice,
+	deviceDetails
 }
