@@ -49,6 +49,12 @@ class DeviceValidator {
 		}).options({ allowUnknown: true, stripUnknown: true });
 	}
 
+	wakeUpDevice = () => {
+		return Joi.object().keys({
+			deviceSerial: Joi.string().required()
+		}).options({ allowUnknown: true, stripUnknown: true });
+	}
+
 }
 
 module.exports = new DeviceValidator();

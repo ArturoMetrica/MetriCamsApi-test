@@ -104,8 +104,34 @@ const deleteDevice = async (req, res) => {
 	}
 }
 
+const wakeUpDevice = async (req, res) => {
+	try {
+		const { deviceSerial } = req.device;
+		const { sessionid } = req.sessionid;
+		
+		const deviceState = await FTService.getDeviceDetail(deviceSerial);
+
+		if (deviceState.code === '404') throw deviceState;
+
+		if (deviceState.dormantState != "DORMANT") throw { message: 'Device is not dormant.', status: false };
+
+		const data = await FTService.wakeUpDevice(deviceSerial);
+		if (data.data !== null) throw data;
+
+		await deviceService.wakeUpDevice(sessionid, deviceSerial, true);
+
+		handleResponseUtil(res, 200, true, 'ok', null);
+	} catch (error) {
+		await errorLogs('API', error, '/api/device/wakeUp');
+		if (error.message === 'Unknown error') error.message = 'This device cannot receive a Wake Up command at this time, try again later.'
+
+		handleResponseUtil(res, error.code || 500, false, error.message || error, null);
+	}
+}
+
 module.exports = {
 	addDevice,
 	updateDevice,
-	deleteDevice
+	deleteDevice,
+	wakeUpDevice
 }

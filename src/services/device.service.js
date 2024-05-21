@@ -38,8 +38,23 @@ const deleteDevice = async (token, vehicleId, deviceData) => {
 	}
 }
 
+const wakeUpDevice = async (token, deviceSerial, streamaxResponse ) => {
+	try {
+		const result = await query('SELECT * FROM insert_turn_on_device_in_auditlog_fn($1,$2,$3) AS QUERY', [
+			token,
+			deviceSerial,
+			streamaxResponse
+		]);
+
+		if (result[0].query.code !== 200) throw result[0].query;
+	} catch (error) {
+		throw error;
+	}
+}
+
 module.exports = {
 	addDevice,
 	updateDevice,
-	deleteDevice
+	deleteDevice,
+	wakeUpDevice
 };
