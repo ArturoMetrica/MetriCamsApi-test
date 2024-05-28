@@ -31,6 +31,26 @@ class deviceMiddleware {
 			handleResponseUtil(res, 400, false, error.message || error, null);
 		}
 	}
+
+	wakeUpDevice = async (req, res, next) => {
+		try {
+			req.device = await deviceValidator.wakeUpDevice().validateAsync({ ...req.body });
+
+			next ();
+		} catch (error) {
+			handleResponseUtil(res, 400, false, error.message || error, null);
+		}
+	}
+
+	deviceDetails = async (req, res, next) => {
+		try {
+			req.device = await deviceValidator.deviceDetails().validateAsync({ ...req.body });
+
+			next ();
+		} catch (error) {
+			handleResponseUtil(res, 400, false, error.message || error, null);
+		}
+	}
 }
 
 module.exports = new deviceMiddleware();
