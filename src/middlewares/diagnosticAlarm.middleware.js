@@ -10,6 +10,16 @@ class Middleware {
       res.status(400).json({ status: false, message: error.message || error, data: null });
     }
   }
+
+  getDeviceHealthStartEndDatetime = async (req, res, next) => {
+    try {
+      req.diagnosticAlarm = await Validator.getDeviceHealthStartEndDatetime().validateAsync({ ...req.body });
+
+      next ();
+    } catch (error) {
+      res.status(400).json({ status: false, message: error.message || error, data: null });
+    }
+  }
 }
 
 module.exports = new Middleware();
