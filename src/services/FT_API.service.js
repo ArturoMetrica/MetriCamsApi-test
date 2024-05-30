@@ -895,6 +895,20 @@ class FTAPIService {
     }
   }
 
+  async getDevicesDetail (page) {
+    try {
+      const { data } = await axios.get(ftAPI.baseURL + ftAPI.getDeviceDetail,
+      {
+        params: { page, pageSize: 1000 },
+        headers: { _sign, _tenantid }
+      });
+
+      return data;
+    } catch (error) {
+      return error.response.data;
+    }
+  }
+
   async wakeUpDevice (uniqueId) {
     try {
       const data = await axios.post(ftAPI.baseURL + ftAPI.wakeUpDevice + `${uniqueId}/wakeup`,
