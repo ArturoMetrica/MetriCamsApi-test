@@ -912,7 +912,7 @@ class DBData {
       statusP,
       statusE
     ]);
-    if (result.data && result.data[0] && result.data[0].query) alarms.streamax = result.data[0].query;
+    if (result.data && result.data[0]) alarms.streamax = result.data;
 
     const result_ = await getData(
       `SELECT * FROM geotab_alarm_by_user_select_fn($1, $2, $3, $4::JSON, $5::JSON, $6) as query`,
