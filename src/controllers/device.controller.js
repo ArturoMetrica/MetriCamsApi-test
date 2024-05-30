@@ -132,11 +132,30 @@ const wakeUpDevice = async (req, res) => {
 const deviceDetails = async (req, res) => {
 	try {
 		const { devices } = req.device;
-		
-		const details = await Promise.all(devices.map(async (d) => {
-		const data = await FTService.getDeviceDetail(d);
+		let page = 1;
+		let allData = [];
 
-			if (data.code === '404') {
+		while (true) {
+			try {
+			const { data } = await FTService.getDevicesDetail(page);
+			// Si no hay datos en la página actual, sal del bucle
+			if (data.length === 0) {
+				break;
+			}
+			// Agrega los datos de la página actual a la lista total
+			allData = allData.concat(data);
+			// Incrementa el número de página para la siguiente solicitud
+			page++;
+			} catch (error) {
+			console.error("Error al obtener datos:", error);
+			break; // Termina el bucle en caso de error
+			}
+		}
+
+		const details = await Promise.all(devices.map(async (d) => {
+			const dormanState = allData.find(e => e.uniqueId === d);
+
+			if (dormanState === undefined) {
 				return {
 					device: d,
 					dormantState: null
@@ -145,7 +164,7 @@ const deviceDetails = async (req, res) => {
 
 			return {
 				device: d,
-				dormantState: data.dormantState
+				dormantState: dormanState.dormantState
 			};
 		}));
 
