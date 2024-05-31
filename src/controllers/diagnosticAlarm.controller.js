@@ -67,7 +67,7 @@ class Controller {
     } catch (error) {
       res.status(500).json({
         status: false,
-        message: error.message || error,
+        message: error.response.data.message || error.message || error,
         data: null
       });
     }
