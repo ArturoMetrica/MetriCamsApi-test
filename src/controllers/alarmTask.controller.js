@@ -1,5 +1,6 @@
 const DBService = require('../services/database');
 const DbService = new DBService();
+const moment = require('moment');
 
 class AlarmTaskController {
     async getTaskId(req, res) {
@@ -18,6 +19,12 @@ class AlarmTaskController {
         try {
             let { startTime, endTime, vehicles, rulesG, rulesS, severity, evidence, classification, offSet, rowNumber, limit, isAttended } = req.alarms;
             const { sessionid } = req.sessionid;
+
+            const dateLimit = moment(startTime).add(30, 'days').format('YYYY-MM-DD HH:mm:ss');
+
+            if (endTime > dateLimit) {
+                throw 'You can not query more than 30 days.';
+            }
 
             const data = await DbService.getAlarmsByUserPagination(
                 sessionid,
