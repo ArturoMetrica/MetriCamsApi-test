@@ -3,6 +3,7 @@ const diagnosticAlarmService = require("../services/diagnosticAlarm.service");
 const axios = require('axios').default;
 const axiosRetry = require('axios-retry');
 axiosRetry(axios, { retries: 3, retryDelay: axiosRetry.exponentialDelay });
+const moment = require('moment');
 
 const { baseURL, apiKeyName, apiKeyValue } = require('../config/env').alarmCollector;
 
@@ -46,6 +47,13 @@ class Controller {
   getDeviceHealthStartEndDatetime = async (req, res) => {
     try {
       const { fromDate, toDate, serials, alarmCode } = req.diagnosticAlarm;
+
+      const endDate = moment(toDate).format('YYYY-MM-DD HH:mm:ss');
+      const dateLimit = moment(fromDate).add(30, 'days').format('YYYY-MM-DD HH:mm:ss');
+
+            if (endDate > dateLimit) {
+                throw 'You can not query more than 30 days.';
+            }
       
       const { data } = await axios.post(baseURL + '/device-health',
           {
@@ -67,7 +75,7 @@ class Controller {
     } catch (error) {
       res.status(500).json({
         status: false,
-        message: error.response.data.message || error.message || error,
+        message: error.response ? error.response.data.message : error,
         data: null
       });
     }

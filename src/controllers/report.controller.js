@@ -111,6 +111,12 @@ class ReportsController {
 		try {
 			const { startTime, endTime, vehicles, rulesS, rulesG, drivers, language, initialDay, offset } = req.report;
 
+			const dateLimit = moment(startTime).add(30, 'days').format('YYYY-MM-DD HH:mm:ss');
+
+            if (endTime > dateLimit) {
+                throw 'You can not query more than 30 days.';
+            }
+
 			const streamax = await formatReport(startTime, endTime, vehicles, rulesS, drivers, language, initialDay, offset);
 			const geotab = await formatReport(startTime, endTime, vehicles, rulesG, drivers, language, initialDay, offset, true);
 			const data = {
