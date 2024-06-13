@@ -194,8 +194,8 @@ class DBData {
     });
   }
 
-  async updateStreamaxRule({ id, sessionid, idVehicles, groups, idAlarm, name, desc, isPublic, isPopup, isEmail, secsPre, secsPos, isActive, emails, action, creationDate, gifRequired, videoRequired, alarmcategoryid, zoneRestrictionIdEntry, zoneRestrictionNameEntry, zoneRestrictionIdExit, zoneRestrictionNameExit, zoneRestriction }) {
-    const result = await getData(`SELECT * FROM spRules($1, $2, $3::BIGINT[], $4::BIGINT[], $5, $6, $7, $8, $9, $10, $11, $12, $13, $14::TEXT[], $15, $16, $17, $18, $19, $20, $21, $22, $23, $24) AS data`, [
+  async updateStreamaxRule({ id, sessionid, idVehicles, groups, idAlarm, name, desc, isPublic, isPopup, isEmail, secsPre, secsPos, isActive, emails, action, creationDate, gifRequired, videoRequired, alarmcategoryid, zoneRestrictionIdEntry, zoneRestrictionNameEntry, zoneRestrictionIdExit, zoneRestrictionNameExit, zoneRestriction, zoneGeofence, zoneRuleIdEntry, zoneRuleNameEntry, zoneRuleIdExit, zoneRuleNameExit }) {
+    const result = await getData(`SELECT * FROM spRules($1, $2, $3::BIGINT[], $4::BIGINT[], $5, $6, $7, $8, $9, $10, $11, $12, $13, $14::TEXT[], $15, $16, $17, $18, $19, $20, $21, $22, $23, $24, $25, $26, $27, $28, $29) AS data`, [
       id,
       sessionid,
       idVehicles,
@@ -219,7 +219,12 @@ class DBData {
       zoneRestrictionNameEntry,
       zoneRestrictionIdExit,
       zoneRestrictionNameExit,
-      zoneRestriction
+      zoneRestriction,
+      zoneGeofence,
+      zoneRuleIdEntry,
+      zoneRuleNameEntry,
+      zoneRuleIdExit,
+      zoneRuleNameExit
     ]);
 
     if (result.data && result.data[0]) return result.data[0].data;
