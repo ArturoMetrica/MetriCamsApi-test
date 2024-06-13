@@ -44,11 +44,11 @@ class GeotabValidator {
       zoneRestrictionIdExit: Joi.string().required().allow(null),
       zoneRestrictionNameExit: Joi.string().required().allow(null),
       zoneRestriction: Joi.boolean().required(),
-      zoneGeofence: Joi.boolean().required(),
-      zoneRuleIdEntry: Joi.string().required(),
-      zoneRuleNameEntry: Joi.string().required(),
-      zoneRuleIdExit: Joi.string().required(),
-      zoneRuleNameExit: Joi.string().required()
+      zoneGeofence: Joi.boolean().optional(),
+      zoneRuleIdEntry: Joi.string().optional(),
+      zoneRuleNameEntry: Joi.string().optional(),
+      zoneRuleIdExit: Joi.string().optional(),
+      zoneRuleNameExit: Joi.string().optional()
     }).options({ allowUnknown: true, stripUnknown: true });
   }
 
@@ -75,11 +75,11 @@ class GeotabValidator {
       zoneRestrictionIdExit: Joi.string().required().allow(null),
       zoneRestrictionNameExit: Joi.string().required().allow(null),
       zoneRestriction: Joi.boolean().required(),
-      zoneGeofence: Joi.boolean().required(),
-      zoneRuleIdEntry: Joi.string().required(),
-      zoneRuleNameEntry: Joi.string().required(),
-      zoneRuleIdExit: Joi.string().required(),
-      zoneRuleNameExit: Joi.string().required()
+      zoneGeofence: Joi.boolean().optional(),
+      zoneRuleIdEntry: Joi.string().optional(),
+      zoneRuleNameEntry: Joi.string().optional(),
+      zoneRuleIdExit: Joi.string().optional(),
+      zoneRuleNameExit: Joi.string().optional()
     }).options({ allowUnknown: true, stripUnknown: true });
   }
 
