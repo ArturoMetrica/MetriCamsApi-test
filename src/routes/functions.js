@@ -393,7 +393,12 @@ async function rules(params, action) {
           'zoneRestrictionNameEntry',
           'zoneRestrictionIdExit',
           'zoneRestrictionNameExit',
-          'zoneRestriction'
+          'zoneRestriction',
+          'zoneGeofence',
+          'zoneRuleIdEntry',
+          'zoneRuleNameEntry',
+          'zoneRuleIdExit',
+          'zoneRuleNameExit'
         ],
         params.body
       )
@@ -425,7 +430,12 @@ async function rules(params, action) {
       params.body.zoneRestrictionNameEntry,
       params.body.zoneRestrictionIdExit,
       params.body.zoneRestrictionNameExit,
-      params.body.zoneRestriction
+      params.body.zoneRestriction,
+      params.body.zoneGeofence,
+      params.body.zoneRuleIdEntry,
+      params.body.zoneRuleNameEntry,
+      params.body.zoneRuleIdExit,
+      params.body.zoneRuleNameExit
     ];
   } else {
     if (!isDataOK(['id'], params.query) || !isDataOK(['sessionid'], params.headers))
@@ -454,7 +464,12 @@ async function rules(params, action) {
       null,
       null,
       null,
-      false
+      false,
+      false,
+      '',
+      '',
+      '',
+      ''
     ];
   }
   if (dbPars != null) res = await dbService.spRules(dbPars);

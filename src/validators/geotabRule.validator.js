@@ -43,7 +43,12 @@ class GeotabValidator {
       zoneRestrictionNameEntry: Joi.string().required().allow(null),
       zoneRestrictionIdExit: Joi.string().required().allow(null),
       zoneRestrictionNameExit: Joi.string().required().allow(null),
-      zoneRestriction: Joi.boolean().required()
+      zoneRestriction: Joi.boolean().required(),
+      zoneGeofence: Joi.boolean().required(),
+      zoneRuleIdEntry: Joi.string().required(),
+      zoneRuleNameEntry: Joi.string().required(),
+      zoneRuleIdExit: Joi.string().required(),
+      zoneRuleNameExit: Joi.string().required()
     }).options({ allowUnknown: true, stripUnknown: true });
   }
 
@@ -69,7 +74,12 @@ class GeotabValidator {
       zoneRestrictionNameEntry: Joi.string().required().allow(null),
       zoneRestrictionIdExit: Joi.string().required().allow(null),
       zoneRestrictionNameExit: Joi.string().required().allow(null),
-      zoneRestriction: Joi.boolean().required()
+      zoneRestriction: Joi.boolean().required(),
+      zoneGeofence: Joi.boolean().required(),
+      zoneRuleIdEntry: Joi.string().required(),
+      zoneRuleNameEntry: Joi.string().required(),
+      zoneRuleIdExit: Joi.string().required(),
+      zoneRuleNameExit: Joi.string().required()
     }).options({ allowUnknown: true, stripUnknown: true });
   }
 
