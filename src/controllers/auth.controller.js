@@ -1,6 +1,6 @@
 const DBService = require('../services/database');
 const { callByUser } = require('../helpers/sso.helper');
-const { getLoginData, ssoLogin, loginConnectorDB } = new DBService();
+const { getLoginData, ssoLogin, loginConnectorDB, logUserQuiz } = new DBService();
 const DbService = new DBService();
 
 class AuthController {
@@ -67,6 +67,30 @@ class AuthController {
       res.status(200).send(data);
     } catch (error) {
       await DbService.errorLogs('API', error, '/login-connector');
+
+      res.status(500).json({
+        code: 500,
+        status: false,
+        message: error.message || error,
+        data: null
+      });
+    }
+  }
+
+  logUserQuiz = async (req, res) => {
+    try {
+      const { isComplete } = req.auth;
+      const { sessionid } = req.sessionid;
+
+      const data = await logUserQuiz(sessionid, isComplete);
+
+      return res.status(200).json({
+        status: false,
+        message: 'Quiz saved',
+        data: null
+      });
+    } catch (error) {
+      await DbService.errorLogs('API', error, '/user/quiz');
 
       res.status(500).json({
         code: 500,

@@ -40,8 +40,26 @@ class AuthMiddleware {
             data: null
         })
     }
-}
+  }
 
+  async logUserQuiz (req, res, next) {
+    try {
+      req.auth = await Validator.logUserQuiz().validateAsync({
+        ...req.body,
+        ...req.query,
+				...req.params,
+      });
+
+      next ();
+    } catch (error) {
+      res.status(400).json({
+        code: 400,
+        status: false,
+        message: error.message,
+        data: null
+      });
+    }
+  }
 }
 
 module.exports = new AuthMiddleware();

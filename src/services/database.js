@@ -1638,6 +1638,19 @@ class DBData {
       throw error;
     }
   }
+
+  logUserQuiz = async (sessionid, isComplete) => {
+    try {
+      const data = await query('SELECT * FROM insert_log_user_quiz_fn($1,$2) AS QUERY', [
+        sessionid,
+        isComplete
+      ]);
+
+      return data[0].query;
+    } catch (error) {
+      throw error;
+    }
+  }
 }
 
 

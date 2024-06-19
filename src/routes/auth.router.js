@@ -13,6 +13,7 @@ router.post('/login', authLimit(), LoginService, Middleware.login, Controller.lo
 router.post('/sso', authLimit(), Middleware.ssoLogin, Controller.ssoLogin);
 router.post('/login-connector', Middleware.loginConnector, Controller.loginConnector);
 router.post('/check', tokenMiddleware.check, tokenController.check);
+router.post('/user/quiz', tokenMiddleware.verify, Middleware.logUserQuiz, Controller.logUserQuiz);
 
 baseRouter.use('/api', router);
 module.exports = baseRouter;
