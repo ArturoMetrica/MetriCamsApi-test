@@ -712,7 +712,7 @@ class DBData {
 
   async insertGeotabRule(rule) {
     const result = await getData(
-      `SELECT * FROM "createGeotabRule"($1::VARCHAR, $2::VARCHAR, $3::VARCHAR, $4::INT, $5::INT, $6::TIMESTAMP(0), $7::BOOLEAN, $8::BOOLEAN, $9::BOOLEAN, $10::TEXT[], $11::BOOLEAN, $12::BOOLEAN, $13::BOOLEAN, $14::VARCHAR, $15::JSON, $16::JSON, $17::INT, $18::JSON, $19, $20, $21, $22, $23::BOOLEAN, $24::BOOLEAN, $25::VARCHAR, $26::VARCHAR, $27::VARCHAR, $28::VARCHAR) as query`,
+      `SELECT * FROM "createGeotabRule"($1::VARCHAR, $2::VARCHAR, $3::VARCHAR, $4::INT, $5::INT, $6::TIMESTAMP(0), $7::BOOLEAN, $8::BOOLEAN, $9::BOOLEAN, $10::TEXT[], $11::BOOLEAN, $12::BOOLEAN, $13::BOOLEAN, $14::VARCHAR, $15::JSON, $16::JSON, $17::INT, $18::JSON, $19, $20, $21, $22, $23::BOOLEAN, $24::BOOLEAN, $25::VARCHAR, $26::VARCHAR, $27::VARCHAR, $28::VARCHAR, $29::VARCHAR, $30::INT) as query`,
       [
         rule.idGeotabRule,
         rule.name,
@@ -741,7 +741,9 @@ class DBData {
         rule.zoneRuleIdEntry,
         rule.zoneRuleNameEntry,
         rule.zoneRuleIdExit,
-        rule.zoneRuleNameExit
+        rule.zoneRuleNameExit,
+        rule.cameraType,
+        rule.cameraTypeId
       ]
     );
     if (result.data && result.data[0]) return result.data[0].query;
@@ -751,7 +753,7 @@ class DBData {
 
   async updateGeotabRule(rule) {
     const result = await getData(
-      `SELECT * FROM "updateGeotabRule"($1, $2, $3, $4::JSON, $5::JSON, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15, $16::INT, $17::JSON, $18, $19, $20, $21, $22::BOOLEAN, $23::BOOLEAN, $24::VARCHAR, $25::VARCHAR, $26::VARCHAR, $27::VARCHAR) as query`,
+      `SELECT * FROM "updateGeotabRule"($1, $2, $3, $4::JSON, $5::JSON, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15, $16::INT, $17::JSON, $18, $19, $20, $21, $22::BOOLEAN, $23::BOOLEAN, $24::VARCHAR, $25::VARCHAR, $26::VARCHAR, $27::VARCHAR, $28::VARCHAR, $29::INT) as query`,
       [
         rule.idGeotabRuleSerial,
         rule.name,
@@ -779,7 +781,9 @@ class DBData {
         rule.zoneRuleIdEntry,
         rule.zoneRuleNameEntry,
         rule.zoneRuleIdExit,
-        rule.zoneRuleNameExit
+        rule.zoneRuleNameExit,
+        rule.cameraType,
+        rule.cameraTypeId
       ]
     );
     console.log(result);

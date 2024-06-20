@@ -21,7 +21,7 @@ const addDevice = async (req, res) => {
 					}]);
 
 					if (!success)
-						return handleResponseUtil(res, 500, false, message || 'Streamax error', null);
+						return handleResponseUtil(res, 200, false, message || 'Streamax error', []);
 
 					await FTService.changeDeviceFleet(streamaxFleetId, device.deviceSerial);
 
@@ -36,7 +36,7 @@ const addDevice = async (req, res) => {
 		handleResponseUtil(res, 200, true, 'ok', null);
 	} catch (error) {
 		await errorLogs('API', error, '/api/device');
-		handleResponseUtil(res, 500, false, error.message || error, null);
+		handleResponseUtil(res, 500, false, error.message || error, []);
 	}
 }
 
