@@ -1,7 +1,7 @@
 const { query } = require('./dbconnection');
 
 class StreamaxService {
-    addRule = async (sessionId, { idVehicle, idFleet, idAlarm, ruleName, desc, isPublic, isPopup, isEmail, secPre, secPoe, isActive, emailList, creationDate, gifRequired, videoRequired, alarmCategoryId, zoneRestrictionIdEntry, zoneRestrictionNameEntry, zoneRestrictionIdExit, zoneRestrictionNameExit, isZoneRestriction, zoneGeofence, zoneRuleIdEntry, zoneRuleNameEntry, zoneRuleIdExit, zoneRuleNameExit, cameraType, cameraTypeId}) => {
+    addRule = async (sessionId, { idVehicle, idFleet, idAlarm, ruleName, desc, isPublic, isPopup, isEmail, secPre, secsPos, isActive, emailList, creationDate, gifRequired, videoRequired, alarmCategoryId, zoneRestrictionIdEntry, zoneRestrictionNameEntry, zoneRestrictionIdExit, zoneRestrictionNameExit, isZoneRestriction, zoneGeofence, zoneRuleIdEntry, zoneRuleNameEntry, zoneRuleIdExit, zoneRuleNameExit, cameraType, cameraTypeId}) => {
         try {
             return await query('SELECT * FROM insert_streamax_rules_fn($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15, $16, $17, $18, $19, $20, $21, $22, $23, $24, $25, $26, $27, $28, $29) AS QUERY', [
                 sessionId,
@@ -14,7 +14,7 @@ class StreamaxService {
                 isPopup,
                 isEmail,
                 secPre,
-                secPoe,
+                secsPos,
                 isActive,
                 emailList,
                 creationDate,
@@ -39,7 +39,7 @@ class StreamaxService {
         }
     }
 
-    updateStreamaxRule = async (sessionId, {idRule, idVehicle, idFleet, idAlarm, ruleName, desc, isPublic, isPopup, isEmail, secPre, secPoe, isActive, emailList, creationDate, gifRequired, videoRequired, alarmCategoryId, zoneRestrictionIdEntry, zoneRestrictionNameEntry, zoneRestrictionIdExit, zoneRestrictionNameExit, isZoneRestriction, zoneGeofence, zoneRuleIdEntry, zoneRuleNameEntry, zoneRuleIdExit, zoneRuleNameExit, cameraType, cameraTypeId}) => {
+    updateStreamaxRule = async (sessionId, {idRule, idVehicle, idFleet, idAlarm, ruleName, desc, isPublic, isPopup, isEmail, secPre, secsPos, isActive, emailList, creationDate, gifRequired, videoRequired, alarmCategoryId, zoneRestrictionIdEntry, zoneRestrictionNameEntry, zoneRestrictionIdExit, zoneRestrictionNameExit, isZoneRestriction, zoneGeofence, zoneRuleIdEntry, zoneRuleNameEntry, zoneRuleIdExit, zoneRuleNameExit, cameraType, cameraTypeId}) => {
         try {
             return await query('SELECT * FROM update_streamax_rules_fn($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12,$13,$14,$15,$16,$17,$18,$19,$20,$21,$22,$23,$24,$25,$26,$27,$28,$29,$30) AS QUERY', [
                 idRule,
@@ -53,7 +53,7 @@ class StreamaxService {
                 isPopup,
                 isEmail,
                 secPre,
-                secPoe,
+                secsPos,
                 isActive,
                 emailList,
                 creationDate,
