@@ -80,7 +80,7 @@ class StreamaxService {
 
     deleteStreamaxRules = async (sessionId, {idRule}) => {
         try {
-            return await query('SELECT * FROM delete_streamax_rules_fn($1,$2) AS QUERY', [
+            return await query('SELECT * FROM delete_streamax_rules_fn($1,$2) AS DATA', [
                 idRule,
                 sessionId,
             ]);

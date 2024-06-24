@@ -43,7 +43,11 @@ class StreamaxController {
         try {
             const data = await streamaxService.deleteStreamaxRules(req.sessionid.sessionid, req.rule);
 
-            res.status(data[0].query.code || 200).json(data[0].query);
+            res.status(200).json({
+                status: true,
+                message: '',
+                data: data[0].data
+            });
         } catch (error) {
             await errorLogs('API', error, '/api/streamax/rule');
 
