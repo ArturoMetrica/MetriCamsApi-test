@@ -24,7 +24,7 @@ class StreamaxMiddleware {
 
     deleteRule = async (req, res, next) => {
         try {
-            req.rule = await streamaxValidator.deleteRule().validateAsync({ ...req.body });
+            req.rule = await streamaxValidator.deleteRule().validateAsync({ ...req.body, ...req.query, ...req.params });
 
             next ();
         } catch (error) {
