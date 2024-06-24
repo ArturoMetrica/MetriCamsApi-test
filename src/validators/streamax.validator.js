@@ -5,7 +5,7 @@ class StreamaxValidator {
         return Joi.object().keys({
             idVehicle: Joi.array().optional().allow('[]'),
             idFleet: Joi.array().optional().allow('[]'),
-            idAlarm: Joi.array().required(),
+            idAlarm: Joi.number().required(),
             ruleName: Joi.string().required(),
             desc: Joi.string().optional(),
             isPublic: Joi.boolean().required(),
@@ -37,11 +37,11 @@ class StreamaxValidator {
     updateRule = () => {
         return Joi.object().keys({
             idRule: Joi.number().required(),
-            idVehicle: Joi.array().required(),
-            idFleet: Joi.array().required(),
+            idVehicle: Joi.array().optional().allow('[]'),
+            idFleet: Joi.array().optional().allow('[]'),
             idAlarm: Joi.number().required(),
             ruleName: Joi.string().required(),
-            desc: Joi.string().required(),
+            desc: Joi.string().optional(),
             isPublic: Joi.boolean().required(),
             isPopup: Joi.boolean().required(),
             isEmail: Joi.boolean().required(),
@@ -71,8 +71,6 @@ class StreamaxValidator {
     deleteRule = () => {
         return Joi.object().keys({
             idRule: Joi.number().required(),
-            idFleet: Joi.array().required(),
-            ruleName: Joi.string().required()
         }).options({ allowUnknown: true, stripUnknown: true });
     }
 }
