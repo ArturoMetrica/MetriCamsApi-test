@@ -30,7 +30,7 @@ class StreamaxValidator {
             zoneRuleIdExit: Joi.string().required().default('').allow(null),
             zoneRuleNameExit: Joi.string().required().default('').allow(null),
             cameraType: Joi.string().required().default('DSM'),
-            cameTypeId: Joi.number().required().default(1)
+            cameraTypeId: Joi.number().required().default(1)
         }).options({ allowUnknown: true, stripUnknown: true });
     }
 
@@ -64,7 +64,7 @@ class StreamaxValidator {
             zoneRuleIdExit: Joi.string().required().default('').allow(null),
             zoneRuleNameExit: Joi.string().required().default('').allow(null),
             cameraType: Joi.string().required().default('DSM'),
-            cameTypeId: Joi.number().required().default(1)
+            cameraTypeId: Joi.number().required().default(1)
         }).options({ allowUnknown: true, stripUnknown: true });
     }
 
