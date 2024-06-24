@@ -3,19 +3,18 @@ const Joi = require('joi');
 class StreamaxValidator {
     addRule = () => {
         return Joi.object().keys({
-            idRule: Joi.number().required(),
-            idVehicle: Joi.string().required(),
-            idFleet: Joi.array().required(),
+            idVehicle: Joi.array().optional().allow([]),
+            idFleet: Joi.array().optional().allow([]),
             idAlarm: Joi.array().required(),
             ruleName: Joi.string().required(),
-            desc: Joi.string().required(),
+            desc: Joi.string().optional(),
             isPublic: Joi.boolean().required(),
             isPopup: Joi.boolean().required(),
             isEmail: Joi.boolean().required(),
             secPre: Joi.number().required(),
             secPoe: Joi.number().required(),
             isActive: Joi.boolean().required(),
-            emailList: Joi.array().required(),
+            emailList: Joi.array().optional(),
             creationDate: Joi.date().required().default(null),
             gifRequired: Joi.boolean().required().default(false),
             videoRequired: Joi.boolean().required().default(false),
