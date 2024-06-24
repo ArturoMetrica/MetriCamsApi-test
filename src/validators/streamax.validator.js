@@ -3,8 +3,8 @@ const Joi = require('joi');
 class StreamaxValidator {
     addRule = () => {
         return Joi.object().keys({
-            idVehicle: Joi.array().optional().allow([]),
-            idFleet: Joi.array().optional().allow([]),
+            idVehicle: Joi.array().optional().allow('[]'),
+            idFleet: Joi.array().optional().allow('[]'),
             idAlarm: Joi.array().required(),
             ruleName: Joi.string().required(),
             desc: Joi.string().optional(),
