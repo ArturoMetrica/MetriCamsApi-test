@@ -48,7 +48,7 @@ class StreamaxValidator {
             secsPre: Joi.number().required(),
             secsPos: Joi.number().required(),
             isActive: Joi.boolean().required(),
-            emailList: Joi.array().required(),
+            emailList: Joi.array().optional(),
             creationDate: Joi.date().required().default(null),
             gifRequired: Joi.boolean().required().default(false),
             videoRequired: Joi.boolean().required().default(false),
