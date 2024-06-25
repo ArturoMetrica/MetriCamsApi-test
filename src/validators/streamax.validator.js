@@ -29,8 +29,8 @@ class StreamaxValidator {
             zoneRuleNameEntry: Joi.string().required().default('').allow(null),
             zoneRuleIdExit: Joi.string().required().default('').allow(null),
             zoneRuleNameExit: Joi.string().required().default('').allow(null),
-            cameraType: Joi.string().required().default('DSM'),
-            cameraTypeId: Joi.number().required().default(1)
+            cameraType: Joi.string().required().default('DSM').allow(null),
+            cameraTypeId: Joi.number().required().default(1).allow(null)
         }).options({ allowUnknown: true, stripUnknown: true });
     }
 
@@ -63,8 +63,8 @@ class StreamaxValidator {
             zoneRuleNameEntry: Joi.string().required().default('').allow(null),
             zoneRuleIdExit: Joi.string().required().default('').allow(null),
             zoneRuleNameExit: Joi.string().required().default('').allow(null),
-            cameraType: Joi.string().required().default('DSM'),
-            cameraTypeId: Joi.number().required().default(1)
+            cameraType: Joi.string().required().default('DSM').allow(null),
+            cameraTypeId: Joi.number().required().default(1).allow(null)
         }).options({ allowUnknown: true, stripUnknown: true });
     }
 
