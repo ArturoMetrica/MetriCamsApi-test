@@ -58,6 +58,7 @@ router.use(
   require('./auditlog.router'),
   require('./templateService.router'),
   require('./streamax.router'),
+  require('./live.router'),
   ErrorMiddlware.handleNotFound,
   ErrorMiddlware.handleError,
 );

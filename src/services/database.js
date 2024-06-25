@@ -1655,6 +1655,18 @@ class DBData {
       throw error;
     }
   }
+
+  getLiveVideoConfig = async (sessionid) => {
+    try {
+      const data = await query('SELECT * FROM select_live_video_configuration($1) AS QUERY', [
+        sessionid
+      ]);
+
+      return data[0];
+    } catch (error) {
+      throw error;
+    }
+  }
 }
 
 
