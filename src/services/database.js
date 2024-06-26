@@ -1372,7 +1372,7 @@ class DBData {
       groups ? JSON.stringify(groups) : '[]'
     ]);
 
-    if (result.data && result.data[0] && result.data[0].query && result.data[0].query.code == 200) return result.data[0].query;
+    if (result.data && result.data[0] && result.data[0].query) return result.data[0].query;
 
     throw {
       code: 500,
