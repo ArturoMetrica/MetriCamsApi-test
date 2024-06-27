@@ -49,8 +49,8 @@ class GeotabValidator {
       zoneRuleNameEntry: Joi.string().optional().allow(null),
       zoneRuleIdExit: Joi.string().optional().allow(null),
       zoneRuleNameExit: Joi.string().optional().allow(null),
-      cameraType: Joi.string().optional().default('DSM'),
-      cameraTypeId: Joi.number().optional().default(1)
+      cameraType: Joi.string().optional().default('DSM').allow(null),
+      cameraTypeId: Joi.number().optional().default(1).allow(null)
     }).options({ allowUnknown: true, stripUnknown: true });
   }
 
@@ -82,8 +82,8 @@ class GeotabValidator {
       zoneRuleNameEntry: Joi.string().optional().allow(null),
       zoneRuleIdExit: Joi.string().optional().allow(null),
       zoneRuleNameExit: Joi.string().optional().allow(null),
-      cameraType: Joi.string().optional().default('DSM'),
-      cameraTypeId: Joi.number().optional().default(1)
+      cameraType: Joi.string().optional().default('DSM').allow(null),
+      cameraTypeId: Joi.number().optional().default(1).allow(null)
     }).options({ allowUnknown: true, stripUnknown: true });
   }
 
