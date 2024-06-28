@@ -30,11 +30,26 @@ class LiveController {
 		} catch (error) {
 			await DbService.errorLogs('API', error, '/api/live/video/config');
 
-			res.status(500).json({
-                status: false,
-                message: error.message || error,
-                data: null
-            });
+			if (error.code == 42883) {
+				res.status(200).json({
+					status: true,
+					message: '',
+					data: {
+						"alertTime": 5,
+						"cutOffDateDay": 25,
+						"planId": 1,
+						"planName": 'Estandar',
+						"timeLimitPerView": 10,
+						"totalTimeLimit": 100
+					}
+				});
+			} else {
+				res.status(500).json({
+					status: false,
+					message: error.message || error,
+					data: null
+				});
+			}
 		}
 	}
 }

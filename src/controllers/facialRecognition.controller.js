@@ -440,7 +440,8 @@ class FacialRecController {
         return res.status(500).json({
           status: false,
           message: message,
-          data
+          data,
+          code
         });
       }
 
@@ -460,10 +461,11 @@ class FacialRecController {
           if (code != 200) throw message;
         }
 
-        return res.status(500).json({
+        return res.status(200).json({
           status: false,
           message: "Driver picture no faces recognized.",
-          data: null
+          data: null,
+          code
         });
       }
 
