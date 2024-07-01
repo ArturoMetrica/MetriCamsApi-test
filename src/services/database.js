@@ -184,7 +184,7 @@ class DBData {
     return new Promise(async (res) => {
       try {
         const result = await getData(
-          'SELECT * FROM spRules($1::BIGINT, $2::TEXT, $3::BIGINT[], $4::BIGINT[], $5::BIGINT, $6::TEXT, $7::TEXT, $8::BOOLEAN, $9::BOOLEAN, $10::BOOLEAN, $11::INT, $12::INT, $13::BOOLEAN, $14::TEXT[], $15::INT, $16::TIMESTAMP(0), $17::BOOLEAN, $18::BOOLEAN, $19::INT, $20::VARCHAR, $21::VARCHAR, $22::VARCHAR, $23::VARCHAR, $24::BOOLEAN) AS data',
+          'SELECT * FROM spRules($1::BIGINT, $2::TEXT, $3::BIGINT[], $4::BIGINT[], $5::BIGINT, $6::TEXT, $7::TEXT, $8::BOOLEAN, $9::BOOLEAN, $10::BOOLEAN, $11::INT, $12::INT, $13::BOOLEAN, $14::TEXT[], $15::INT, $16::TIMESTAMP(0), $17::BOOLEAN, $18::BOOLEAN, $19::INT, $20::VARCHAR, $21::VARCHAR, $22::VARCHAR, $23::VARCHAR, $24::BOOLEAN, $25::BOOLEAN, $26::VARCHAR, $27::VARCHAR, $28::VARCHAR, $29::VARCHAR) AS data',
           params
         );
         res(result);
@@ -194,8 +194,8 @@ class DBData {
     });
   }
 
-  async updateStreamaxRule({ id, sessionid, idVehicles, groups, idAlarm, name, desc, isPublic, isPopup, isEmail, secsPre, secsPos, isActive, emails, action, creationDate, gifRequired, videoRequired, alarmcategoryid, zoneRestrictionIdEntry, zoneRestrictionNameEntry, zoneRestrictionIdExit, zoneRestrictionNameExit, zoneRestriction }) {
-    const result = await getData(`SELECT * FROM spRules($1, $2, $3::BIGINT[], $4::BIGINT[], $5, $6, $7, $8, $9, $10, $11, $12, $13, $14::TEXT[], $15, $16, $17, $18, $19, $20, $21, $22, $23, $24) AS data`, [
+  async updateStreamaxRule({ id, sessionid, idVehicles, groups, idAlarm, name, desc, isPublic, isPopup, isEmail, secsPre, secsPos, isActive, emails, action, creationDate, gifRequired, videoRequired, alarmcategoryid, zoneRestrictionIdEntry, zoneRestrictionNameEntry, zoneRestrictionIdExit, zoneRestrictionNameExit, zoneRestriction, zoneGeofence, zoneRuleIdEntry, zoneRuleNameEntry, zoneRuleIdExit, zoneRuleNameExit }) {
+    const result = await getData(`SELECT * FROM spRules($1, $2, $3::BIGINT[], $4::BIGINT[], $5, $6, $7, $8, $9, $10, $11, $12, $13, $14::TEXT[], $15, $16, $17, $18, $19, $20, $21, $22, $23, $24, $25, $26, $27, $28, $29) AS data`, [
       id,
       sessionid,
       idVehicles,
@@ -219,7 +219,12 @@ class DBData {
       zoneRestrictionNameEntry,
       zoneRestrictionIdExit,
       zoneRestrictionNameExit,
-      zoneRestriction
+      zoneRestriction,
+      zoneGeofence,
+      zoneRuleIdEntry,
+      zoneRuleNameEntry,
+      zoneRuleIdExit,
+      zoneRuleNameExit
     ]);
 
     if (result.data && result.data[0]) return result.data[0].data;
@@ -707,7 +712,7 @@ class DBData {
 
   async insertGeotabRule(rule) {
     const result = await getData(
-      `SELECT * FROM "createGeotabRule"($1::VARCHAR, $2::VARCHAR, $3::VARCHAR, $4::INT, $5::INT, $6::TIMESTAMP(0), $7::BOOLEAN, $8::BOOLEAN, $9::BOOLEAN, $10::TEXT[], $11::BOOLEAN, $12::BOOLEAN, $13::BOOLEAN, $14::VARCHAR, $15::JSON, $16::JSON, $17::INT, $18::JSON, $19, $20, $21, $22, $23::BOOLEAN) as query`,
+      `SELECT * FROM "createGeotabRule"($1::VARCHAR, $2::VARCHAR, $3::VARCHAR, $4::INT, $5::INT, $6::TIMESTAMP(0), $7::BOOLEAN, $8::BOOLEAN, $9::BOOLEAN, $10::TEXT[], $11::BOOLEAN, $12::BOOLEAN, $13::BOOLEAN, $14::VARCHAR, $15::JSON, $16::JSON, $17::INT, $18::JSON, $19, $20, $21, $22, $23::BOOLEAN, $24::BOOLEAN, $25::VARCHAR, $26::VARCHAR, $27::VARCHAR, $28::VARCHAR, $29::VARCHAR, $30::INT) as query`,
       [
         rule.idGeotabRule,
         rule.name,
@@ -731,7 +736,14 @@ class DBData {
         rule.zoneRestrictionNameEntry,
         rule.zoneRestrictionIdExit,
         rule.zoneRestrictionNameExit,
-        rule.zoneRestriction
+        rule.zoneRestriction,
+        rule.zoneGeofence,
+        rule.zoneRuleIdEntry,
+        rule.zoneRuleNameEntry,
+        rule.zoneRuleIdExit,
+        rule.zoneRuleNameExit,
+        rule.cameraType,
+        rule.cameraTypeId
       ]
     );
     if (result.data && result.data[0]) return result.data[0].query;
@@ -741,7 +753,7 @@ class DBData {
 
   async updateGeotabRule(rule) {
     const result = await getData(
-      `SELECT * FROM "updateGeotabRule"($1, $2, $3, $4::JSON, $5::JSON, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15, $16::INT, $17::JSON, $18, $19, $20, $21, $22::BOOLEAN) as query`,
+      `SELECT * FROM "updateGeotabRule"($1, $2, $3, $4::JSON, $5::JSON, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15, $16::INT, $17::JSON, $18, $19, $20, $21, $22::BOOLEAN, $23::BOOLEAN, $24::VARCHAR, $25::VARCHAR, $26::VARCHAR, $27::VARCHAR, $28::VARCHAR, $29::INT) as query`,
       [
         rule.idGeotabRuleSerial,
         rule.name,
@@ -764,7 +776,14 @@ class DBData {
         rule.zoneRestrictionNameEntry,
         rule.zoneRestrictionIdExit,
         rule.zoneRestrictionNameExit,
-        rule.zoneRestriction
+        rule.zoneRestriction,
+        rule.zoneGeofence,
+        rule.zoneRuleIdEntry,
+        rule.zoneRuleNameEntry,
+        rule.zoneRuleIdExit,
+        rule.zoneRuleNameExit,
+        rule.cameraType,
+        rule.cameraTypeId
       ]
     );
     console.log(result);
@@ -1353,7 +1372,7 @@ class DBData {
       groups ? JSON.stringify(groups) : '[]'
     ]);
 
-    if (result.data && result.data[0] && result.data[0].query && result.data[0].query.code == 200) return result.data[0].query;
+    if (result.data && result.data[0] && result.data[0].query) return result.data[0].query;
 
     throw {
       code: 500,
@@ -1619,6 +1638,31 @@ class DBData {
       const [result] = await query('SELECT * FROM getDeviceSerial() AS QUERY');
 
       return result.query;
+    } catch (error) {
+      throw error;
+    }
+  }
+
+  logUserQuiz = async (sessionid, isComplete) => {
+    try {
+      const data = await query('SELECT * FROM insert_log_user_quiz_fn($1,$2) AS QUERY', [
+        sessionid,
+        isComplete
+      ]);
+
+      return data[0].query;
+    } catch (error) {
+      throw error;
+    }
+  }
+
+  getLiveVideoConfig = async (sessionid) => {
+    try {
+      const data = await query('SELECT * FROM select_live_video_configuration($1) AS QUERY', [
+        sessionid
+      ]);
+
+      return data[0];
     } catch (error) {
       throw error;
     }

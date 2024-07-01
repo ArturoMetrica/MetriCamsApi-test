@@ -7,7 +7,10 @@ class ClassificationMessageController {
 			const { message, groups } = req.classification;
 			const { sessionid } = req.sessionid;
 
-			const { data } = await dbService.insertClassificationMessage(sessionid, message, groups);
+			const { data, code, message: message_response } = await dbService.insertClassificationMessage(sessionid, message, groups);
+
+			if (code === 204) throw { code, status: false, message: message_response }
+			
 			res.status(200).json({
 				status: true,
 				message: '',
@@ -16,7 +19,7 @@ class ClassificationMessageController {
 		} catch (error) {
 			await dbService.errorLogs('API', error, '/api/classification-message/insert');
 
-			res.status(500).json({
+			res.status(error.code ? 200 : 500).json({
 				status: false,
 				message: error.message || error,
 				data: null

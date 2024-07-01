@@ -57,6 +57,8 @@ router.use(
   require('./shortcut.router'),
   require('./auditlog.router'),
   require('./templateService.router'),
+  require('./streamax.router'),
+  require('./live.router'),
   ErrorMiddlware.handleNotFound,
   ErrorMiddlware.handleError,
 );

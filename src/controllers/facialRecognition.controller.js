@@ -441,7 +441,8 @@ class FacialRecController {
         return res.status(500).json({
           status: false,
           message: message,
-          data
+          data,
+          code
         });
       }
 
@@ -461,10 +462,11 @@ class FacialRecController {
           if (code != 200) throw message;
         }
 
-        return res.status(500).json({
+        return res.status(200).json({
           status: false,
           message: "Driver picture no faces recognized.",
-          data: null
+          data: null,
+          code
         });
       }
 
@@ -740,7 +742,9 @@ class FacialRecController {
     try {
       const { token, channels, resolution, uniqueId } = req.capture;
 
-      const { data, code, message, success } = await ftService.captureRealTime(token, channels, resolution, uniqueId);
+      let { data, code, message, success } = await ftService.captureRealTime(token, channels, resolution, uniqueId);
+
+      if (code === 10214) { throw { message, code: 200, code_stm: code } }
 
       if (code != 200) throw message;
 
@@ -752,12 +756,21 @@ class FacialRecController {
     } catch (error) {
       await dbService.errorLogs('API', error, '/api/ft/facial-recognition/capture/realTime');
 
-      res.status(500).json({
+      if (error.code === 200) {
+        res.status(error.code || 500).json({
+          status: false,
+          message: error.message || error,
+          data: null,
+          code: error.code_stm
+        });
+      } else {
+        res.status(error.code || 500).json({
         status: false,
         message: error.message || error,
         data: null
       });
     }
+   }
   }
 
 }

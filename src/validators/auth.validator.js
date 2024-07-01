@@ -22,6 +22,12 @@ class AuthValidator {
     }).options({ allowUnknown: true, stripUnknown: true });
   }
 
+  logUserQuiz () {
+    return Joi.object().keys({
+      isComplete: Joi.boolean().required()
+    }).options({ allowUnknown: true, stripUnknown: true });
+  }
+
 }
 
 module.exports = new AuthValidator();

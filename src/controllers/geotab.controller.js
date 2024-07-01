@@ -6,7 +6,7 @@ class GeotabController {
     async create(req, res, next) {
         try {
             const { idGeotabRule, name, description, secsPreEvent, secsPosEvent, creationDate, isPublic, isPopup,
-                isEmail, emailList, isActive, gifRequired, videoRequired, idFleet, idVehicle, idAlarmCategory, cams, zoneRestrictionIdEntry, zoneRestrictionNameEntry, zoneRestrictionIdExit, zoneRestrictionNameExit, zoneRestriction } = req.geotabRule;
+                isEmail, emailList, isActive, gifRequired, videoRequired, idFleet, idVehicle, idAlarmCategory, cams, zoneRestrictionIdEntry, zoneRestrictionNameEntry, zoneRestrictionIdExit, zoneRestrictionNameExit, zoneRestriction, zoneGeofence, zoneRuleIdEntry, zoneRuleNameEntry, zoneRuleIdExit, zoneRuleNameExit, cameraType, cameraTypeId } = req.geotabRule;
             const { sessionid } = req.sessionid;
             const data = await dbService.insertGeotabRule({
                 idGeotabRule,
@@ -31,7 +31,14 @@ class GeotabController {
                 zoneRestrictionNameEntry,
                 zoneRestrictionIdExit,
                 zoneRestrictionNameExit,
-                zoneRestriction
+                zoneRestriction,
+                zoneGeofence,
+                zoneRuleIdEntry,
+                zoneRuleNameEntry,
+                zoneRuleIdExit,
+                zoneRuleNameExit,
+                cameraType,
+                cameraTypeId
             });
             res.status(data.code || 400).json(data);
         } catch (error) {
@@ -48,7 +55,7 @@ class GeotabController {
     async update(req, res) {
         try {
             const { idGeotabRuleSerial, name, idFleet, idVehicle, description, secsPreEvent, secsPosEvent,
-                isPublic, isPopup, isActive, gifRequired, videoRequired, isEmail, emailList, idAlarmCategory, cams, zoneRestrictionIdEntry, zoneRestrictionNameEntry, zoneRestrictionIdExit, zoneRestrictionNameExit, zoneRestriction } = req.geotabRule;
+                isPublic, isPopup, isActive, gifRequired, videoRequired, isEmail, emailList, idAlarmCategory, cams, zoneRestrictionIdEntry, zoneRestrictionNameEntry, zoneRestrictionIdExit, zoneRestrictionNameExit, zoneRestriction, zoneGeofence, zoneRuleIdEntry, zoneRuleNameEntry, zoneRuleIdExit, zoneRuleNameExit, cameraType, cameraTypeId } = req.geotabRule;
             const { sessionid } = req.sessionid;
             const data = await dbService.updateGeotabRule({
                 idGeotabRuleSerial,
@@ -72,11 +79,18 @@ class GeotabController {
                 zoneRestrictionNameEntry,
                 zoneRestrictionIdExit,
                 zoneRestrictionNameExit,
-                zoneRestriction
+                zoneRestriction,
+                zoneGeofence,
+                zoneRuleIdEntry,
+                zoneRuleNameEntry,
+                zoneRuleIdExit,
+                zoneRuleNameExit,
+                cameraType,
+                cameraTypeId
             });
             console.log({
                 idGeotabRuleSerial, name, idFleet, idVehicle, description, secsPreEvent, secsPosEvent,
-                isPublic, isPopup, isActive, gifRequired, videoRequired, isEmail, emailList, idAlarmCategory, cams, zoneRestrictionIdEntry, zoneRestrictionNameEntry, zoneRestrictionIdExit, zoneRestrictionNameExit
+                isPublic, isPopup, isActive, gifRequired, videoRequired, isEmail, emailList, idAlarmCategory, cams, zoneRestrictionIdEntry, zoneRestrictionNameEntry, zoneRestrictionIdExit, zoneRestrictionNameExit, cameraType, cameraTypeId
             });
             res.status(data ? 200 : 400).json({
                 status: true,
