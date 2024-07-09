@@ -15,7 +15,7 @@ class historicalValidator {
 
 	stopDeviceStreaming = () => {
 		return Joi.object().keys({
-			session: Joi.string().required(),
+			session: Joi.array().required(),
 		}).options({ allowUnknown: true, stripUnknown: true });
 	}
 }

@@ -26,12 +26,18 @@ const historyStreamingVideo = async (req, res) => {
 const stopDeviceStreaming = async (req, res) => {
 	try {
 		const { session } = req.streaming;
-		const { data } = await FTService.stopDeviceStreaming(session);
+
+		const data = await Promise.all(session.map(async (e) => {
+			const res = await FTService.stopDeviceStreaming(e);
+			return {
+				data: res
+			}
+		}));
 
 		res.status(200).json({
             status: true,
             message: '',
-            data: data.data
+            data: true
           });
 	} catch (error) {
 		await errorLogs('API', error, '/api/historical/stop');
