@@ -6,6 +6,7 @@ const historicalMiddleware = require('../middlewares/historical.middleware');
 const TokenMiddleware = require('../middlewares/token.middleware');
 
 routes.post('/historical', TokenMiddleware.verify, historicalMiddleware.historyStreamingVideo, historicalController.historyStreamingVideo);
+routes.post('/historical/stop', TokenMiddleware.verify, historicalMiddleware.stopDeviceStreaming, historicalController.stopDeviceStreaming);
 
 baseRouter.use('/api', routes);
 

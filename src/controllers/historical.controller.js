@@ -23,6 +23,23 @@ const historyStreamingVideo = async (req, res) => {
 	}
 }
 
+const stopDeviceStreaming = async (req, res) => {
+	try {
+		const { session } = req.streaming;
+		const { data } = await FTService.stopDeviceStreaming(session);
+
+		res.status(200).json({
+            status: true,
+            message: '',
+            data: data.data
+          });
+	} catch (error) {
+		await errorLogs('API', error, '/api/historical/stop');
+		handleResponseUtil(res, 500, false, error.message || error, []);
+	}
+}
+
 module.exports = {
-	historyStreamingVideo
+	historyStreamingVideo,
+	stopDeviceStreaming
 }

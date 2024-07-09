@@ -12,6 +12,12 @@ class historicalValidator {
             streamingProtocol: Joi.string().optional().default('FLV').valid('FLV', 'HLS'),
 		}).options({ allowUnknown: true, stripUnknown: true });
 	}
+
+	stopDeviceStreaming = () => {
+		return Joi.object().keys({
+			session: Joi.string().required(),
+		}).options({ allowUnknown: true, stripUnknown: true });
+	}
 }
 
 module.exports = new historicalValidator();

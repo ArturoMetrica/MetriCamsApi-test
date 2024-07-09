@@ -296,6 +296,7 @@ module.exports = {
     wakeUpDevice: validateEnv.FT_API_WAKE_UP_DEVICE,
     getDeviceDetail: validateEnv.FT_API_DETAIL,
     historyStreamingVideo: validateEnv.FT_API_HISTORY_STREAMING_VIDEO,
+    stopDeviceStreaming: validateEnv.FT_API_STOP_DEVICE_PLAYBACK,
   },
   genExcel: {
     baseUrl: validateEnv.GENEXCEL_BASE_URL,
