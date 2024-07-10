@@ -7,7 +7,9 @@ const historyStreamingVideo = async (req, res) => {
 	try {
 		const { serialMdvr, channels, endTime, startTime, storeType, streamType, streamingProtocol } = req.history;
 
-        const { data, success }  = await FTService.historyStreamingVideo(serialMdvr, channels, endTime, startTime, storeType, streamType, streamingProtocol);
+        const data  = await FTService.historyStreamingVideo(serialMdvr, channels, endTime, startTime, storeType, streamType, streamingProtocol);
+
+		if (!data.status) throw data;
 
         res.status(200).json({
             status: true,
