@@ -15,7 +15,7 @@ const historyStreamingVideo = async (req, res) => {
             status: true,
             message: '',
             streamingProtocol,
-            data: data.data
+            data: data.data.data
           });
 
 		// handleResponseUtil(res, 200, true, 'ok', null);
