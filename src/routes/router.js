@@ -59,6 +59,7 @@ router.use(
   require('./templateService.router'),
   require('./streamax.router'),
   require('./live.router'),
+  require('./historical.router'),
   ErrorMiddlware.handleNotFound,
   ErrorMiddlware.handleError,
 );

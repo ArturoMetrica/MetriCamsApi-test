@@ -922,6 +922,36 @@ class FTAPIService {
     }
   }
 
+  async historyStreamingVideo (uniqueId, channels, endTime, startTime, storeType, streamType, streamingProtocol) {
+    try {
+      const data = await axios.get(ftAPI.baseURL + ftAPI.historyStreamingVideo + `${uniqueId}/playback-links`,
+        {
+          params: { channels, endTime, startTime, storeType, streamType, streamingProtocol },
+          headers: { _sign, _tenantid }
+        });
+
+        return data;
+    } catch (error) {
+      return error.response.data;
+    }
+  }
+
+  async stopDeviceStreaming (session) {
+    try {
+      const data = await axios.post(ftAPI.baseURL + ftAPI.stopDeviceStreaming,
+        {
+          session
+        },
+        {
+          headers: { _sign, _tenantid}
+        });
+
+        return data;
+    } catch (error) {
+      return error.response.data;
+    }
+  }
+
 }
 
 module.exports = new FTAPIService();

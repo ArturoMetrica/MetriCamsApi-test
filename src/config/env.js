@@ -132,6 +132,7 @@ const envSchema = Joi.object({
   FT_API_CHANGE_DEVICE_FLEET: Joi.string().required(),
   FT_API_WAKE_UP_DEVICE: Joi.string().required(),
   FT_API_DETAIL: Joi.string().required(),
+  FT_API_HISTORY_STREAMING_VIDEO: Joi.string().required(),
   // GENEXCEL SERVICE
   GENEXCEL_BASE_URL: Joi.string().required(),
   GENEXCEL_DELETE_TEMPLATE: Joi.string().required(),
@@ -294,6 +295,8 @@ module.exports = {
     changeDeviceFleet: validateEnv.FT_API_CHANGE_DEVICE_FLEET,
     wakeUpDevice: validateEnv.FT_API_WAKE_UP_DEVICE,
     getDeviceDetail: validateEnv.FT_API_DETAIL,
+    historyStreamingVideo: validateEnv.FT_API_HISTORY_STREAMING_VIDEO,
+    stopDeviceStreaming: validateEnv.FT_API_STOP_DEVICE_PLAYBACK,
   },
   genExcel: {
     baseUrl: validateEnv.GENEXCEL_BASE_URL,
