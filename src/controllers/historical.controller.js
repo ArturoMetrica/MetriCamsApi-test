@@ -1,5 +1,6 @@
 const FTService = require('../services/FT_API.service');
 const DBService = require('../services/database');
+const historicalService = require("../services/historical.service");
 const { errorLogs } = new DBService();
 const handleResponseUtil = require('../utils/handleResponse.util');
 
@@ -47,7 +48,24 @@ const stopDeviceStreaming = async (req, res) => {
 	}
 }
 
+const getHistoricalVideoDownloadConfig = async (req, res) => {
+	try {
+		const { sessionid } = req.sessionid;
+
+		const data = await historicalService.getHistoricalVideoDownloadConfig(sessionid);
+
+		res.status(200).json({
+            status: true,
+            message: '',
+            data
+          });
+	} catch (error) {
+		
+	}
+}
+
 module.exports = {
 	historyStreamingVideo,
-	stopDeviceStreaming
+	stopDeviceStreaming,
+	getHistoricalVideoDownloadConfig
 }
