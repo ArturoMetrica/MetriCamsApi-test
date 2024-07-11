@@ -12,7 +12,7 @@ const historyStreamingVideo = async (req, res) => {
 
 		if (data.code == 500) {
 			return res.status(200).json({
-				status: true,
+				status: false,
 				message: data.message,
 				data: [],
 				errorCode: 201052
