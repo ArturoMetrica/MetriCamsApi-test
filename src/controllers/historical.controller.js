@@ -10,7 +10,14 @@ const historyStreamingVideo = async (req, res) => {
 
         const data  = await FTService.historyStreamingVideo(serialMdvr, channels, endTime, startTime, storeType, streamType, streamingProtocol);
 
-		if (!data.status) throw data;
+		if (data.code == 500) {
+			return res.status(200).json({
+				status: true,
+				message: data.message,
+				data: [],
+				errorCode: 201052
+			  });
+		}
 
         res.status(200).json({
             status: true,
