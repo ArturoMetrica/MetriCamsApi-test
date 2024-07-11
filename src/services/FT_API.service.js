@@ -927,7 +927,7 @@ class FTAPIService {
       const data = await axios.get(ftAPI.baseURL + ftAPI.historyStreamingVideo + `${uniqueId}/playback-links`,
         {
           params: { channels, endTime, startTime, storeType, streamType, streamingProtocol },
-          headers: { "_sign": "7b256726bf21ee03ba39a48240bf9cb9b1ef7f2906ffffd68b06603772f41a99e053171b25eaf73f1506100fe80fe2b0618821ffa860322847b2d9cf00d9f8bf32a92bffd66893e20623c7130912c27b0a65e4e9725ada5cb761e3eb995d52f7c82dec5a77c9c8179de079504fdf6a26f7e28f7e7f9abc83121f5a92d6a9b77ac7bb36bc12c5182094a74d61e43deff8", "_tenantid": 18 }
+          headers: { _sign, _tenantid }
         });
 
         return data;
