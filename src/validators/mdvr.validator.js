@@ -13,6 +13,15 @@ class mdvrValidator {
       mdvrArr: Joi.array().default([]).optional(),
     }).options({ allowUnknown: true, stripUnknown: true });
   }
+
+  getLastPosition = () => {
+    return Joi.object().keys({
+      mdvrArr: Joi.array().items(Joi.string().required()).required(),
+      last : Joi.boolean().optional().default(false),
+      startTime: Joi.string().optional(),
+      endTime: Joi.string().optional(),
+    }).options({ allowUnknown: true, stripUnknown: true });
+  } 
 }
 
 module.exports = new mdvrValidator();
