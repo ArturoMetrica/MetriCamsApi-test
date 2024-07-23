@@ -5,7 +5,7 @@ const Token = require('../middlewares/token.middleware');
 
 router.post('/api/mdvr/login', Token.verify, Middleware.login, Controller.login);
 router.get('/api/mdvr/offset', Token.verify, Middleware.getMdvrOffset, Controller.getMdvrOffset);
-router.get('/api/mdvr/last-position', Token.verify, Middleware.getLastPosition, Controller.getLastPosition);
+router.post('/api/mdvr/last-position', Token.verify, Middleware.getLastPosition, Controller.getLastPosition);
 
 
 module.exports = router;
