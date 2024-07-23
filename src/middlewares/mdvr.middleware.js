@@ -31,7 +31,8 @@ class mdvrMiddleware {
       req.mdvr = await mdvrValidator.getLastPosition().validateAsync({
         ...req.headers,
         ...req.query,
-        ...req.params
+        ...req.params,
+        ...req.body
       });
 
       next ();
