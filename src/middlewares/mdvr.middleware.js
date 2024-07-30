@@ -25,6 +25,21 @@ class mdvrMiddleware {
       res.status(400).json({ status: false, message: error.message || error });
     }
   }
+
+  getLastPosition = async (req, res, next) => {
+    try {
+      req.mdvr = await mdvrValidator.getLastPosition().validateAsync({
+        ...req.headers,
+        ...req.query,
+        ...req.params,
+        ...req.body
+      });
+
+      next ();
+    } catch (error) {
+      res.status(400).json({ status: false, message: error.message || error});
+    }
+  }
 }
 
 module.exports = new mdvrMiddleware();

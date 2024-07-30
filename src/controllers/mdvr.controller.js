@@ -1,6 +1,11 @@
 const mdvrService = require('../services/mdvr.service');
 const DBService = require('../services/database');
 const dbService = new DBService();
+const axios = require('axios').default;
+const axiosRetry = require('axios-retry');
+axiosRetry(axios, { retries: 3, retryDelay: axiosRetry.exponentialDelay });
+
+const { apiKeyName, apiKeyValue, baseURL, getLastPositionURL } = require('../config/env').alarmCollector;
 
 class mdvrController {
   login = async (req, res) => {
@@ -52,6 +57,30 @@ class mdvrController {
       res.status(200).json(data);
     } catch (error) {
       await dbService.errorLogs('API', error, '/api/mdvr/perclient');
+
+      res.status(500).json({
+        status: false,
+        message: error.message || error,
+        data: null
+      })
+    }
+  }
+
+  getLastPosition = async (req, res) => {
+    try {
+      const { mdvrArr, startTime, endTime, last } = req.mdvr;
+
+      const headers = {};
+			headers[apiKeyName] = apiKeyValue;
+      const { data } = await axios.put(baseURL + getLastPositionURL, { mdvrArr, startTime, endTime, last }, { headers });
+
+      res.status(200).json({
+        status: true,
+        message: 'Session started successfully',
+        data: data.data
+      });
+    } catch (error) {
+      await dbService.errorLogs('API', error, '/api/mdvr/last-position');
 
       res.status(500).json({
         status: false,
