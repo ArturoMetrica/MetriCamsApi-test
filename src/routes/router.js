@@ -60,6 +60,7 @@ router.use(
   require('./streamax.router'),
   require('./live.router'),
   require('./historical.router'),
+  require('./snap.router'),
   ErrorMiddlware.handleNotFound,
   ErrorMiddlware.handleError,
 );
