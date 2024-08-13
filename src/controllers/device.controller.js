@@ -15,6 +15,9 @@ const addDevice = async (req, res) => {
 					await deviceService.addDevice(req.sessionid.sessionid, vehicleId, [device], []);
 					break;
 				case 2:
+				if (!cameras.length) {
+					return handleResponseUtil(res, 200, false, 'Select at least one channel.', []);
+				}
 					const { success, message } = await FTService.addListDevices('', [{
 						channels: cameras.map(camera => camera.chl).join(','),
 						uniqueId: device.deviceSerial,
