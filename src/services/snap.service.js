@@ -29,7 +29,9 @@ const { query } = require('./dbconnection');
 
     const getVehiclesWithSnaps = async () => {
         try {
-            return await query('SELECT snap_sel_mdvr_av_fn() AS DATA', []);
+            const result = await query('SELECT snap_sel_mdvr_av_fn() AS DATA', []);
+
+            if (result[0] && result[0].data) return result[0].data;
         } catch (error) {
             throw { message: error, area: 'DB' };
         }
@@ -37,9 +39,11 @@ const { query } = require('./dbconnection');
 
     const getSnapDatesByMDVR = async (mdvr) => {
         try {
-            return await query('SELECT snaps_sel_dates_av_fn($1) AS DATA', [
+            const result = await query('SELECT snaps_sel_dates_av_fn($1) AS DATA', [
                 mdvr
             ]);
+
+            if (result[0] && result[0].data) return result[0].data;
         } catch (error) {
             throw { message: error, area: 'DB' };
         }
@@ -47,10 +51,12 @@ const { query } = require('./dbconnection');
 
     const getDataUsage = async (vehicles, offSet) => {
         try {
-            return await query('SELECT snaps_limit_usage_fn_test($1, $2) AS DATA', [
+            const result = await query('SELECT snaps_limit_usage_fn_test($1, $2) AS DATA', [
                 vehicles,
                 offSet
             ]);
+
+            if (result[0] && result[0].data) return result[0].data;
         } catch (error) {
             throw { message: error, area:'DB' };
         }
@@ -58,12 +64,14 @@ const { query } = require('./dbconnection');
 
     const getLastsSnapshots = async (token, serials, rowOffset, rowsLimit) => {
         try {
-            return await query('SELECT * FROM get_last_snap_by_vehicle($1::TEXT,$2,$3::INT,$4::INT) AS DATA', [
+            const result = await query('SELECT * FROM get_last_snap_by_vehicle($1::TEXT,$2,$3::INT,$4::INT) AS DATA', [
                 token,
                 serials,
                 rowOffset,
                 rowsLimit
             ]);
+
+            if (result[0] && result[0].data) return result[0].data;
         } catch (error) {
             throw { message: error.where, area: 'BD '};
         }

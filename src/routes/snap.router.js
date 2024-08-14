@@ -14,14 +14,3 @@ routes.post('/snaps/last-snaps', snapMiddleware.getLastsSnapshots, snapControlle
 baseRouter.use('/api', routes);
 
 module.exports = baseRouter;
-
-// // Rutas
-// router.get('/snaps/', Middleware.getSnaps, Controller.getSnaps);
-// router.get('/snaps/vehicles', Controller.getVehiclesWithSnaps);
-// router.get('/snaps/dates', Middleware.getSnapDates, Controller.getSnapDates);
-// router.put('/data-usage', Middleware.getDataUsage, Controller.getDataUsage);
-// router.post('/last-snaps', Middleware.getLastsSnapshots, Controller.getLastsSnapshots);
-
-// // Prefijo de las rutas
-// app.use('/api/snaps', router);
-// module.exports = app;

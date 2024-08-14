@@ -1,4 +1,6 @@
 const snapService = require('../services/snap.service');
+const DBService = require('../services/database');
+const { errorLogs } = new DBService();
 const { sendMsg, sendErr } = require('../helpers/responses.helper');
 const snapHelper = require('../helpers/facialRec.helper');
 
@@ -27,7 +29,7 @@ const getVehiclesWithSnaps = async (req, res) => {
     try {
         const { data } = await snapService.getVehiclesWithSnaps();
         
-        res.status(200).json({
+        return res.status(200).json({
             status: true,
             message: '',
             data
@@ -35,7 +37,7 @@ const getVehiclesWithSnaps = async (req, res) => {
     } catch (error) {
         await errorLogs('API', error, '/api/snaps/vehicles');
 
-        res.status(500).json({
+        return res.status(500).json({
             status: false,
             message: error.message || error,
             data: null
@@ -46,17 +48,17 @@ const getVehiclesWithSnaps = async (req, res) => {
 const getSnapDates = async (req, res) => {
     try {
         const { mdvr } = req.snap;
-        const { data } = await snapService.getSnapDatesByMDVR(mdvr);
+        const data = await snapService.getSnapDatesByMDVR(mdvr);
 
-        res.status(200).json({
+        return res.status(200).json({
             status: true,
-            message: '',
-            data
+            message: data.message,
+            data: data.data
           });
     } catch (error) {
         await errorLogs('API', error, '/api/snaps/dates');
 
-        res.status(500).json({
+        return res.status(500).json({
             status: false,
             message: error.message || error,
             data: null
@@ -80,15 +82,15 @@ const getDataUsage = async (req, res) => {
         });
     }
 
-        res.status(200).json({
+        return res.status(200).json({
             status: true,
             message: '',
-            data
+            data: usage.data
         });
     } catch (error) {
         await errorLogs('API', error, '/api/snaps/data-usage');
 
-        res.status(500).json({
+        return res.status(500).json({
             status: false,
             message: error.message || error,
             data: null
@@ -119,7 +121,13 @@ const getLastsSnapshots = async (req, res) => {
             totalRows: snaps.total_rows
         });
     } catch (error) {
-        return res.status(error.sCode || 400).json(sendErr(error));
+        await errorLogs('API', error, '/api/snaps/last-snaps');
+
+        return res.status(500).json({
+            status: false,
+            message: error.message || error,
+            data: null
+        });
     }
 }
 
