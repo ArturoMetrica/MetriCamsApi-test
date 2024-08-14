@@ -1,7 +1,7 @@
 const nodemailer = require('nodemailer');
 const fs = require('fs');
 const { lang } = require('moment');
-const { server: { environment }, geotab, email } = require('../config/env');
+const { server: { environment }, geotab } = require('../config/env');
 
 const transporter = nodemailer.createTransport({
     host: 'smtp.gmail.com',
@@ -10,13 +10,13 @@ const transporter = nodemailer.createTransport({
     requireTLS: true,
     service: 'gmail',
     auth: {
-        user: email.user,
-        pass: email.password
+        user: process.env.EMAIL,
+        pass: process.env.EMAILPASS
     }
 });
 const htmlTemplate = '';
 let mailOptions = {
-    from: email.name,
+    from: process.env.EMAILNAME,
 }
 
 async function send(email, { code, language }) {
