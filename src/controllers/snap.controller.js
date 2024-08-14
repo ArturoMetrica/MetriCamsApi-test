@@ -6,8 +6,8 @@ const snapHelper = require('../helpers/facialRec.helper');
 
 const getSnaps = async (req, res) => {
     try {
-        const { mdvr, firstDate, lastDate } = req.snaps;
-        const { data } = await snapService.getSnapsByMDVR(mdvr, firstDate, lastDate);
+        const { mdvr, firstDate, lastDate } = req.snap;
+        const data = await snapService.getSnapsByMDVR(mdvr, firstDate, lastDate);
 
         res.status(200).json({
             status: true,

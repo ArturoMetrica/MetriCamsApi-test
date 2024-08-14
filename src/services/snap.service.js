@@ -8,7 +8,7 @@ const { query } = require('./dbconnection');
                 lastDate
             ]);
 
-            if (result[0] && result[0].query) return result[0].query;
+            if (result[0] && result[0].data) return result[0].data;
         } catch (error) {
             throw { message: error, area: 'DB' };
         }
