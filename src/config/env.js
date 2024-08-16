@@ -38,7 +38,7 @@ const envSchema = Joi.object({
   ALARM_COLLECTOR_BASE_URL: Joi.string().required(),
   ALARM_COLLECTOR_GET_URL: Joi.string().required(),
   LAST_POSITION_GET_URL: Joi.string().required(),
-  GET_DASHBOARD_ANALYTICS: Joi.string().required(),
+  // GET_DASHBOARD_ANALYTICS: Joi.string().required(),
   // GEOTAB
   GEOTAB_USER: Joi.string().required(),
   GEOTAB_PASSWORD: Joi.string().required(),

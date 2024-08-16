@@ -12,7 +12,7 @@ const addDevice = async (req, res) => {
 			const device = deviceData[i];
 			switch (device.deviceType) {
 				case 1:
-					await deviceService.addDevice(req.sessionid.sessionid, vehicleId, [device], cameras);
+					await deviceService.addDevice(req.sessionid.sessionid, vehicleId, [device], []);
 					break;
 				case 2:
 					const { success, message } = await FTService.addListDevices('', [{

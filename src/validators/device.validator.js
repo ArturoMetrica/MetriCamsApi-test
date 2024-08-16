@@ -14,7 +14,7 @@ class DeviceValidator {
 					devicePhone: Joi.string().optional()
 				})
 			).optional(),
-			cameras: Joi.array().required(),
+			cameras: Joi.array().optional(),
 			streamaxFleetId: Joi.string().optional()
 		}).options({ allowUnknown: true, stripUnknown: true });
 	}
