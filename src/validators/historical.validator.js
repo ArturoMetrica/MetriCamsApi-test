@@ -18,6 +18,14 @@ class historicalValidator {
 			session: Joi.array().required(),
 		}).options({ allowUnknown: true, stripUnknown: true });
 	}
+
+	getAlarmsForVideoTransmission = () => {
+		return Joi.object().keys({
+			vehicleId: Joi.number().required(),
+			fromDate: Joi.string().required(),
+			toDate: Joi.string().required()
+		}).options({ allowUnknown: true, stripUnknown: true });
+	}
 }
 
 module.exports = new historicalValidator();

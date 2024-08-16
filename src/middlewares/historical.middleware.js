@@ -25,6 +25,16 @@ class historicalMiddleware {
 			handleResponseUtil(res, 400, false, error.message || error, null);
 		}
 	}
+
+	getAlarmsForVideoTransmission = async (req, res, next) => {
+		try {
+			req.alarms = await historicalValidator.getAlarmsForVideoTransmission().validateAsync({ ...req.query, ...req.params });
+
+			next ();
+		} catch (error) {
+			handleResponseUtil(res, 400, false, error.message || error, null);
+		}
+	}
 }
 
 module.exports = new historicalMiddleware();
