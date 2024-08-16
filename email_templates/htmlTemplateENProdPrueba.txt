@@ -1,8 +1,0 @@
-<p>Dear user,</p>
-<p> </p>
-<p>Your email was registered in the <b>MM-Cam V5.10.0</b> system.</p>
-<p>Please enter the following <a href='https://metricams-addin-lnx.metricamovil.com/register/index.html?code=@&bd=$'>link</a> to complete your registration.</p>
-<p>In case of n error, please ignore it. </p>
-<p></p>
-<img src="https://www.metricamovil.com/contenido/themes/mm/images/logo-metrica-movil.png" alt="Métrica Móvil">
-<p></p>
