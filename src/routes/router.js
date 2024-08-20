@@ -61,6 +61,7 @@ router.use(
   require('./live.router'),
   require('./historical.router'),
   require('./snap.router'),
+  require('./driverDataset.router'),
   ErrorMiddlware.handleNotFound,
   ErrorMiddlware.handleError,
 );
