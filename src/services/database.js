@@ -79,6 +79,24 @@ class DBData {
     });
   }
 
+  async getListModulesUser(params) {
+    try {
+      const result = await getData('SELECT * FROM get_user_modules_fn($1) AS data', params);
+      if (result.status) return result.data[0].data.data[0];
+    } catch (error) {
+      throw error;
+    }
+  }
+
+  async updateListModulesUser(params) {
+    try {
+      const result = await getData('SELECT * FROM update_user_modules_fn($1, $2) AS data', params);
+      if (result.status) return result.data[0].data.data;
+    } catch (error) {
+      throw error;
+    }
+  }
+
   async spNewUser(params) {
     return new Promise(async (res) => {
       const result = await getData('SELECT spUserByAdmin ($1, $2::JSON, $3, $4, $5, $6) AS data', params);

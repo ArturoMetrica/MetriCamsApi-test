@@ -65,6 +65,32 @@ class UserValidator {
     })
       .options({ allowUnknown: true, stripUnknown: true });
   }
+
+  getListModulesUser() {
+    return Joi.object()
+      .keys({
+        sessionid: Joi.string().required()
+      })
+      .options({ allowUnknown: true, stripUnknown: true });
+  }
+
+  updateListModulesUser() {
+    return Joi.object()
+      .keys({
+        sessionid: Joi.string().required(),
+        data: Joi.object().keys({
+          map: Joi.boolean().required(),
+          multiview: Joi.boolean().required(),
+          historical_video: Joi.boolean().required(),
+          exceptions: Joi.boolean().required(),
+          snapshots: Joi.boolean().required(),
+          device_health: Joi.boolean().required(),
+          risk_analytics: Joi.boolean().required(),
+          setting: Joi.boolean().required(),
+        }).required()
+      })
+      .options({ allowUnknown: true, stripUnknown: true });
+  }
 }
 
 module.exports = new UserValidator();

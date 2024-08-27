@@ -121,6 +121,28 @@ class UserController {
       handleResponseUtil(res, 500, false, error.message || error, null)
     }
   }
+
+  getListModulesUser = async (req, res) => {
+    try {
+      const { sessionid } = req.user;
+      let  data  = await dbService.getListModulesUser([sessionid]);
+      handleResponseUtil(res, 200, true, 'ok', data);
+    } catch (error) {
+      await dbService.errorLogs('API', error, '/user/modules');
+      handleResponseUtil(res, 500, false, error.message || error, null);
+    }
+  }
+
+  updateListModulesUser = async (req, res) => {
+    try {
+      const { sessionid, data } = req.user;
+      let  dt  = await dbService.updateListModulesUser([sessionid, data]);
+      handleResponseUtil(res, 200, true, 'ok', dt);
+    } catch (error) {
+      await dbService.errorLogs('API', error, '/user/modules');
+      handleResponseUtil(res, 500, false, error.message || error, null);
+    }
+  }
 }
 
 module.exports = new UserController();

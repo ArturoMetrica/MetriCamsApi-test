@@ -8,6 +8,7 @@ const TokenMiddleware = require('../middlewares/token.middleware');
 routes.post('/historical', TokenMiddleware.verify, historicalMiddleware.historyStreamingVideo, historicalController.historyStreamingVideo);
 routes.post('/historical/stop', TokenMiddleware.verify, historicalMiddleware.stopDeviceStreaming, historicalController.stopDeviceStreaming);
 routes.get('/historical/video/download/config', TokenMiddleware.verify, historicalController.getHistoricalVideoDownloadConfig);
+routes.get('/alarms/historic/events', TokenMiddleware.verify, historicalMiddleware.getAlarmsForVideoTransmission, historicalController.getAlarmsForVideoTransmission);
 
 baseRouter.use('/api', routes);
 

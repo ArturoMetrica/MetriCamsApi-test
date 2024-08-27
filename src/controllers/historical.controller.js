@@ -67,12 +67,40 @@ const getHistoricalVideoDownloadConfig = async (req, res) => {
             data
           });
 	} catch (error) {
-		
+		await errorLogs('API', error, '/historical/video/download/config');
+		handleResponseUtil(res, 500, false, error.message || error, []);
+	}
+}
+
+const getAlarmsForVideoTransmission = async (req, res) => {
+	try {
+		const { sessionid } = req.sessionid;
+		const { vehicleId, fromDate, toDate } = req.alarms;
+
+		const data = await historicalService.getAlarmsForVideoTransmission(sessionid, vehicleId, fromDate, toDate);
+
+		if (data === null || !data.length) {
+			return res.status(200).json({
+				status: true,
+				message: '',
+				data: []
+			})
+		}
+
+		return res.status(200).json({
+			status: true,
+			message: '',
+			data
+		})
+	} catch (error) {
+		await errorLogs('API', error, '/alarms/historic/events');
+		handleResponseUtil(res, 500, false, error.message || error, []);
 	}
 }
 
 module.exports = {
 	historyStreamingVideo,
 	stopDeviceStreaming,
-	getHistoricalVideoDownloadConfig
+	getHistoricalVideoDownloadConfig,
+	getAlarmsForVideoTransmission
 }

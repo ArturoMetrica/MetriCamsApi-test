@@ -72,6 +72,34 @@ class ssoMiddleware {
       handleResponseUtil(res, 400, false, error.message, null);
     }
   }
+
+  async getListModulesUser(req, res, next) {
+    try {
+      req.user = await Validator.getListModulesUser().validateAsync({
+        ...req.body,
+        ...req.query,
+        ...req.headers
+      });
+
+      next();
+    } catch (error) {
+      res.status(400).json({ code: 400, status: false, message: error.message, data: null });
+    }
+  }
+
+  async updateListModulesUser(req, res, next) {
+    try {
+      req.user = await Validator.updateListModulesUser().validateAsync({
+        ...req.body,
+        ...req.query,
+        ...req.headers
+      });
+
+      next();
+    } catch (error) {
+      res.status(400).json({ code: 400, status: false, message: error.message, data: null });
+    }
+  }
 }
 
 module.exports = new ssoMiddleware();

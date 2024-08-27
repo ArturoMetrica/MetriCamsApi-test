@@ -12,6 +12,22 @@ class Historical {
             throw error;
         }
     }
+
+    getAlarmsForVideoTransmission = async (token, vehicleId, fromDate, toDate) => {
+        try {
+            const result = await query('SELECT * FROM get_alarms_for_video_transmission_fn($1,$2,$3,$4) as QUERY', [
+                token,
+                vehicleId,
+                fromDate,
+                toDate
+            ]);
+
+            if (result.length) return result;
+            else return [];
+        } catch (error) {
+            throw error;
+        }
+    }
 }
 
 module.exports = new Historical();
