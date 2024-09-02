@@ -6,10 +6,10 @@ class AlarmController {
 			const { sessionid } = req.sessionid;
 			const { fromDate, toDate } = req.alarm;
 
-			const { data, message } = await alarmService.getHeatMapAlarm(sessionid, fromDate, toDate);
+			const data = await alarmService.getHeatMapAlarm(sessionid, fromDate, toDate);
 			res.status(200).json({
 				status: true,
-				message,
+				message: '',
 				data
 			});
 		} catch (error) {
