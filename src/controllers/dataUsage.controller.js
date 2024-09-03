@@ -7,11 +7,27 @@ class DataUsageController {
 			const { offset } = req.data;
 
 			const { data, message } = await dataUsageService.getDataUsage(sessionid, offset);
+
+            const newArray = data.map( e => {
+                let liveVideo = (e.liveVideoDuration * 100) / e.liveViewTotalTimeLimit;
+                let downloadVideos = (e.evidenceDownloadCount * 100) / e.maxAutomaticDownload;
+                let snapsTaken = (e.snapCount * 100) / e.snapTotalLimit;
+
+				let sum = (liveVideo + downloadVideos + snapsTaken) / 3;
+
+				return {
+					...e,
+					dataUsagePercent: sum.toFixed(2)
+				}
+            });
+
 			res.status(200).json({
 				status: true,
 				message,
-				data
+				newArray
 			});
+
+
 		} catch (error) {
 			await dbService.errorLogs('API', error, '/api/data/usage');
 
