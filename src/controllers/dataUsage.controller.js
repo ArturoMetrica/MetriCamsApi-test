@@ -8,6 +8,8 @@ class DataUsageController {
 
 			const { data, message } = await dataUsageService.getDataUsage(sessionid, offset);
 
+			if (!data.length) data = [];
+
             const newArray = data.map( e => {
                 let liveVideo = (e.liveVideoDuration * 100) / e.liveViewTotalTimeLimit;
                 let downloadVideos = (e.evidenceDownloadCount * 100) / e.maxAutomaticDownload;
