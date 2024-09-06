@@ -14,7 +14,15 @@ const getAlarmsByGroup = () => {
   }).options({ allowUnknown: true, stripUnknown: true });
 }
 
+const getAlarmsByDriver = () => {
+  return Joi.object().keys({
+    fromDate: Joi.string().required(),
+    toDate: Joi.string().required()
+  }).options({ allowUnknown: true, stripUnknown: true });
+}
+
 module.exports = {
     getHeatMapAlarm,
-    getAlarmsByGroup
+    getAlarmsByGroup,
+    getAlarmsByDriver
 }

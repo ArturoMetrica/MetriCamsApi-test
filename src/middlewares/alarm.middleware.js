@@ -29,7 +29,22 @@ const getAlarmsByGroup = async (req, res, next) => {
   }
 }
 
+const getAlarmsByDriver = async (req, res, next) => {
+  try {
+    req.alarm = await AlarmValidator.getAlarmsByDriver().validateAsync({
+      ...req.body,
+      ...req.query,
+      ...req.params
+    });
+
+    next();
+  } catch (error) {
+    handleResponseUtil(res, 400, false, error.message || error, null);
+  }
+}
+
 module.exports = {
     getHeatMapAlarm,
-    getAlarmsByGroup
+    getAlarmsByGroup,
+    getAlarmsByDriver
 }

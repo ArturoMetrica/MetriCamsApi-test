@@ -57,6 +57,42 @@ class AlarmController {
 		}
 	}
 
+	async getAlarmsByDriver(req, res) {
+		try {
+			const { sessionid } = req.sessionid;
+			const { fromDate, toDate } = req.alarm;
+
+			const data = await alarmService.getAlarmsByDriver(sessionid, fromDate, toDate);
+
+			const alarmsGroupedByDriver = _.groupBy(data, 'driverId');
+
+			const updatedDrivers = _.map(alarmsGroupedByDriver, (alarms, driverId) => {
+				const driverName = alarms[0].driverName || 'UnknownDriver';
+
+				return {
+					driverName: driverName,
+					driverId: driverId,
+					alarms: alarms,
+					alarmsLength: alarms.length
+				};
+			});
+
+			return res.status(200).json({
+				status: true,
+				message: '',
+				data: updatedDrivers
+			});
+		} catch (error) {
+			await dbService.errorLogs('API', error, '/api/alarm/driver');
+
+			return res.status(500).json({
+				status: false,
+				message: error.message || error,
+				data: null
+			});
+		}
+	}
+
 }
 
 module.exports = new AlarmController();
