@@ -1,4 +1,6 @@
 const alarmService = require('../services/alarm.service');
+const DBService = require('../services/database');
+const dbService = new DBService();
 const _ = require('lodash');
 
 class AlarmController {

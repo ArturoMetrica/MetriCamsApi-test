@@ -1,4 +1,6 @@
 const dataUsageService = require('../services/dataUsage.service');
+const DBService = require('../services/database');
+const dbService = new DBService();
 
 class DataUsageController {
 	async getDataUsage(req, res) {
