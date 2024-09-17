@@ -8,7 +8,7 @@ class DataUsageController {
 			const { sessionid } = req.sessionid;
 			const { offset } = req.data;
 
-			const { data, message } = await dataUsageService.getDataUsage(sessionid, offset);
+			let { data, message } = await dataUsageService.getDataUsage(sessionid, offset);
 
 			if (!data.length) data = [];
 
@@ -28,7 +28,7 @@ class DataUsageController {
 			res.status(200).json({
 				status: true,
 				message,
-				newArray
+				data: newArray
 			});
 
 
